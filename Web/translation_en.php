@@ -25,6 +25,7 @@ $title1 = "Information";
 $title2 = "Contact";
 $title3 = "More Informations";
 $title4 = "Type";
+$title5 = "Address";
 $info1 = "A random password will be sent to you by email ";
 $info2 = "Fields preceded by a * are mandatory";
 $labelType = "User type";

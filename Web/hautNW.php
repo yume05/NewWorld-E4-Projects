@@ -24,17 +24,18 @@ include("translation_en.php");
 <div id="hautNW">
 <?php 
 if(isset($_SESSION['login'])) 
-{ 
-$login = $_SESSION['login'];
-
-
+{
+	$login = $_SESSION['login'];
 ?>
-<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=fr"><?php echo $lang_fr; ?></a> | <a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=en"><?php echo $lang_en; ?></a> | <?php echo ' '.$login.' '.$aConnected;?> | <a href="accountNW.php"><?php echo $labelYourProfil; ?></a> | <a href="logout.php"><?php echo $aLogOut; ?></a>
-<?php
-}else{ 
-?>
-<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=fr"><?php echo $lang_fr; ?></a> | <a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=en"><?php echo $lang_en; ?></a> | <a href="connexionNW.php"><?php echo $aLogIn; ?></a> / <a href="inscriptionNW.php"><?php echo $aRegistration; ?></a>
-<?php
+	<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=fr"><?php echo $lang_fr; ?></a> | <a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=en"><?php echo $lang_en; ?></a> | <?php echo ' '.$login.' '.$aConnected;?> | <a href="accountNW.php"><?php echo $labelYourProfil; ?></a> | <a href="logout.php"><?php echo $aLogOut; ?></a>
+<?php 
+}
+else
+{
+	?>
+	<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=fr"><?php echo $lang_fr; ?></a> | <a href="<?php echo basename($_SERVER['PHP_SELF']);?>?l=en"><?php echo $lang_en; ?></a> | <a href="connexionNW.php"><?php echo $aLogIn; ?></a> / <a href="inscriptionNW.php"><?php echo $aRegistration; ?></a>
+	<?php
+	
 } 
 ?>
  </div>
