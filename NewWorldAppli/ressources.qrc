@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>docs/add.png</file>
+        <file>docs/arrow-left-double.png</file>
+        <file>docs/arrow-right-double.png</file>
+        <file>docs/edit-delete.png</file>
+        <file>docs/edit-redo.png</file>
+        <file>docs/edit-undo.png</file>
+        <file>docs/go-previous.png</file>
+        <file>docs/go-previous-rtl.png</file>
+        <file>docs/list-add.png</file>
+        <file>docs/list-remove.png</file>
+    </qresource>
+</RCC>
