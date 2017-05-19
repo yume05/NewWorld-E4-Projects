@@ -22,9 +22,9 @@ int main(int argc, char *argv[])
         QString ip = dialogConnexion.getIp();
         maBase.setHostName(ip);//a changer
 
-          maBase.setUserName("clapprand");
-        maBase.setPassword("lsoSzKpLierMyuRyz");
-        maBase.setDatabaseName("clapprand_NW");
+          maBase.setUserName("");
+        maBase.setPassword("");
+        maBase.setDatabaseName("");
         if(maBase.open())
         {
             QSqlQuery maReq;
