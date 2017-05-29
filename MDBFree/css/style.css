@@ -1,0 +1,37 @@
+/* YOUR CUSTOM STYLES */
+html,
+body,
+header,
+.view {
+    height: 100%;
+}
+/* Navigation*/
+
+.navbar {
+    background-color: #4285F4;
+}
+/*Intro*/
+
+.view {
+    background: url("./img/monde.png")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+background {
+
+	background-size:cover;
+	
+}
+
+#cacherConsumer{
+	display: none;
+}
+#cacherProducer, #cacherProducer2{
+	display: none;
+} 
+#cacherPointSale, #cacherPointSale2{
+	display: none;
+}
