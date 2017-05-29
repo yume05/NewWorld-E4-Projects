@@ -33,7 +33,7 @@ if(isset($_SESSION['login']))
 			$_SESSION['mailContact'] = $data['user_mailContact'];
 			$_SESSION['siret'] = $data['user_siret'];
 			$_SESSION['iban'] = $data['user_iban'];
-			$_SESSION['description'] = $data['user_description'];
+			$_SESSION['description'] = $data['user_descriptionEntreprise'];
 	    			// autre traitement
 			
 			$_SESSION['mail'] = $mail;

@@ -26,6 +26,19 @@ background {
 	
 }
 
+.service_article {
+    text-align:center;
+    padding:10px;
+
+}
+
+.service_article img{
+    
+    height:200px;
+    width:265px;
+    margin-bottom:20px;
+}
+
 #cacherConsumer{
 	display: none;
 }

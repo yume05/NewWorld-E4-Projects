@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/mdb.min.js"></script>
 </body>
 <!--Footer-->
-<footer class="page-footer fixed-bottom center-on-small-only brown darken-1">
+<footer class="page-footer center-on-small-only brown darken-1">
     <!--Footer Links-->
     <div class="container-fluid">
         <!--First row-->

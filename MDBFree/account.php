@@ -63,18 +63,55 @@ include './haut.php';
 			</div>
 			<div class="col-6 col-md-4">
 				<form id="formulaireCompte">
-					
 					<legend><?php echo $title1; ?></legend>
-
-					<?php echo $labelLogin; ?> : <?php echo $_SESSION['login']; ?></br>
-					<?php echo $labelLastName; ?> : <?php echo $_SESSION['nom']; ?> </br>
-					<?php echo $labelFirstName; ?> : <?php echo $_SESSION['prenom']; ?> </br>
-					<?php echo $labelMail; ?> : <?php echo $_SESSION['mail']; ?> </br>
-					<?php echo $labelPhone; ?> : <?php echo $_SESSION['tel']; ?> </br>
-					<?php echo $labelAddress; ?> : <?php echo $_SESSION['adresse']; ?> </br>
-					<?php echo $labelType; ?> : <?php echo $_SESSION['type']; ?> </br>
+					<?php echo $labelLogin; ?>
+					<input value="<?php echo $_SESSION['login']; ?>" type="text" id="form6" class="form-control">
+					<?php echo $labelLastName; ?>
+					<input value=" <?php echo $_SESSION['nom']; ?>" type="text" id="form6" class="form-control">
+					<?php echo $labelFirstName; ?>
+					<input value="<?php echo $_SESSION['prenom']; ?>" type="text" id="form6" class="form-control">
+					<?php echo $labelMail; ?>
+					<input value="<?php echo $_SESSION['mail']; ?>" type="text" id="form6" class="form-control">
+					<?php echo $labelPhone; ?>
+					<input value="<?php echo $_SESSION['tel']; ?>" type="text" id="form6" class="form-control">
+					<?php echo $labelType; ?>
+					<input value=" <?php echo $_SESSION['type']; ?>" type="text" id="form6" class="form-control">
+			</div>
+			<div class="col-6 col-md-4">
+			<legend><?php echo $title3; ?></legend>
 					<?php if($_SESSION['type'] == "Producteur"){
 						?>
+						<?php echo $labelAddress; ?>
+						<input value="<?php echo $_SESSION['adresse']; ?> " type="text" id="form6" class="form-control">
+
+						Facturation
+						<input value="<?php echo $_SESSION['facturation']; ?>" type="text" id="form6" class="form-control">
+
+						Statut Juridique
+						<input value="<?php echo $_SESSION['statutJuridique']; ?>" type="text" id="form6" class="form-control">
+
+						Denomination Sociale
+						<input value="<?php echo $_SESSION['denomination']; ?>" type="text" id="form6" class="form-control">
+
+						Mail contact
+						<input value="<?php echo $_SESSION['mailContact']; ?>" type="text" id="form6" class="form-control">
+
+						Siret
+						<input value="<?php echo $_SESSION['siret']; ?>" type="text" id="form6" class="form-control">
+
+						Iban
+						<input value="<?php echo $_SESSION['iban']; ?>" type="text" id="form6" class="form-control">
+
+						Description Entreprise
+						<input value="<?php echo $_SESSION['description']; ?>" type="text" id="form6" class="form-control">
+					<?php 
+					}  if($_SESSION['type'] == "Consommateur"){
+						?>
+						<?php echo $labelAddress; ?> : <?php echo $_SESSION['adresse']; ?> </br>
+					<?php 
+					} if($_SESSION['type'] == "Point de vente"){
+						?>
+						<?php echo $labelAddress; ?> : <?php echo $_SESSION['adresse']; ?> </br>
 						Facturation : <?php echo $_SESSION['facturation']; ?> </br>
 						Statut Juridique : <?php echo $_SESSION['statutJuridique']; ?></br> 
 						Denomination Sociale : <?php echo $_SESSION['denomination']; ?> </br> 
@@ -82,7 +119,6 @@ include './haut.php';
 						Siret : <?php echo $_SESSION['siret']; ?>
 						</br> 
 						Iban : <?php echo $_SESSION['iban']; ?></br> 
-						Description de l'entreprise : <?php echo $_SESSION['description']; ?>
 					<?php 
 					} ?>
 				</form>

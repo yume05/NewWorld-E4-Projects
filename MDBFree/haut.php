@@ -15,7 +15,7 @@ include("translation_en.php");
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>New World</title>
@@ -40,7 +40,7 @@ include("translation_en.php");
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <h4><a class="nav-link"><?php echo $aBuy;?></a></h4>
+                            <h4><a href = 'acheter.php' class="nav-link"><?php echo $aBuy;?></a></h4>
                         </li>
                         <li class="nav-item">
                             <h4><a class="nav-link"><?php echo $aProduce; ?></a></h4>
