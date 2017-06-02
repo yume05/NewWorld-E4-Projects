@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     dialogmodifierpersonnel.cpp \
     dialogajoutpersonnel.cpp \
     dialogajoutrayons.cpp \
-    dialogmodifiertypeproduits.cpp
+    dialogmodifiertypeproduits.cpp \
+    dialogafficheimageproduit.cpp
 
 HEADERS  += mainwindow.h \
     dialogConnexion.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     dialogmodifierpersonnel.h \
     dialogajoutpersonnel.h \
     dialogajoutrayons.h \
-    dialogmodifiertypeproduits.h
+    dialogmodifiertypeproduits.h \
+    dialogafficheimageproduit.h
 
 FORMS    += mainwindow.ui \
     dialogConnexion.ui \
@@ -38,7 +40,8 @@ FORMS    += mainwindow.ui \
     dialogmodifierpersonnel.ui \
     dialogajoutpersonnel.ui \
     dialogajoutrayons.ui \
-    dialogmodifiertypeproduits.ui
+    dialogmodifiertypeproduits.ui \
+    dialogafficheimageproduit.ui
 
 RESOURCES += \
     ressources.qrc

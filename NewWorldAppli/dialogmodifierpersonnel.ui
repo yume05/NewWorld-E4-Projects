@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Modifier Personnel</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ressources.qrc">
+    <normaloff>:/images/docs/emblem-web.png</normaloff>:/images/docs/emblem-web.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -110,7 +114,6 @@
    </item>
   </layout>
   <zorder>buttonBox</zorder>
-  <zorder>label_2</zorder>
   <zorder>lineEditNom</zorder>
   <zorder>lineEditPrenom</zorder>
   <zorder>lineEditMail</zorder>
@@ -127,7 +130,9 @@
   <zorder>lineEditRue</zorder>
   <zorder>comboBox</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="ressources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

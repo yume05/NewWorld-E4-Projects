@@ -10,5 +10,7 @@
         <file>docs/go-previous-rtl.png</file>
         <file>docs/list-add.png</file>
         <file>docs/list-remove.png</file>
+        <file>docs/document-open.png</file>
+        <file>docs/emblem-web.png</file>
     </qresource>
 </RCC>

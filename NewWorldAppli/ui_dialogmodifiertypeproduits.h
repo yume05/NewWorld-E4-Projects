@@ -40,6 +40,9 @@ public:
         if (DialogModifierTypeProduits->objectName().isEmpty())
             DialogModifierTypeProduits->setObjectName(QStringLiteral("DialogModifierTypeProduits"));
         DialogModifierTypeProduits->resize(409, 253);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/docs/emblem-web.png"), QSize(), QIcon::Normal, QIcon::Off);
+        DialogModifierTypeProduits->setWindowIcon(icon);
         gridLayout = new QGridLayout(DialogModifierTypeProduits);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label = new QLabel(DialogModifierTypeProduits);
@@ -89,7 +92,7 @@ public:
 
     void retranslateUi(QDialog *DialogModifierTypeProduits)
     {
-        DialogModifierTypeProduits->setWindowTitle(QApplication::translate("DialogModifierTypeProduits", "Dialog", 0));
+        DialogModifierTypeProduits->setWindowTitle(QApplication::translate("DialogModifierTypeProduits", "Modifier Type Produit", 0));
         label->setText(QApplication::translate("DialogModifierTypeProduits", "<html><head/><body><p><span style=\" font-weight:600;\">Modifier le type de produit</span></p></body></html>", 0));
         label_2->setText(QApplication::translate("DialogModifierTypeProduits", "Rayons", 0));
         label_3->setText(QApplication::translate("DialogModifierTypeProduits", "Type produit", 0));

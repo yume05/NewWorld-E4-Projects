@@ -6,86 +6,125 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>367</width>
-    <height>534</height>
+    <width>417</width>
+    <height>315</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Ajout Personnel</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QLabel" name="label_4">
+  <property name="windowIcon">
+   <iconset resource="ressources.qrc">
+    <normaloff>:/images/docs/emblem-web.png</normaloff>:/images/docs/emblem-web.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Nom :</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ajout d'un personnel :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditNom"/>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Login :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditLogin"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Prenom :</string>
-     </property>
-    </widget>
+   <item row="1" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Rue :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditRue"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditPrenom"/>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Nom :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditNom"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLabel" name="label_8">
-     <property name="text">
-      <string>Mail :</string>
-     </property>
-    </widget>
+   <item row="2" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Ville :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditVille"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditMail"/>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Prenom :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditPrenom"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLabel" name="label_7">
-     <property name="text">
-      <string>Tel :</string>
-     </property>
-    </widget>
+   <item row="3" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>Cp :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditCp"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditTel"/>
+   <item row="4" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Mail :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditMail"/>
+     </item>
+    </layout>
    </item>
-   <item>
-    <widget class="QLabel" name="label_10">
-     <property name="text">
-      <string>Rue :</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditRue"/>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_9">
-     <property name="text">
-      <string>Ville :</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditVille"/>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_11">
-     <property name="text">
-      <string>Cp :</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="lineEditCp"/>
-   </item>
-   <item>
-    <widget class="QComboBox" name="comboBox">
+   <item row="4" column="1">
+    <widget class="QComboBox" name="comboBoxType">
      <item>
       <property name="text">
        <string>Gestionnaire</string>
@@ -98,7 +137,21 @@
      </item>
     </widget>
    </item>
-   <item>
+   <item row="5" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Tel :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditTel"/>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="1">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -110,7 +163,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="ressources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

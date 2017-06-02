@@ -11,6 +11,7 @@
 #include "dialogmodifiertypeproduits.h"
 #include <QDateEdit>
 #include <QDateTime>
+#include "dialogafficheimageproduit.h"
 
 MainWindow::MainWindow(QString leUserConnected, QWidget *parent) :
     QMainWindow(parent),
@@ -21,6 +22,10 @@ MainWindow::MainWindow(QString leUserConnected, QWidget *parent) :
     chargeLePersonnel();
     chargeLesRayons();
     chargeLesRayonsCombo();
+    chargeLesProducteursAccepter();
+    chargeLesProducteursTous();
+    chargeLesControleurs();
+    chargeLesVisites();
     QSqlQuery reqTypeProduitPasRanges("select typeProduits.id from rayons inner join typeProduits on rayons.id = typeProduits.idRayons where rayons.libelle = 'Pas ranges' ;");
     while(reqTypeProduitPasRanges.next()){
         idTypeProduitPasRanges = reqTypeProduitPasRanges.value(0).toString();
@@ -42,12 +47,11 @@ void MainWindow::chargeLePersonnel()
 {
     qDebug()<<"void MainWindow::chargeLePersonnel()";
 
-    ui->tableWidgetPersonnel->clear();
     ui->tableWidgetPersonnel->setRowCount(0);
     ui->tableWidgetPersonnel->setColumnCount(0);
     //je créée ma requete qui chargera les evaluations à l'ouverture de l'application
     QSqlQuery reqChargePersonnel;
-    QString textreq = "SELECT pers_nom, pers_prenom, pers_mail, pers_tel, pers_cp, pers_rue, pers_ville, type_libelle, pers_id FROM personnel INNER JOIN type ON personnel.pers_type = type.type_id;";
+    QString textreq = "SELECT pers_login, pers_nom, pers_prenom, pers_mail, pers_tel, pers_cp, pers_rue, pers_ville, type_libelle, pers_id FROM personnel INNER JOIN type ON personnel.pers_type = type.type_id;";
     qDebug()<<textreq;
     //je fais une boucle 0, n
     reqChargePersonnel.exec(textreq);
@@ -62,12 +66,12 @@ void MainWindow::chargeLePersonnel()
             //nbLigne recoit +1 pour initialiser la ligne qui sera ajouter
             //ajout d'une ligne en plus des lignes déjà présentes
 
-            ui->tableWidgetPersonnel->setColumnCount(8);
+            ui->tableWidgetPersonnel->setColumnCount(9);
              //pour chaque champ à afficher
-              for(int noCol=0;noCol<7;noCol++)
+              for(int noCol=0;noCol<10;noCol++)
               {
-                    QString colomn = reqChargePersonnel.value(noCol).toString();
-                    ui->tableWidgetPersonnel->setItem(nbLigne-1,noCol,new QTableWidgetItem(colomn));
+                    QString colonne = reqChargePersonnel.value(noCol).toString();
+                    ui->tableWidgetPersonnel->setItem(nbLigne-1,noCol,new QTableWidgetItem(colonne));
               }
               //chargement de l'identifiant du client en data32 de la première colonne
               ui->tableWidgetPersonnel->item(nbLigne-1,0)->setData(32,reqChargePersonnel.value("pers_id").toInt());
@@ -97,7 +101,6 @@ void MainWindow::chargeLesRayonsCombo()
 void MainWindow::chargeLesRayons()
 {
     qDebug()<<"void MainWindow::chargeLesRayons()";
-    ui->tableWidgetRayons->clear();
     ui->tableWidgetRayons->setRowCount(0);
     QSqlQuery reqRayons ("select libelle, id from rayons;");
     int nbLigne = ui->tableWidgetRayons->rowCount();
@@ -112,8 +115,8 @@ void MainWindow::chargeLesRayons()
                      //pour chaque champ à afficher
                       for(int noCol=0;noCol<1;noCol++)
                       {
-                            QString colomn = reqRayons.value(noCol).toString();
-                            ui->tableWidgetRayons->setItem(nbLigne-1,noCol,new QTableWidgetItem(colomn));
+                            QString colonne = reqRayons.value(noCol).toString();
+                            ui->tableWidgetRayons->setItem(nbLigne-1,noCol,new QTableWidgetItem(colonne));
                       }
                       //chargement de l'identifiant du client en data32 de la première colonne
                       ui->tableWidgetRayons->item(nbLigne-1,0)->setData(32,reqRayons.value("id").toInt());
@@ -122,11 +125,133 @@ void MainWindow::chargeLesRayons()
 
 }
 
+void MainWindow::chargeLesProducteursAccepter()
+{
+    qDebug()<<"void MainWindow::chargeLesProducteurs()";
+    ui->tableWidgetProducteurs->setRowCount(0);
+    QSqlQuery reqProducteurs ("SELECT user.user_login, user.user_nom, user.user_prenom, user.user_id FROM user INNER JOIN type ON user.user_type = type.type_id WHERE type.type_libelle = 'Producteur' AND user.etat = 'ACC';");
+    int nbLigne = ui->tableWidgetProducteurs->rowCount();
+    while(reqProducteurs.next())
+    {
+        nbLigne++;
+        ui->tableWidgetProducteurs->setRowCount(nbLigne);
+        for(int noCol=0;noCol<4;noCol++)
+        {
+            QString colonne  = reqProducteurs.value(noCol).toString();
+            ui->tableWidgetProducteurs->setItem(nbLigne-1,noCol, new QTableWidgetItem(colonne));
+        }
+        ui->tableWidgetProducteurs->item(nbLigne-1,0)->setData(32,reqProducteurs.value("user_id").toInt());
+    }
+}
+
+void MainWindow::chargeLesProducteursTous()
+{
+    qDebug()<<"void MainWindow::chargeLesProducteursTous()";
+    ui->tableWidgetProducteursTous->setRowCount(0);
+    QSqlQuery reqProducteursTous ("SELECT user.user_login, user.user_nom, user.user_prenom, user.user_rue, user.user_ville, user.user_cp, user.etat, user.user_id FROM user INNER JOIN type ON user.user_type = type.type_id WHERE type.type_libelle = 'Producteur' AND user.etat like 'ACC' OR user.etat like 'ATT' AND type.type_libelle = 'Producteur';");
+    int nbLigne = ui->tableWidgetProducteursTous->rowCount();
+    qDebug()<<"SELECT user.user_login, user.user_nom, user.user_prenom, user.user_rue, user.user_ville, user.user_cp, propose.etat, user.user_id FROM user INNER JOIN type ON user.user_type = type.type_id INNER JOIN propose ON user.user_id = propose.producteurUser WHERE type.type_libelle = 'Producteur' AND user.etat like 'ACC' OR user.etat like 'ATT' AND type.type_libelle = 'Producteur';";
+    while(reqProducteursTous.next())
+    {
+        nbLigne++;
+        ui->tableWidgetProducteursTous->setRowCount(nbLigne);
+        QString adresse = reqProducteursTous.value(3).toString();
+        adresse += " "+reqProducteursTous.value(4).toString();
+        adresse += " "+reqProducteursTous.value(5).toString();
+        qDebug()<<adresse;
+        QString nomcomplet = reqProducteursTous.value(1).toString();
+        nomcomplet += " "+reqProducteursTous.value(2).toString();
+        qDebug()<<nomcomplet;
+        QString login  = reqProducteursTous.value(0).toString();
+        QString etat  = reqProducteursTous.value(6).toString();
+        ui->tableWidgetProducteursTous->setItem(nbLigne-1,0, new QTableWidgetItem(login));
+        ui->tableWidgetProducteursTous->setItem(nbLigne-1,1, new QTableWidgetItem(nomcomplet));
+        ui->tableWidgetProducteursTous->setItem(nbLigne-1,2, new QTableWidgetItem(adresse));
+        ui->tableWidgetProducteursTous->setItem(nbLigne-1,3, new QTableWidgetItem(etat));
+        ui->tableWidgetProducteursTous->item(nbLigne-1,0)->setData(32,reqProducteursTous.value("user_id").toInt());
+    }
+}
+
+void MainWindow::chargeLesControleurs()
+{
+    qDebug()<<"void MainWindow::chargeLesControleurs()";
+    ui->tableWidgetControleurs->setRowCount(0);
+    QSqlQuery reqControleurs ("SELECT personnel.pers_login, personnel.pers_nom, personnel.pers_prenom, personnel.pers_rue, personnel.pers_ville, personnel.pers_rue, personnel.pers_id FROM personnel INNER JOIN type ON personnel.pers_type = type.type_id WHERE type.type_libelle = 'Controleur';");
+    qDebug()<<"SELECT personnel.pers_login, personnel.pers_nom, personnel.pers_prenom, personnel.pers_rue, personnel.pers_ville, personnel.pers_rue FROM personnel INNER JOIN type ON personnel.pers_type = type.type_id WHERE type.type_libelle = 'Controleur';";
+    int nbLigne = ui->tableWidgetControleurs->rowCount();
+    while(reqControleurs.next())
+    {
+        nbLigne++;
+        ui->tableWidgetControleurs->setRowCount(nbLigne);
+        QString adresse = reqControleurs.value(3).toString();
+        adresse += " "+reqControleurs.value(4).toString();
+        adresse += " "+reqControleurs.value(5).toString();
+        qDebug()<<adresse;
+        QString nomcomplet = reqControleurs.value(1).toString();
+        nomcomplet += " "+reqControleurs.value(2).toString();
+        qDebug()<<nomcomplet;
+        QString login  = reqControleurs.value(0).toString();
+        ui->tableWidgetControleurs->setItem(nbLigne-1,0, new QTableWidgetItem(login));
+        ui->tableWidgetControleurs->setItem(nbLigne-1,1, new QTableWidgetItem(nomcomplet));
+        ui->tableWidgetControleurs->setItem(nbLigne-1,2, new QTableWidgetItem(adresse));
+        ui->tableWidgetControleurs->item(nbLigne-1,0)->setData(32,reqControleurs.value("pers_id").toInt());
+    }
+}
+
+void MainWindow::chargeLesVisites()
+{
+    qDebug()<<"void MainWindow::chargeLesVisites()";
+    ui->tableWidgetVisites->setRowCount(0);
+    //Requete pour afficher le gestionnaire en toute lettre
+    QSqlQuery reqVisites ("SELECT personnel.pers_nom, personnel.pers_prenom, visitePrevue.etat, visitePrevue.typeVisite, visitePrevue.dateVisite, user.user_nom, user_prenom, visitePrevue.id FROM visitePrevue INNER JOIN personnel ON visitePrevue.idGestionnaire = personnel.pers_id INNER JOIN user ON visitePrevue.idProducteur = user.user_id WHERE personnel.pers_type like 1 ;");
+    int nbLigne = ui->tableWidgetVisites->rowCount();
+    //requete pour afficher le controleur en toute lettre
+    QSqlQuery reqVisites2 ("SELECT personnel.pers_nom, personnel.pers_prenom, visitePrevue.etat, visitePrevue.typeVisite, visitePrevue.dateVisite, user.user_nom, user_prenom, visitePrevue.id FROM visitePrevue INNER JOIN personnel ON visitePrevue.idControleur = personnel.pers_id INNER JOIN user ON visitePrevue.idProducteur = user.user_id WHERE personnel.pers_type like 2 ;");
+    qDebug()<<"SELECT personnel.pers_nom, personnel.pers_prenom, visitePrevue.etat, visitePrevue.typeVisite, visitePrevue.dateVisite, user.user_nom, user_prenom, visitePrevue.id FROM visitePrevue INNER JOIN personnel ON visitePrevue.idGestionnaire = personnel.pers_id INNER JOIN user ON visitePrevue.idProducteur = user.user_id WHERE personnel.pers_type like 1 ;";
+    qDebug()<<"SELECT personnel.pers_nom, personnel.pers_prenom, visitePrevue.etat, visitePrevue.typeVisite, visitePrevue.dateVisite, user.user_nom, user_prenom, visitePrevue.id FROM visitePrevue INNER JOIN personnel ON visitePrevue.idControleur = personnel.pers_id INNER JOIN user ON visitePrevue.idProducteur = user.user_id WHERE personnel.pers_type like 2 ;";
+    while(reqVisites.next() && reqVisites2.next())
+    {
+        nbLigne++;
+        ui->tableWidgetVisites->setRowCount(nbLigne);
+
+        QString nomcompletGestionnaire = reqVisites.value(0).toString();
+        nomcompletGestionnaire += " "+reqVisites.value(1).toString();
+        qDebug()<<nomcompletGestionnaire;
+        QString nomcompletControleur = reqVisites2.value(0).toString();
+        nomcompletControleur += " "+reqVisites2.value(1).toString();
+        qDebug()<<nomcompletControleur;
+        QString nomcompletProducteur = reqVisites.value(5).toString();
+        nomcompletProducteur += " "+reqVisites2.value(6).toString();
+        qDebug()<<nomcompletProducteur;
+
+        QString dateVisite = reqVisites.value(4).toString();
+        QString etat  = reqVisites.value(2).toString();
+        QString typeVisite = reqVisites.value(3).toString();
+        ui->tableWidgetVisites->setItem(nbLigne-1,0, new QTableWidgetItem(dateVisite));
+        ui->tableWidgetVisites->setItem(nbLigne-1,1, new QTableWidgetItem(etat));
+        ui->tableWidgetVisites->setItem(nbLigne-1,2, new QTableWidgetItem(nomcompletGestionnaire));
+        ui->tableWidgetVisites->setItem(nbLigne-1,3, new QTableWidgetItem(nomcompletControleur));
+        ui->tableWidgetVisites->setItem(nbLigne-1,4, new QTableWidgetItem(nomcompletProducteur));
+        ui->tableWidgetVisites->setItem(nbLigne-1,5, new QTableWidgetItem(typeVisite));
+        ui->tableWidgetVisites->item(nbLigne-1,0)->setData(32,reqVisites.value("id").toInt());
+    }
+}
+
 void MainWindow::on_tableWidgetRayons_cellClicked(int row, int column)
 {
     qDebug()<<"void MainWindow::on_tableWidgetRayons_clicked(const QModelIndex &index)";
         //ui->tableWidgetTypeProduits->setRowCount(0);
         //Récupère le numéro de la ligne sélectionner
+        ui->pushButtonModifierProduits->setEnabled(false);
+        ui->pushButtonSupprimerProduits->setEnabled(false);
+        ui->lineEditLibelleProduit->setEnabled(false);
+        ui->doubleSpinBoxPoids->setEnabled(false);
+        ui->doubleSpinBoxPrix->setEnabled(false);
+        ui->dateTimeEditDebut->setEnabled(false);
+        ui->dateTimeEditFin->setEnabled(false);
+        ui->lineEditLibelleProduit->clear();
+        ui->doubleSpinBoxPoids->clear();
+        ui->doubleSpinBoxPrix->clear();
         idRayonCourant=ui->tableWidgetRayons->item(row,0)->data(32).toString();
         qDebug()<<idRayonCourant;
         QSqlQuery reqTypeProduits ("select typeProduits.libelle, typeProduits.id from typeProduits inner join rayons on typeProduits.idRayons = rayons.id where idRayons = "+idRayonCourant+";");
@@ -171,10 +296,21 @@ void MainWindow::on_tableWidgetTypeProduits_cellClicked(int row, int column)
 {
         qDebug()<<"void MainWindow::on_tableWidgetTypeProduits_cellClicked(const QModelIndex &index)";
         ui->tableWidgetProduits->setRowCount(0);
+        //Récuperer l'id de la ligne sélectionnait
+        ui->pushButtonModifierProduits->setEnabled(false);
+        ui->pushButtonSupprimerProduits->setEnabled(false);
+        ui->lineEditLibelleProduit->setEnabled(false);
+        ui->doubleSpinBoxPoids->setEnabled(false);
+        ui->doubleSpinBoxPrix->setEnabled(false);
+        ui->dateTimeEditDebut->setEnabled(false);
+        ui->dateTimeEditFin->setEnabled(false);
+        ui->lineEditLibelleProduit->clear();
+        ui->doubleSpinBoxPoids->clear();
+        ui->doubleSpinBoxPrix->clear();
         //Récupère le numéro de la ligne sélectionner
         idTypeProduitCourant=ui->tableWidgetTypeProduits->item(row,0)->data(32).toString();
         qDebug()<<idTypeProduitCourant;
-        QSqlQuery reqProduits ("select produits.libelle, produits.prix, produits.poids, produits.dateDebut, produits.dateFin, produits.id from produits inner join typeProduits on produits.idTypeProduits = typeProduits.id where idTypeProduits = "+idTypeProduitCourant+";");
+        QSqlQuery reqProduits ("select produits.libelle, produits.prix, produits.poids, produits.dateDebut, produits.dateFin, produits.id from produits inner join typeProduits on produits.idTypeProduits = typeProduits.id INNER JOIN propose ON produits.id = propose.producteurProduits where propose.etat = 'ACC' AND idTypeProduits = "+idTypeProduitCourant+";");
         int nbLigne= 0;
                 while (reqProduits.next())
                 {
@@ -314,6 +450,7 @@ void MainWindow::on_pushButtonGestionPersonnelAjouter_clicked()
     if(diagAjoutPersonnel.exec()==QDialog::Accepted)
     {
         //les variables recoivent les données saisies du dialogue edit
+        QString login = diagAjoutPersonnel.getLogin();
         QString nom = diagAjoutPersonnel.getNom();
         QString prenom = diagAjoutPersonnel.getPrenom();
         QString mail = diagAjoutPersonnel.getMail();
@@ -321,12 +458,21 @@ void MainWindow::on_pushButtonGestionPersonnelAjouter_clicked()
         QString cp = diagAjoutPersonnel.getCp();
         QString ville = diagAjoutPersonnel.getVille();
         QString rue = diagAjoutPersonnel.getRue();
+        QString type = diagAjoutPersonnel.getType();
+        qDebug()<<type;
         //si champs vides
-        if(prenom.isEmpty() || nom.isEmpty() || mail.isEmpty() || portable.isEmpty() || cp.isEmpty() || ville.isEmpty() || rue.isEmpty()){
+        if(login.isEmpty() || prenom.isEmpty() || nom.isEmpty() || mail.isEmpty() || portable.isEmpty() || cp.isEmpty() || ville.isEmpty() || rue.isEmpty()){
             //Message d'erreur
             QMessageBox::critical(this, "Error", "You have to complete all fields !!");
              return;
         }else{
+            if(type=="Gestionnaire")
+            {
+                type = "1";
+            } else {
+                type = "2";
+            }
+
             //nbLigne recoit le nombre de ligne du tableWidgetStudent
             int nbLigne = ui->tableWidgetPersonnel->rowCount();
             //nbLigne recoit +1 pour initialiser la ligne qui sera AjoutPersonneler
@@ -334,23 +480,28 @@ void MainWindow::on_pushButtonGestionPersonnelAjouter_clicked()
             //AjoutPersonnel d'une ligne en plus des lignes déjà présentes
             ui->tableWidgetPersonnel->setRowCount(nbLigne);
             //remplissage de la ligne AjoutPersonneler, avec les données correspondantes
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 0, new QTableWidgetItem(nom));
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 1, new QTableWidgetItem(prenom));
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 2, new QTableWidgetItem(mail));
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 3, new QTableWidgetItem(portable));
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 4, new QTableWidgetItem(cp));
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 5, new QTableWidgetItem(rue));
-            ui->tableWidgetPersonnel->setItem(nbLigne-1, 6, new QTableWidgetItem(ville));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 0, new QTableWidgetItem(login));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 1, new QTableWidgetItem(nom));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 2, new QTableWidgetItem(prenom));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 3, new QTableWidgetItem(mail));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 4, new QTableWidgetItem(portable));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 5, new QTableWidgetItem(cp));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 6, new QTableWidgetItem(rue));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 7, new QTableWidgetItem(ville));
+            ui->tableWidgetPersonnel->setItem(nbLigne-1, 8, new QTableWidgetItem(type));
+
 
 
 
             //Création d'une requete qui inserera les données saisies dans la table Personnel
             QSqlQuery reqPersonnel;
-            QString texteRequete = "insert into personnel (pers_nom, pers_prenom, pers_mail, pers_tel, pers_ville, pers_rue, pers_cp) values ('";
+            QString texteRequete = "insert into personnel (pers_login, pers_nom, pers_prenom, pers_mdp, pers_mail, pers_tel, pers_ville, pers_rue, pers_cp, pers_type) values ('";
+            texteRequete += login;
+            texteRequete +="','";
             texteRequete += nom;
             texteRequete +="','";
             texteRequete +=prenom;
-            texteRequete +="','";
+            texteRequete +="', 'ini01', '";
             texteRequete +=mail;
             texteRequete +="','";
             texteRequete +=portable;
@@ -360,6 +511,8 @@ void MainWindow::on_pushButtonGestionPersonnelAjouter_clicked()
             texteRequete +=rue;
             texteRequete +="','";
             texteRequete+=cp;
+            texteRequete +="','";
+            texteRequete+=type;
             texteRequete += "');";
 
             //test de la requete
@@ -720,4 +873,119 @@ void MainWindow::on_pushButtonSupprimerProduits_clicked()
       }
 
 
+}
+
+void MainWindow::on_tableWidgetProducteurs_cellClicked(int row, int column)
+{
+    qDebug()<<"void MainWindow::on_tableWidgetProducteurs_cellClicked(int row, int column)";
+    idProducteurSelectionner = ui->tableWidgetProducteurs->item(row,0)->data(32).toString();
+    qDebug()<<idProducteurSelectionner;
+    QSqlQuery reqProduitProposer ("SELECT  produits.libelle, produits.prix, produits.poids, rayons.libelle, typeProduits.libelle, produits.dateDebut, produits.dateFin, produits.id FROM rayons INNER JOIN typeProduits ON rayons.id = typeProduits.idRayons INNER JOIN produits ON typeProduits.id = produits.idTypeProduits INNER JOIN propose ON produits.id = propose.producteurProduits WHERE producteurUser like "+idProducteurSelectionner+" AND etat = 'ATT';");
+    int nbLigne=0;
+    while(reqProduitProposer.next()){
+        nbLigne++;
+        ui->tableWidgetProduitsAttente->setRowCount(nbLigne);
+         //pour chaque champ à afficher
+          for(int noCol=0;noCol<8;noCol++)
+          {
+                QString colonne = reqProduitProposer.value(noCol).toString();
+                ui->tableWidgetProduitsAttente->setItem(nbLigne-1,noCol,new QTableWidgetItem(colonne));
+          }
+          //chargement de l'identifiant en data32 de la première colonne
+          ui->tableWidgetProduitsAttente->item(nbLigne-1,0)->setData(32,reqProduitProposer.value("id").toInt());
+
+    }//fin du pour chaque
+
+
+}
+
+void MainWindow::on_tableWidgetProduitsAttente_cellClicked(int row, int column)
+{
+    qDebug()<<"void MainWindow::on_tableWidgetProduitsAttente_cellClicked(int row, int column)";
+    idProduitSelectionner = ui->tableWidgetProduitsAttente->item(row,0)->data(32).toString();
+    ui->libelleProduit->setEnabled(true);
+    ui->prixProduit->setEnabled(true);
+    ui->poidsProduit->setEnabled(true);
+    ui->datedebutProduit->setEnabled(true);
+    ui->datefinProduit->setEnabled(true);
+    ui->rayonProduit->setEnabled(true);
+    ui->categorieProduit->setEnabled(true);
+    ui->imageProduit->setEnabled(true);
+    ui->etatProduit->setEnabled(true);
+    ui->pushButtonValiderProduit->setEnabled(true);
+    qDebug()<<"Ici";
+
+    QSqlQuery reqProduitEtat ("SELECT  produits.libelle, produits.prix, produits.poids, rayons.libelle, typeProduits.libelle, produits.dateDebut, produits.dateFin, produits.image FROM rayons INNER JOIN typeProduits ON rayons.id = typeProduits.idRayons INNER JOIN produits ON typeProduits.id = produits.idTypeProduits WHERE produits.id like "+idProduitSelectionner+";");
+    while(reqProduitEtat.next()){
+        qDebug()<<"ici2";
+        ui->libelleProduit->setText(reqProduitEtat.value(0).toString());
+        ui->prixProduit->setText(reqProduitEtat.value(1).toString());
+        ui->poidsProduit->setText(reqProduitEtat.value(2).toString());
+        ui->rayonProduit->setText(reqProduitEtat.value(3).toString());
+        ui->categorieProduit->setText(reqProduitEtat.value(4).toString());
+        ui->datedebutProduit->setText(reqProduitEtat.value(5).toString());
+        ui->datefinProduit->setText(reqProduitEtat.value(6).toString());
+        imageProduit = reqProduitEtat.value(7).toString();
+    }
+}
+
+void MainWindow::on_imageProduit_clicked()
+{
+    qDebug()<<"void MainWindow::on_imageProduit_clicked()";
+    DialogAfficheImageProduit diagAfficheProduit(imageProduit, this);
+    //si le dialogue à été exécuter
+    diagAfficheProduit.exec()==QDialog::Accepted;
+}
+
+void MainWindow::on_pushButtonValiderProduit_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonValiderProduit_clicked()";
+    //On récupère toutes les informations rentrées
+    QString etat = ui->etatProduit->currentText();
+    //On l'update dans la base de données
+    QSqlQuery reqUpdateProduitAttente ("update propose set etat = '"+etat+"' where producteurProduits = "+idProduitSelectionner+";");
+    qDebug()<<"update propose set etat = '"+etat+"' where producteurProduits = "+idProduitSelectionner+";";
+    reqUpdateProduitAttente.exec();
+    chargeLesProducteursAccepter();
+    chargeLesRayons();
+    ui->tableWidgetProduitsAttente->setRowCount(0);
+}
+
+void MainWindow::on_tableWidgetProducteursTous_cellClicked(int row, int column)
+{
+    qDebug()<<"void MainWindow::on_tableWidgetProducteursTous_cellClicked(int row, int column)";
+    ui->pushButtonProposerVisite->setEnabled(true);
+    ui->dateVisite->setEnabled(true);
+    ui->typeVisite->setEnabled(true);
+    ui->producteur->setEnabled(true);
+    ui->controleur->setEnabled(true);
+    ui->etatProducteur->setEnabled(true);
+    idProducteurVisite = ui->tableWidgetProducteursTous->item(row,0)->data(32).toString();
+    QString nom = ui->tableWidgetProducteursTous->item(row, 1)->text();
+    QString etat = ui->tableWidgetProducteursTous->item(row, 3)->text();
+    ui->producteur->setText(nom);
+    ui->etatProducteur->setText(etat);
+}
+
+void MainWindow::on_tableWidgetControleurs_cellClicked(int row, int column)
+{
+    idControleurVisite = ui->tableWidgetControleurs->item(row,0)->data(32).toString();
+    QString nom = ui->tableWidgetControleurs->item(row, 1)->text();
+    ui->controleur->setText(nom);
+}
+
+void MainWindow::on_pushButtonProposerVisite_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonProposerVisite_clicked()";
+    qDebug()<<idUserConnected;
+    qDebug()<<idProducteurVisite;
+    qDebug()<<idControleurVisite;
+    QString date = ui->dateVisite->date().toString("yyyy-MM-dd");
+    QString typeVisite = ui->typeVisite->currentText();
+    qDebug()<<date;
+    qDebug()<<typeVisite;
+    QSqlQuery reqProposerVisite ("INSERT INTO visitePrevue (dateVisite, etat, idGestionnaire, idControleur, idProducteur, typeVisite) values ('"+date+"', 'ATT', "+idUserConnected+", "+idControleurVisite+", "+idProducteurVisite+", '"+typeVisite+"');");
+    qDebug()<<"INSERT INTO visitePrevue (dateVisite, etat, idGestionnaire, idControleur, idProducteur, typeVisite) values ('"+date+"', 'ATT', "+idUserConnected+", "+idControleurVisite+", "+idProducteurVisite+", '"+typeVisite+"');";
+    //reqProposerVisite.exec();
+    chargeLesVisites();
 }

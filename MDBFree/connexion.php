@@ -13,7 +13,7 @@ if(isset($_SESSION['login']))
 		$mail=$_POST['mail'];
 		$password=$_POST['password'];
 
-		$requete = "SELECT user.user_id, type.type_libelle, user.user_nom,  user.user_prenom,  user.user_mail,  user.user_tel,  user.user_rue,  user.user_cp,  user.user_ville, user.user_dateInscription, user.user_facturation, user.user_statutJuridique, user.user_denominationSociale, user.user_mailContact, user.user_siret, user.user_iban, user.user_descriptionEntreprise FROM user inner join type on  user.user_type=type.type_id WHERE  user.user_login = '$login' AND  user.user_mail = '$mail' AND  user.user_mdp = '$password';"; 
+		$requete = "SELECT user.user_id, type.type_libelle, user.user_nom,  user.user_prenom,  user.user_mail,  user.user_tel,  user.user_rue,  user.user_cp,  user.user_ville, user.user_dateInscription, user.user_facturation, user.user_statutJuridique, user.user_denominationSociale, user.user_mailContact, user.user_siret, user.user_iban, user.user_descriptionEntreprise, user.etat FROM user inner join type on  user.user_type=type.type_id WHERE  user.user_login = '$login' AND  user.user_mail = '$mail' AND  user.user_mdp = '$password';"; 
 		$result = mysqli_query($connexion, $requete);
 		$data = mysqli_fetch_assoc($result);
 	    if(!$result){
@@ -34,6 +34,7 @@ if(isset($_SESSION['login']))
 			$_SESSION['siret'] = $data['user_siret'];
 			$_SESSION['iban'] = $data['user_iban'];
 			$_SESSION['description'] = $data['user_descriptionEntreprise'];
+			$_SESSION['etat'] = $data['etat'];
 	    			// autre traitement
 			
 			$_SESSION['mail'] = $mail;

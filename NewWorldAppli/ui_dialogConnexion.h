@@ -29,6 +29,7 @@ class Ui_DialogConnexion
 {
 public:
     QGridLayout *gridLayout;
+    QDialogButtonBox *buttonBox;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer_5;
     QLabel *label;
@@ -49,7 +50,6 @@ public:
     QLabel *label_3;
     QLineEdit *lineEditMdp;
     QSpacerItem *horizontalSpacer_4;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogConnexion)
     {
@@ -58,8 +58,18 @@ public:
         DialogConnexion->resize(405, 197);
         DialogConnexion->setMinimumSize(QSize(405, 197));
         DialogConnexion->setMaximumSize(QSize(405, 202));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/docs/emblem-web.png"), QSize(), QIcon::Normal, QIcon::Off);
+        DialogConnexion->setWindowIcon(icon);
         gridLayout = new QGridLayout(DialogConnexion);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        buttonBox = new QDialogButtonBox(DialogConnexion);
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
+        buttonBox->setOrientation(Qt::Horizontal);
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        gridLayout->addWidget(buttonBox, 2, 0, 1, 1);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -153,13 +163,6 @@ public:
 
         gridLayout->addLayout(verticalLayout, 1, 0, 1, 1);
 
-        buttonBox = new QDialogButtonBox(DialogConnexion);
-        buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        gridLayout->addWidget(buttonBox, 2, 0, 1, 1);
-
 
         retranslateUi(DialogConnexion);
         QObject::connect(buttonBox, SIGNAL(accepted()), DialogConnexion, SLOT(accept()));
@@ -170,7 +173,7 @@ public:
 
     void retranslateUi(QDialog *DialogConnexion)
     {
-        DialogConnexion->setWindowTitle(QApplication::translate("DialogConnexion", "Dialog", 0));
+        DialogConnexion->setWindowTitle(QApplication::translate("DialogConnexion", "New Wprld", 0));
         label->setText(QApplication::translate("DialogConnexion", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">NEW WORLD</span></p></body></html>", 0));
         label_4->setText(QApplication::translate("DialogConnexion", "Serveur :", 0));
         label_2->setText(QApplication::translate("DialogConnexion", "Login :", 0));

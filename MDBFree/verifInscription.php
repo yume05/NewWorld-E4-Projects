@@ -152,7 +152,7 @@ $type = $_POST['type'];
 				$mdp = generer_mot_de_passe(12);
 				// on écrit la requête sql 
 				//on insère dans la bdd
-				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_facturation, user_statutJuridique, user_denominationSociale, user_mailContact, user_siret, user_iban , user_descriptionEntreprise) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$facturation."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$siret."', '".$iban."', '".$description."');"; 
+				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_facturation, user_statutJuridique, user_denominationSociale, user_mailContact, user_siret, user_iban , user_descriptionEntreprise, etat) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$facturation."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$siret."', '".$iban."', '".$description."', 'ATT');"; 
 				// on insère les informations du formulaire dans la table 
 				mysqli_query($connexion, $sql); 
 				echo "<font color='green'><i>Inscription réussie, retour sur l'accueil dans 2 secondes.</i></font>";
@@ -248,7 +248,7 @@ $type = $_POST['type'];
 				$mdp = generer_mot_de_passe(12);
 				// on écrit la requête sql 
 				//on insère dans la bdd
-				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_facturation, user_statutJuridique, user_denominationSociale, user_mailContact, user_siret, user_iban) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$facturation."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$siret."', '".$iban."');"; 
+				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_facturation, user_statutJuridique, user_denominationSociale, user_mailContact, user_siret, user_iban, etat) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$facturation."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$siret."', '".$iban."', 'ATT');"; 
 				// on insère les informations du formulaire dans la table 
 				mysqli_query($connexion, $sql); 
 				echo "<font color='green'><i>Inscription réussie, retour sur l'accueil dans 2 secondes.</i></font>";

@@ -14,6 +14,7 @@ class DialogAjoutPersonnel : public QDialog
 public:
     explicit DialogAjoutPersonnel(QWidget *parent = 0);
     ~DialogAjoutPersonnel();
+    QString getLogin();
     QString getNom();
     QString getPrenom();
     QString getMail();
@@ -21,6 +22,7 @@ public:
     QString getVille();
     QString getRue();
     QString getCp();
+    QString getType();
 
 private:
     Ui::DialogAjoutPersonnel *ui;

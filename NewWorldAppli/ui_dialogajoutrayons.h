@@ -29,6 +29,9 @@ public:
         if (DialogAjoutRayons->objectName().isEmpty())
             DialogAjoutRayons->setObjectName(QStringLiteral("DialogAjoutRayons"));
         DialogAjoutRayons->resize(388, 166);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/docs/emblem-web.png"), QSize(), QIcon::Normal, QIcon::Off);
+        DialogAjoutRayons->setWindowIcon(icon);
         buttonBox = new QDialogButtonBox(DialogAjoutRayons);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setGeometry(QRect(30, 120, 341, 32));
@@ -44,7 +47,7 @@ public:
 
     void retranslateUi(QDialog *DialogAjoutRayons)
     {
-        DialogAjoutRayons->setWindowTitle(QApplication::translate("DialogAjoutRayons", "Dialog", 0));
+        DialogAjoutRayons->setWindowTitle(QApplication::translate("DialogAjoutRayons", "Ajout Rayon", 0));
     } // retranslateUi
 
 };

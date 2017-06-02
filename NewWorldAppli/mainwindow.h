@@ -21,9 +21,18 @@ public:
     QString idRayonCourant;
     QString idTypeProduitCourant;
     QString idProduitCourant;
+    QString idProducteurSelectionner;
+    QString idProduitSelectionner;
+    QString imageProduit;
+    QString idProducteurVisite;
+    QString idControleurVisite;
     void chargeLePersonnel();
     void chargeLesRayons();
     void chargeLesRayonsCombo();
+    void chargeLesProducteursAccepter();
+    void chargeLesProducteursTous();
+    void chargeLesControleurs();
+    void chargeLesVisites();
 
 
 private slots:
@@ -59,6 +68,20 @@ private slots:
     void on_pushButtonModifierProduits_clicked();
 
     void on_pushButtonSupprimerProduits_clicked();
+
+    void on_tableWidgetProducteurs_cellClicked(int row, int column);
+
+    void on_tableWidgetProduitsAttente_cellClicked(int row, int column);
+
+    void on_imageProduit_clicked();
+
+    void on_pushButtonValiderProduit_clicked();
+
+    void on_tableWidgetProducteursTous_cellClicked(int row, int column);
+
+    void on_tableWidgetControleurs_cellClicked(int row, int column);
+
+    void on_pushButtonProposerVisite_clicked();
 
 private:
     Ui::MainWindow *ui;

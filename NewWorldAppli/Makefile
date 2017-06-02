@@ -53,7 +53,8 @@ SOURCES       = main.cpp \
 		dialogmodifierpersonnel.cpp \
 		dialogajoutpersonnel.cpp \
 		dialogajoutrayons.cpp \
-		dialogmodifiertypeproduits.cpp qrc_ressources.cpp \
+		dialogmodifiertypeproduits.cpp \
+		dialogafficheimageproduit.cpp qrc_ressources.cpp \
 		moc_mainwindow.cpp \
 		moc_dialogConnexion.cpp \
 		moc_dialogMenuPrincipal.cpp \
@@ -61,7 +62,8 @@ SOURCES       = main.cpp \
 		moc_dialogmodifierpersonnel.cpp \
 		moc_dialogajoutpersonnel.cpp \
 		moc_dialogajoutrayons.cpp \
-		moc_dialogmodifiertypeproduits.cpp
+		moc_dialogmodifiertypeproduits.cpp \
+		moc_dialogafficheimageproduit.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		dialogConnexion.o \
@@ -71,6 +73,7 @@ OBJECTS       = main.o \
 		dialogajoutpersonnel.o \
 		dialogajoutrayons.o \
 		dialogmodifiertypeproduits.o \
+		dialogafficheimageproduit.o \
 		qrc_ressources.o \
 		moc_mainwindow.o \
 		moc_dialogConnexion.o \
@@ -79,7 +82,8 @@ OBJECTS       = main.o \
 		moc_dialogmodifierpersonnel.o \
 		moc_dialogajoutpersonnel.o \
 		moc_dialogajoutrayons.o \
-		moc_dialogmodifiertypeproduits.o
+		moc_dialogmodifiertypeproduits.o \
+		moc_dialogafficheimageproduit.o
 DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -148,7 +152,8 @@ DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		dialogmodifierpersonnel.cpp \
 		dialogajoutpersonnel.cpp \
 		dialogajoutrayons.cpp \
-		dialogmodifiertypeproduits.cpp
+		dialogmodifiertypeproduits.cpp \
+		dialogafficheimageproduit.cpp
 QMAKE_TARGET  = NewWorld
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = NewWorld
@@ -178,7 +183,7 @@ first: all
 
 all: Makefile $(TARGET)
 
-$(TARGET): ui_mainwindow.h ui_dialogConnexion.h ui_dialogMenuPrincipal.h ui_mainwindow2.h ui_dialogmodifierpersonnel.h ui_dialogajoutpersonnel.h ui_dialogajoutrayons.h ui_dialogmodifiertypeproduits.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_dialogConnexion.h ui_dialogMenuPrincipal.h ui_mainwindow2.h ui_dialogmodifierpersonnel.h ui_dialogajoutpersonnel.h ui_dialogajoutrayons.h ui_dialogmodifiertypeproduits.h ui_dialogafficheimageproduit.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: NewWorld.pro /usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -321,7 +326,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/NewWorld1.0.0 || mkdir -p .tmp/NewWorld1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents ressources.qrc .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents mainwindow.h dialogConnexion.h dialogMenuPrincipal.h mainwindow2.h dialogmodifierpersonnel.h dialogajoutpersonnel.h dialogajoutrayons.h dialogmodifiertypeproduits.h .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp dialogConnexion.cpp dialogMenuPrincipal.cpp mainwindow2.cpp dialogmodifierpersonnel.cpp dialogajoutpersonnel.cpp dialogajoutrayons.cpp dialogmodifiertypeproduits.cpp .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents mainwindow.ui dialogConnexion.ui dialogMenuPrincipal.ui mainwindow2.ui dialogmodifierpersonnel.ui dialogajoutpersonnel.ui dialogajoutrayons.ui dialogmodifiertypeproduits.ui .tmp/NewWorld1.0.0/ && (cd `dirname .tmp/NewWorld1.0.0` && $(TAR) NewWorld1.0.0.tar NewWorld1.0.0 && $(COMPRESS) NewWorld1.0.0.tar) && $(MOVE) `dirname .tmp/NewWorld1.0.0`/NewWorld1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/NewWorld1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents ressources.qrc .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents mainwindow.h dialogConnexion.h dialogMenuPrincipal.h mainwindow2.h dialogmodifierpersonnel.h dialogajoutpersonnel.h dialogajoutrayons.h dialogmodifiertypeproduits.h dialogafficheimageproduit.h .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp dialogConnexion.cpp dialogMenuPrincipal.cpp mainwindow2.cpp dialogmodifierpersonnel.cpp dialogajoutpersonnel.cpp dialogajoutrayons.cpp dialogmodifiertypeproduits.cpp dialogafficheimageproduit.cpp .tmp/NewWorld1.0.0/ && $(COPY_FILE) --parents mainwindow.ui dialogConnexion.ui dialogMenuPrincipal.ui mainwindow2.ui dialogmodifierpersonnel.ui dialogajoutpersonnel.ui dialogajoutrayons.ui dialogmodifiertypeproduits.ui dialogafficheimageproduit.ui .tmp/NewWorld1.0.0/ && (cd `dirname .tmp/NewWorld1.0.0` && $(TAR) NewWorld1.0.0.tar NewWorld1.0.0 && $(COMPRESS) NewWorld1.0.0.tar) && $(MOVE) `dirname .tmp/NewWorld1.0.0`/NewWorld1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/NewWorld1.0.0
 
 
 clean:compiler_clean 
@@ -349,7 +354,9 @@ qrc_ressources.cpp: ressources.qrc \
 		docs/arrow-right-double.png \
 		docs/edit-redo.png \
 		docs/list-add.png \
+		docs/document-open.png \
 		docs/add.png \
+		docs/emblem-web.png \
 		docs/go-previous.png \
 		docs/list-remove.png \
 		docs/arrow-left-double.png \
@@ -358,9 +365,9 @@ qrc_ressources.cpp: ressources.qrc \
 		docs/edit-delete.png
 	/usr/lib/i386-linux-gnu/qt5/bin/rcc -name ressources ressources.qrc -o qrc_ressources.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_dialogConnexion.cpp moc_dialogMenuPrincipal.cpp moc_mainwindow2.cpp moc_dialogmodifierpersonnel.cpp moc_dialogajoutpersonnel.cpp moc_dialogajoutrayons.cpp moc_dialogmodifiertypeproduits.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_dialogConnexion.cpp moc_dialogMenuPrincipal.cpp moc_mainwindow2.cpp moc_dialogmodifierpersonnel.cpp moc_dialogajoutpersonnel.cpp moc_dialogajoutrayons.cpp moc_dialogmodifiertypeproduits.cpp moc_dialogafficheimageproduit.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_dialogConnexion.cpp moc_dialogMenuPrincipal.cpp moc_mainwindow2.cpp moc_dialogmodifierpersonnel.cpp moc_dialogajoutpersonnel.cpp moc_dialogajoutrayons.cpp moc_dialogmodifiertypeproduits.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_dialogConnexion.cpp moc_dialogMenuPrincipal.cpp moc_mainwindow2.cpp moc_dialogmodifierpersonnel.cpp moc_dialogajoutpersonnel.cpp moc_dialogajoutrayons.cpp moc_dialogmodifiertypeproduits.cpp moc_dialogafficheimageproduit.cpp
 moc_mainwindow.cpp: mainwindow.h
 	/usr/lib/i386-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++ -I/home/clapprand/Téléchargements/NewWorldAppli -I/usr/include/i386-linux-gnu/qt5 -I/usr/include/i386-linux-gnu/qt5/QtWidgets -I/usr/include/i386-linux-gnu/qt5/QtSql -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/i386-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/i586-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/i586-linux-gnu/4.9/include-fixed -I/usr/include/i386-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
@@ -385,11 +392,14 @@ moc_dialogajoutrayons.cpp: dialogajoutrayons.h
 moc_dialogmodifiertypeproduits.cpp: dialogmodifiertypeproduits.h
 	/usr/lib/i386-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++ -I/home/clapprand/Téléchargements/NewWorldAppli -I/usr/include/i386-linux-gnu/qt5 -I/usr/include/i386-linux-gnu/qt5/QtWidgets -I/usr/include/i386-linux-gnu/qt5/QtSql -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/i386-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/i586-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/i586-linux-gnu/4.9/include-fixed -I/usr/include/i386-linux-gnu -I/usr/include dialogmodifiertypeproduits.h -o moc_dialogmodifiertypeproduits.cpp
 
+moc_dialogafficheimageproduit.cpp: dialogafficheimageproduit.h
+	/usr/lib/i386-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++ -I/home/clapprand/Téléchargements/NewWorldAppli -I/usr/include/i386-linux-gnu/qt5 -I/usr/include/i386-linux-gnu/qt5/QtWidgets -I/usr/include/i386-linux-gnu/qt5/QtSql -I/usr/include/i386-linux-gnu/qt5/QtGui -I/usr/include/i386-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/i386-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/i586-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/i586-linux-gnu/4.9/include-fixed -I/usr/include/i386-linux-gnu -I/usr/include dialogafficheimageproduit.h -o moc_dialogafficheimageproduit.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_dialogConnexion.h ui_dialogMenuPrincipal.h ui_mainwindow2.h ui_dialogmodifierpersonnel.h ui_dialogajoutpersonnel.h ui_dialogajoutrayons.h ui_dialogmodifiertypeproduits.h
+compiler_uic_make_all: ui_mainwindow.h ui_dialogConnexion.h ui_dialogMenuPrincipal.h ui_mainwindow2.h ui_dialogmodifierpersonnel.h ui_dialogajoutpersonnel.h ui_dialogajoutrayons.h ui_dialogmodifiertypeproduits.h ui_dialogafficheimageproduit.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_dialogConnexion.h ui_dialogMenuPrincipal.h ui_mainwindow2.h ui_dialogmodifierpersonnel.h ui_dialogajoutpersonnel.h ui_dialogajoutrayons.h ui_dialogmodifiertypeproduits.h
+	-$(DEL_FILE) ui_mainwindow.h ui_dialogConnexion.h ui_dialogMenuPrincipal.h ui_mainwindow2.h ui_dialogmodifierpersonnel.h ui_dialogajoutpersonnel.h ui_dialogajoutrayons.h ui_dialogmodifiertypeproduits.h ui_dialogafficheimageproduit.h
 ui_mainwindow.h: mainwindow.ui
 	/usr/lib/i386-linux-gnu/qt5/bin/uic mainwindow.ui -o ui_mainwindow.h
 
@@ -414,6 +424,9 @@ ui_dialogajoutrayons.h: dialogajoutrayons.ui
 ui_dialogmodifiertypeproduits.h: dialogmodifiertypeproduits.ui
 	/usr/lib/i386-linux-gnu/qt5/bin/uic dialogmodifiertypeproduits.ui -o ui_dialogmodifiertypeproduits.h
 
+ui_dialogafficheimageproduit.h: dialogafficheimageproduit.ui
+	/usr/lib/i386-linux-gnu/qt5/bin/uic dialogafficheimageproduit.ui -o ui_dialogafficheimageproduit.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -433,7 +446,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		ui_mainwindow.h \
 		dialogmodifierpersonnel.h \
 		dialogajoutpersonnel.h \
-		dialogmodifiertypeproduits.h
+		dialogmodifiertypeproduits.h \
+		dialogafficheimageproduit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 dialogConnexion.o: dialogConnexion.cpp dialogConnexion.h \
@@ -464,6 +478,10 @@ dialogmodifiertypeproduits.o: dialogmodifiertypeproduits.cpp dialogmodifiertypep
 		ui_dialogmodifiertypeproduits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogmodifiertypeproduits.o dialogmodifiertypeproduits.cpp
 
+dialogafficheimageproduit.o: dialogafficheimageproduit.cpp dialogafficheimageproduit.h \
+		ui_dialogafficheimageproduit.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogafficheimageproduit.o dialogafficheimageproduit.cpp
+
 qrc_ressources.o: qrc_ressources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressources.o qrc_ressources.cpp
 
@@ -490,6 +508,9 @@ moc_dialogajoutrayons.o: moc_dialogajoutrayons.cpp
 
 moc_dialogmodifiertypeproduits.o: moc_dialogmodifiertypeproduits.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialogmodifiertypeproduits.o moc_dialogmodifiertypeproduits.cpp
+
+moc_dialogafficheimageproduit.o: moc_dialogafficheimageproduit.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialogafficheimageproduit.o moc_dialogafficheimageproduit.cpp
 
 ####### Install
 

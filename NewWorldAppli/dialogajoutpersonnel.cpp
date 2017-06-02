@@ -13,6 +13,11 @@ DialogAjoutPersonnel::~DialogAjoutPersonnel()
     delete ui;
 }
 
+QString DialogAjoutPersonnel::getLogin()
+{
+    return ui->lineEditLogin->text();
+}
+
 QString DialogAjoutPersonnel::getNom()
 {
     return ui->lineEditNom->text();
@@ -47,4 +52,9 @@ QString DialogAjoutPersonnel::getVille()
 QString DialogAjoutPersonnel::getCp()
 {
     return ui->lineEditCp->text();
+}
+
+QString DialogAjoutPersonnel::getType()
+{
+    return ui->comboBoxType->currentText();
 }

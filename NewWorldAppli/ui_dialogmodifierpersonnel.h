@@ -49,6 +49,9 @@ public:
         if (DialogModifierPersonnel->objectName().isEmpty())
             DialogModifierPersonnel->setObjectName(QStringLiteral("DialogModifierPersonnel"));
         DialogModifierPersonnel->resize(355, 561);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/docs/emblem-web.png"), QSize(), QIcon::Normal, QIcon::Off);
+        DialogModifierPersonnel->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(DialogModifierPersonnel);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label_4 = new QLabel(DialogModifierPersonnel);
@@ -159,7 +162,7 @@ public:
 
     void retranslateUi(QDialog *DialogModifierPersonnel)
     {
-        DialogModifierPersonnel->setWindowTitle(QApplication::translate("DialogModifierPersonnel", "Dialog", 0));
+        DialogModifierPersonnel->setWindowTitle(QApplication::translate("DialogModifierPersonnel", "Modifier Personnel", 0));
         label_4->setText(QApplication::translate("DialogModifierPersonnel", "Nom :", 0));
         label_6->setText(QApplication::translate("DialogModifierPersonnel", "Prenom :", 0));
         label_8->setText(QApplication::translate("DialogModifierPersonnel", "Mail :", 0));
