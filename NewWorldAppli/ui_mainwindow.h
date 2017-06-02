@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateTimeEdit>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -47,7 +48,7 @@ public:
     QPushButton *pushButtonGestionPersonnelModifier;
     QPushButton *pushButtonGestionPersonnelSupprimer;
     QWidget *tab_3;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
@@ -56,6 +57,8 @@ public:
     QTableWidget *tableWidgetProduits;
     QFrame *line;
     QGridLayout *gridLayout_5;
+    QPushButton *pushButtonSupprimerProduits;
+    QDateTimeEdit *dateTimeEditDebut;
     QLabel *label_7;
     QComboBox *comboBoxRayons;
     QHBoxLayout *horizontalLayout_3;
@@ -70,14 +73,15 @@ public:
     QLabel *label_9;
     QLineEdit *lineEditLibelleProduit;
     QLabel *label_10;
-    QLineEdit *lineEditPrix;
     QLabel *label_11;
-    QLineEdit *lineEditPoids;
     QLabel *label_12;
-    QDateTimeEdit *dateTimeEdit;
     QLabel *label_13;
-    QDateTimeEdit *dateTimeEdit_2;
-    QPushButton *pushButtonGestionPersonnelAjouter_2;
+    QDateTimeEdit *dateTimeEditFin;
+    QPushButton *pushButtonModifierProduits;
+    QDoubleSpinBox *doubleSpinBoxPrix;
+    QDoubleSpinBox *doubleSpinBoxPoids;
+    QLabel *label_14;
+    QLabel *label_15;
     QWidget *tab_6;
     QVBoxLayout *verticalLayout_4;
     QGridLayout *gridLayout_4;
@@ -177,10 +181,10 @@ public:
         tabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
-        widget = new QWidget(tab_3);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(12, 12, 845, 396));
-        horizontalLayout_4 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(tab_3);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(12, 12, 845, 396));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget);
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -191,7 +195,7 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        tableWidgetRayons = new QTableWidget(widget);
+        tableWidgetRayons = new QTableWidget(layoutWidget);
         if (tableWidgetRayons->columnCount() < 1)
             tableWidgetRayons->setColumnCount(1);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -202,7 +206,7 @@ public:
 
         horizontalLayout_2->addWidget(tableWidgetRayons);
 
-        tableWidgetTypeProduits = new QTableWidget(widget);
+        tableWidgetTypeProduits = new QTableWidget(layoutWidget);
         if (tableWidgetTypeProduits->columnCount() < 1)
             tableWidgetTypeProduits->setColumnCount(1);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -216,7 +220,7 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
-        tableWidgetProduits = new QTableWidget(widget);
+        tableWidgetProduits = new QTableWidget(layoutWidget);
         if (tableWidgetProduits->columnCount() < 5)
             tableWidgetProduits->setColumnCount(5);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
@@ -230,13 +234,14 @@ public:
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
         tableWidgetProduits->setHorizontalHeaderItem(4, __qtablewidgetitem6);
         tableWidgetProduits->setObjectName(QStringLiteral("tableWidgetProduits"));
+        tableWidgetProduits->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         verticalLayout_3->addWidget(tableWidgetProduits);
 
 
         horizontalLayout_4->addLayout(verticalLayout_3);
 
-        line = new QFrame(widget);
+        line = new QFrame(layoutWidget);
         line->setObjectName(QStringLiteral("line"));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
@@ -246,12 +251,25 @@ public:
         gridLayout_5 = new QGridLayout();
         gridLayout_5->setSpacing(6);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
-        label_7 = new QLabel(widget);
+        pushButtonSupprimerProduits = new QPushButton(layoutWidget);
+        pushButtonSupprimerProduits->setObjectName(QStringLiteral("pushButtonSupprimerProduits"));
+        pushButtonSupprimerProduits->setEnabled(false);
+        pushButtonSupprimerProduits->setIcon(icon2);
+
+        gridLayout_5->addWidget(pushButtonSupprimerProduits, 7, 3, 1, 1);
+
+        dateTimeEditDebut = new QDateTimeEdit(layoutWidget);
+        dateTimeEditDebut->setObjectName(QStringLiteral("dateTimeEditDebut"));
+        dateTimeEditDebut->setEnabled(false);
+
+        gridLayout_5->addWidget(dateTimeEditDebut, 5, 1, 1, 3);
+
+        label_7 = new QLabel(layoutWidget);
         label_7->setObjectName(QStringLiteral("label_7"));
 
         gridLayout_5->addWidget(label_7, 0, 0, 1, 1);
 
-        comboBoxRayons = new QComboBox(widget);
+        comboBoxRayons = new QComboBox(layoutWidget);
         comboBoxRayons->setObjectName(QStringLiteral("comboBoxRayons"));
 
         gridLayout_5->addWidget(comboBoxRayons, 0, 2, 1, 1);
@@ -259,13 +277,13 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        pushButtonAjoutRayons = new QPushButton(widget);
+        pushButtonAjoutRayons = new QPushButton(layoutWidget);
         pushButtonAjoutRayons->setObjectName(QStringLiteral("pushButtonAjoutRayons"));
         pushButtonAjoutRayons->setIcon(icon);
 
         horizontalLayout_3->addWidget(pushButtonAjoutRayons);
 
-        pushButtonSupprimerRayons = new QPushButton(widget);
+        pushButtonSupprimerRayons = new QPushButton(layoutWidget);
         pushButtonSupprimerRayons->setObjectName(QStringLiteral("pushButtonSupprimerRayons"));
         pushButtonSupprimerRayons->setEnabled(false);
         QIcon icon3;
@@ -277,12 +295,12 @@ public:
 
         gridLayout_5->addLayout(horizontalLayout_3, 0, 3, 1, 1);
 
-        label_8 = new QLabel(widget);
+        label_8 = new QLabel(layoutWidget);
         label_8->setObjectName(QStringLiteral("label_8"));
 
         gridLayout_5->addWidget(label_8, 1, 0, 1, 2);
 
-        comboBoxTypeProduits = new QComboBox(widget);
+        comboBoxTypeProduits = new QComboBox(layoutWidget);
         comboBoxTypeProduits->setObjectName(QStringLiteral("comboBoxTypeProduits"));
 
         gridLayout_5->addWidget(comboBoxTypeProduits, 1, 2, 1, 1);
@@ -290,21 +308,22 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        pushButtonAjoutTypeProduits = new QPushButton(widget);
+        pushButtonAjoutTypeProduits = new QPushButton(layoutWidget);
         pushButtonAjoutTypeProduits->setObjectName(QStringLiteral("pushButtonAjoutTypeProduits"));
         pushButtonAjoutTypeProduits->setIcon(icon);
 
         horizontalLayout->addWidget(pushButtonAjoutTypeProduits);
 
-        pushButtonSupprimerTypeProduits = new QPushButton(widget);
+        pushButtonSupprimerTypeProduits = new QPushButton(layoutWidget);
         pushButtonSupprimerTypeProduits->setObjectName(QStringLiteral("pushButtonSupprimerTypeProduits"));
         pushButtonSupprimerTypeProduits->setEnabled(false);
         pushButtonSupprimerTypeProduits->setIcon(icon3);
 
         horizontalLayout->addWidget(pushButtonSupprimerTypeProduits);
 
-        pushButtonModifierTypeProduits = new QPushButton(widget);
+        pushButtonModifierTypeProduits = new QPushButton(layoutWidget);
         pushButtonModifierTypeProduits->setObjectName(QStringLiteral("pushButtonModifierTypeProduits"));
+        pushButtonModifierTypeProduits->setEnabled(false);
         pushButtonModifierTypeProduits->setIcon(icon1);
 
         horizontalLayout->addWidget(pushButtonModifierTypeProduits);
@@ -312,62 +331,74 @@ public:
 
         gridLayout_5->addLayout(horizontalLayout, 1, 3, 1, 1);
 
-        label_9 = new QLabel(widget);
+        label_9 = new QLabel(layoutWidget);
         label_9->setObjectName(QStringLiteral("label_9"));
 
         gridLayout_5->addWidget(label_9, 2, 0, 1, 2);
 
-        lineEditLibelleProduit = new QLineEdit(widget);
+        lineEditLibelleProduit = new QLineEdit(layoutWidget);
         lineEditLibelleProduit->setObjectName(QStringLiteral("lineEditLibelleProduit"));
+        lineEditLibelleProduit->setEnabled(false);
 
         gridLayout_5->addWidget(lineEditLibelleProduit, 2, 2, 1, 2);
 
-        label_10 = new QLabel(widget);
+        label_10 = new QLabel(layoutWidget);
         label_10->setObjectName(QStringLiteral("label_10"));
 
         gridLayout_5->addWidget(label_10, 3, 0, 1, 1);
 
-        lineEditPrix = new QLineEdit(widget);
-        lineEditPrix->setObjectName(QStringLiteral("lineEditPrix"));
-
-        gridLayout_5->addWidget(lineEditPrix, 3, 1, 1, 3);
-
-        label_11 = new QLabel(widget);
+        label_11 = new QLabel(layoutWidget);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         gridLayout_5->addWidget(label_11, 4, 0, 1, 1);
 
-        lineEditPoids = new QLineEdit(widget);
-        lineEditPoids->setObjectName(QStringLiteral("lineEditPoids"));
-
-        gridLayout_5->addWidget(lineEditPoids, 4, 1, 1, 3);
-
-        label_12 = new QLabel(widget);
+        label_12 = new QLabel(layoutWidget);
         label_12->setObjectName(QStringLiteral("label_12"));
 
         gridLayout_5->addWidget(label_12, 5, 0, 1, 1);
 
-        dateTimeEdit = new QDateTimeEdit(widget);
-        dateTimeEdit->setObjectName(QStringLiteral("dateTimeEdit"));
-
-        gridLayout_5->addWidget(dateTimeEdit, 5, 1, 1, 3);
-
-        label_13 = new QLabel(widget);
+        label_13 = new QLabel(layoutWidget);
         label_13->setObjectName(QStringLiteral("label_13"));
 
         gridLayout_5->addWidget(label_13, 6, 0, 1, 1);
 
-        dateTimeEdit_2 = new QDateTimeEdit(widget);
-        dateTimeEdit_2->setObjectName(QStringLiteral("dateTimeEdit_2"));
+        dateTimeEditFin = new QDateTimeEdit(layoutWidget);
+        dateTimeEditFin->setObjectName(QStringLiteral("dateTimeEditFin"));
+        dateTimeEditFin->setEnabled(false);
 
-        gridLayout_5->addWidget(dateTimeEdit_2, 6, 1, 1, 3);
+        gridLayout_5->addWidget(dateTimeEditFin, 6, 1, 1, 3);
 
-        pushButtonGestionPersonnelAjouter_2 = new QPushButton(widget);
-        pushButtonGestionPersonnelAjouter_2->setObjectName(QStringLiteral("pushButtonGestionPersonnelAjouter_2"));
-        pushButtonGestionPersonnelAjouter_2->setEnabled(true);
-        pushButtonGestionPersonnelAjouter_2->setIcon(icon);
+        pushButtonModifierProduits = new QPushButton(layoutWidget);
+        pushButtonModifierProduits->setObjectName(QStringLiteral("pushButtonModifierProduits"));
+        pushButtonModifierProduits->setEnabled(false);
+        pushButtonModifierProduits->setIcon(icon1);
 
-        gridLayout_5->addWidget(pushButtonGestionPersonnelAjouter_2, 7, 0, 1, 1);
+        gridLayout_5->addWidget(pushButtonModifierProduits, 7, 2, 1, 1);
+
+        doubleSpinBoxPrix = new QDoubleSpinBox(layoutWidget);
+        doubleSpinBoxPrix->setObjectName(QStringLiteral("doubleSpinBoxPrix"));
+        doubleSpinBoxPrix->setEnabled(false);
+        doubleSpinBoxPrix->setSingleStep(0.25);
+        doubleSpinBoxPrix->setValue(0);
+
+        gridLayout_5->addWidget(doubleSpinBoxPrix, 3, 2, 1, 1);
+
+        doubleSpinBoxPoids = new QDoubleSpinBox(layoutWidget);
+        doubleSpinBoxPoids->setObjectName(QStringLiteral("doubleSpinBoxPoids"));
+        doubleSpinBoxPoids->setEnabled(false);
+        doubleSpinBoxPoids->setSingleStep(0.25);
+
+        gridLayout_5->addWidget(doubleSpinBoxPoids, 4, 2, 1, 1);
+
+        label_14 = new QLabel(layoutWidget);
+        label_14->setObjectName(QStringLiteral("label_14"));
+
+        gridLayout_5->addWidget(label_14, 4, 3, 1, 1);
+
+        label_15 = new QLabel(layoutWidget);
+        label_15->setObjectName(QStringLiteral("label_15"));
+
+        gridLayout_5->addWidget(label_15, 3, 3, 1, 1);
 
 
         horizontalLayout_4->addLayout(gridLayout_5);
@@ -562,6 +593,7 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "date d\303\251but", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidgetProduits->horizontalHeaderItem(4);
         ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "date fin", 0));
+        pushButtonSupprimerProduits->setText(QString());
         label_7->setText(QApplication::translate("MainWindow", "Rayons :", 0));
         pushButtonAjoutRayons->setText(QString());
         pushButtonSupprimerRayons->setText(QString());
@@ -570,11 +602,13 @@ public:
         pushButtonSupprimerTypeProduits->setText(QString());
         pushButtonModifierTypeProduits->setText(QString());
         label_9->setText(QApplication::translate("MainWindow", "Libelle produit :", 0));
-        label_10->setText(QApplication::translate("MainWindow", "Prix :", 0));
-        label_11->setText(QApplication::translate("MainWindow", "Poids :", 0));
-        label_12->setText(QApplication::translate("MainWindow", "Date Debut :", 0));
-        label_13->setText(QApplication::translate("MainWindow", "Date Fin :", 0));
-        pushButtonGestionPersonnelAjouter_2->setText(QString());
+        label_10->setText(QApplication::translate("MainWindow", "Prix : (au kilo)", 0));
+        label_11->setText(QApplication::translate("MainWindow", "Poids : ", 0));
+        label_12->setText(QApplication::translate("MainWindow", "Date Fabrication:", 0));
+        label_13->setText(QApplication::translate("MainWindow", "Date Peremption :", 0));
+        pushButtonModifierProduits->setText(QString());
+        label_14->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">kilo(s)</span></p></body></html>", 0));
+        label_15->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">\342\202\254/kilo</span></p></body></html>", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Gestion catalogue", 0));
         label_2->setText(QApplication::translate("MainWindow", "Producteurs :", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidgetProducteurs->horizontalHeaderItem(0);

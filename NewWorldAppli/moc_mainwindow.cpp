@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[13];
-    char stringdata[377];
+    QByteArrayData data[21];
+    char stringdata[662];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,7 +41,15 @@ QT_MOC_LITERAL(8, 197, 32),
 QT_MOC_LITERAL(9, 230, 38),
 QT_MOC_LITERAL(10, 269, 37),
 QT_MOC_LITERAL(11, 307, 32),
-QT_MOC_LITERAL(12, 340, 36)
+QT_MOC_LITERAL(12, 340, 36),
+QT_MOC_LITERAL(13, 377, 41),
+QT_MOC_LITERAL(14, 419, 43),
+QT_MOC_LITERAL(15, 463, 4),
+QT_MOC_LITERAL(16, 468, 38),
+QT_MOC_LITERAL(17, 507, 42),
+QT_MOC_LITERAL(18, 550, 34),
+QT_MOC_LITERAL(19, 585, 37),
+QT_MOC_LITERAL(20, 623, 38)
     },
     "MainWindow\0on_pushButtonGestionPersonnelAjouter_clicked\0"
     "\0on_pushButtonGestionPersonnelModifier_clicked\0"
@@ -51,7 +59,14 @@ QT_MOC_LITERAL(12, 340, 36)
     "on_tableWidgetTypeProduits_cellClicked\0"
     "on_comboBoxRayons_currentIndexChanged\0"
     "on_pushButtonAjoutRayons_clicked\0"
-    "on_pushButtonSupprimerRayons_clicked"
+    "on_pushButtonSupprimerRayons_clicked\0"
+    "on_pushButtonModifierTypeProduits_clicked\0"
+    "on_comboBoxTypeProduits_currentIndexChanged\0"
+    "arg1\0on_pushButtonAjoutTypeProduits_clicked\0"
+    "on_pushButtonSupprimerTypeProduits_clicked\0"
+    "on_tableWidgetProduits_cellClicked\0"
+    "on_pushButtonModifierProduits_clicked\0"
+    "on_pushButtonSupprimerProduits_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +76,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,15 +84,22 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   59,    2, 0x08 /* Private */,
-       3,    0,   60,    2, 0x08 /* Private */,
-       4,    0,   61,    2, 0x08 /* Private */,
-       5,    2,   62,    2, 0x08 /* Private */,
-       8,    2,   67,    2, 0x08 /* Private */,
-       9,    2,   72,    2, 0x08 /* Private */,
-      10,    1,   77,    2, 0x08 /* Private */,
-      11,    0,   80,    2, 0x08 /* Private */,
-      12,    0,   81,    2, 0x08 /* Private */,
+       1,    0,   94,    2, 0x08 /* Private */,
+       3,    0,   95,    2, 0x08 /* Private */,
+       4,    0,   96,    2, 0x08 /* Private */,
+       5,    2,   97,    2, 0x08 /* Private */,
+       8,    2,  102,    2, 0x08 /* Private */,
+       9,    2,  107,    2, 0x08 /* Private */,
+      10,    1,  112,    2, 0x08 /* Private */,
+      11,    0,  115,    2, 0x08 /* Private */,
+      12,    0,  116,    2, 0x08 /* Private */,
+      13,    0,  117,    2, 0x08 /* Private */,
+      14,    1,  118,    2, 0x08 /* Private */,
+      16,    0,  121,    2, 0x08 /* Private */,
+      17,    0,  122,    2, 0x08 /* Private */,
+      18,    2,  123,    2, 0x08 /* Private */,
+      19,    0,  128,    2, 0x08 /* Private */,
+      20,    0,  129,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -87,6 +109,13 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,    7,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,    7,
     QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   15,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,    7,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -107,6 +136,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->on_comboBoxRayons_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 7: _t->on_pushButtonAjoutRayons_clicked(); break;
         case 8: _t->on_pushButtonSupprimerRayons_clicked(); break;
+        case 9: _t->on_pushButtonModifierTypeProduits_clicked(); break;
+        case 10: _t->on_comboBoxTypeProduits_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 11: _t->on_pushButtonAjoutTypeProduits_clicked(); break;
+        case 12: _t->on_pushButtonSupprimerTypeProduits_clicked(); break;
+        case 13: _t->on_tableWidgetProduits_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 14: _t->on_pushButtonModifierProduits_clicked(); break;
+        case 15: _t->on_pushButtonSupprimerProduits_clicked(); break;
         default: ;
         }
     }
@@ -137,13 +173,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 16)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 16;
     }
     return _id;
 }

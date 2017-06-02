@@ -38,29 +38,30 @@ include ('./haut.php');
                     <?php
                         if(isset($_GET['id'])) {
                             $rayon = $_GET['id'];
-                            $sql = "SELECT produits.libelle, produits.image, produits.poids, produits.prix FROM rayons INNER JOIN typeProduits ON rayons.id = typeProduits.idRayons INNER JOIN produits ON typeProduits.id = produits.idTypeProduits WHERE rayons.libelle = '".$rayon."';";
+                            $sql = "SELECT produits.libelle, user.user_nom, user.user_prenom, produits.image, produits.poids, produits.prix FROM rayons INNER JOIN typeProduits ON rayons.id = typeProduits.idRayons INNER JOIN produits ON typeProduits.id = produits.idTypeProduits INNER JOIN propose ON produits.id = propose.producteurProduits INNER JOIN user ON propose.producteurUser = user.user_id  WHERE rayons.libelle = '".$rayon."' AND propose.etat = 'ACC' ORDER BY rayons.id;";
+                            //var_dump ($sql);
                             $result = mysqli_query($connexion, $sql);
                 
                             while($data = mysqli_fetch_assoc($result)) {
                                 echo '<div class="service_article">';
-                                echo '<div class="view overlay hm-white-slight z-depth-1"><strong>'.$data['libelle'].'</strong>';
+                                echo '<div class="view overlay hm-white-slight z-depth-1"><strong>'.$data['libelle'].'</strong> par <i>'.$data['user_nom'].' '.$data['user_prenom'].'</i>';
                                 echo '<img src="./img/produits/'.$data["image"].'" alt="">';
-                                echo '<p class="card-text">('.$data['poids'].'kg)</p>';
-                                echo '<span class="left">'.$data["prix"].'€/kilos </span>';
-                                echo '<span class="right"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span></div>';
+                                echo '<span class="left">('.$data['poids'].'kg)</span>';
+                                echo '<br /><span class="left">'.$data["prix"].'€/unité</span>';
+                                echo '<br /><span class="right"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span></div>';
                                 echo '</div>';
                             }
                         }else{
-                            $sql = "SELECT * FROM produits;";
+                            $sql = "SELECT produits.libelle, produits.image, produits.prix, produits.poids, user.user_nom, user.user_prenom FROM produits INNER JOIN propose ON produits.id = propose.producteurProduits INNER JOIN user ON propose.producteurUser = user.user_id WHERE propose.etat = 'ACC' ORDER BY produits.idTypeProduits;";
                             $result = mysqli_query($connexion, $sql);
 
                             while($data = mysqli_fetch_assoc($result)) {
                                 echo '<div class="service_article">';
-                                echo '<div class="view overlay hm-white-slight z-depth-1"><strong>'.$data['libelle'].'</strong>';
+                                echo '<div class="view overlay hm-white-slight z-depth-1"><strong>'.$data['libelle'].'</strong> par <i>'.$data['user_nom'].' '.$data['user_prenom'].'</i>';
                                 echo '<img src="./img/produits/'.$data["image"].'" alt="">';
-                                echo '<p class="card-text">('.$data['poids'].'kg)</p>';
-                                echo '<span class="left">'.$data["prix"].'€/kilos </span>';
-                                echo '<span class="right"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span></div>';
+                                echo '<span class="left">('.$data['poids'].'kg)</span>';
+                                echo '<br /><span class="left">'.$data["prix"].'€/unité</span>';
+                                echo '<br /><span class="right"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span></div>';
                                 echo '</div>';
                             }
                         }

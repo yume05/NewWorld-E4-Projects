@@ -8,6 +8,9 @@
 #include "dialogajoutpersonnel.h"
 #include <QMessageBox>
 #include <QInputDialog>
+#include "dialogmodifiertypeproduits.h"
+#include <QDateEdit>
+#include <QDateTime>
 
 MainWindow::MainWindow(QString leUserConnected, QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +21,15 @@ MainWindow::MainWindow(QString leUserConnected, QWidget *parent) :
     chargeLePersonnel();
     chargeLesRayons();
     chargeLesRayonsCombo();
+    QSqlQuery reqTypeProduitPasRanges("select typeProduits.id from rayons inner join typeProduits on rayons.id = typeProduits.idRayons where rayons.libelle = 'Pas ranges' ;");
+    while(reqTypeProduitPasRanges.next()){
+        idTypeProduitPasRanges = reqTypeProduitPasRanges.value(0).toString();
+    }
+    QSqlQuery reqRayonPasRanges ("select distinct rayons.id from rayons where libelle = 'Pas ranges';");
+    while(reqRayonPasRanges.next()){
+        idRayonPasRanges = reqRayonPasRanges.value(0).toString();
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -85,6 +97,8 @@ void MainWindow::chargeLesRayonsCombo()
 void MainWindow::chargeLesRayons()
 {
     qDebug()<<"void MainWindow::chargeLesRayons()";
+    ui->tableWidgetRayons->clear();
+    ui->tableWidgetRayons->setRowCount(0);
     QSqlQuery reqRayons ("select libelle, id from rayons;");
     int nbLigne = ui->tableWidgetRayons->rowCount();
             while (reqRayons.next())
@@ -113,9 +127,9 @@ void MainWindow::on_tableWidgetRayons_cellClicked(int row, int column)
     qDebug()<<"void MainWindow::on_tableWidgetRayons_clicked(const QModelIndex &index)";
         //ui->tableWidgetTypeProduits->setRowCount(0);
         //Récupère le numéro de la ligne sélectionner
-        QString idRayons=ui->tableWidgetRayons->item(row,0)->data(32).toString();
-        qDebug()<<idRayons;
-        QSqlQuery reqTypeProduits ("select typeProduits.libelle, typeProduits.id from typeProduits inner join rayons on typeProduits.idRayons = rayons.id where idRayons = "+idRayons+";");
+        idRayonCourant=ui->tableWidgetRayons->item(row,0)->data(32).toString();
+        qDebug()<<idRayonCourant;
+        QSqlQuery reqTypeProduits ("select typeProduits.libelle, typeProduits.id from typeProduits inner join rayons on typeProduits.idRayons = rayons.id where idRayons = "+idRayonCourant+";");
         int nbLigne= reqTypeProduits.numRowsAffected();
         ui->tableWidgetTypeProduits->setRowCount(nbLigne);
         int noLigne=0;
@@ -158,9 +172,9 @@ void MainWindow::on_tableWidgetTypeProduits_cellClicked(int row, int column)
         qDebug()<<"void MainWindow::on_tableWidgetTypeProduits_cellClicked(const QModelIndex &index)";
         ui->tableWidgetProduits->setRowCount(0);
         //Récupère le numéro de la ligne sélectionner
-        QString idTypeProduits=ui->tableWidgetTypeProduits->item(row,0)->data(32).toString();
-        qDebug()<<idTypeProduits;
-        QSqlQuery reqProduits ("select produits.libelle, produits.prix, produits.poids, produits.dateDebut, produits.dateFin, produits.id from produits inner join typeProduits on produits.idTypeProduits = typeProduits.id where idTypeProduits = "+idTypeProduits+";");
+        idTypeProduitCourant=ui->tableWidgetTypeProduits->item(row,0)->data(32).toString();
+        qDebug()<<idTypeProduitCourant;
+        QSqlQuery reqProduits ("select produits.libelle, produits.prix, produits.poids, produits.dateDebut, produits.dateFin, produits.id from produits inner join typeProduits on produits.idTypeProduits = typeProduits.id where idTypeProduits = "+idTypeProduitCourant+";");
         int nbLigne= 0;
                 while (reqProduits.next())
                 {
@@ -389,7 +403,8 @@ void MainWindow::on_pushButtonAjoutRayons_clicked()
                 QSqlQuery reqPasRanges ("select id from rayons where libelle = '"+nomRayons+"';");
                 while (reqPasRanges.next()){
                     QString idNouveauRayon = reqPasRanges.value(0).toString();
-                    QSqlQuery reqAjoutPasRanges ("insert into typeProduits (libelle, idRayons) values ('Pas rangés', "+idNouveauRayon+");");
+                    qDebug()<<"idNouveauRayon = "+idNouveauRayon;
+                    QSqlQuery reqAjoutPasRanges ("insert into typeProduits (libelle, idRayons) values ('Pas ranges', "+idNouveauRayon+");");
                     reqAjoutPasRanges.exec();
                 }
                 chargeLesRayonsCombo();
@@ -409,31 +424,300 @@ void MainWindow::on_pushButtonSupprimerRayons_clicked()
     //Récuperer l'id du rayon sélectionnait
     QString idRayons = ui->comboBoxRayons->currentData().toString();
     qDebug()<<idRayons;
-    //Vérifier si le rayon en question possède des type de produits
-    QSqlQuery reqExisteTypeProduit ("select typeProduits.id from rayons inner join typeProduits on typeProduits.idRayons = rayons.id where idRayons = "+idRayons+";");
-    qDebug()<<"select typeProduits.id from rayons inner join typeProduits on typeProduits.idRayons = rayons.id where idRayons = "+idRayons+";";
-    int nbLigne= reqExisteTypeProduit.numRowsAffected();
-    qDebug()<<nbLigne;
-    //Si le rayon ne possède aucuns type de produits, alors il peut etre supprimer normalement
-    if(nbLigne == 0){
-        QSqlQuery reqDeleteRayon ("delete from rayons where id = "+idRayons+";");
-        qDebug()<<"delete from rayons where id = '+idRayons+';";
-        reqDeleteRayon.exec();
-        chargeLesRayonsCombo();
-    }else{
-        //On récupère l'id du rayon "pas rangés"
-        QSqlQuery reqRayonPasRanges ("select distinct rayons.id from rayons where libelle = 'Pas rangés';");
-        while(reqRayonPasRanges.next()){
-            QString idRayonPasRanges = reqRayonPasRanges.value(0).toString();
+    //Vérifier si le rayon que l'utilisateur veut supprimer n'est pas le rayon "Pas ranges"
+    QSqlQuery reqIsRayonPasRanges ("select * from rayons where id = "+idRayons+" AND libelle = 'Pas ranges';");
+    int nbLigne= reqIsRayonPasRanges.numRowsAffected();
+    //Si le rayon sélectionnait n'est pas le rayon "Pas Rangés"
+    if(nbLigne==0){
+
+        //Vérifier si le rayon en question possède des type de produits
+        QSqlQuery reqExisteTypeProduit ("select typeProduits.id from rayons inner join typeProduits on typeProduits.idRayons = rayons.id where idRayons = "+idRayons+";");
+        qDebug()<<"select typeProduits.id from rayons inner join typeProduits on typeProduits.idRayons = rayons.id where idRayons = "+idRayons+";";
+        int nbLigne= reqExisteTypeProduit.numRowsAffected();
+        qDebug()<<nbLigne;
+
+        //Si le rayon ne possède aucuns type de produits, alors il peut etre supprimer normalement
+        if(nbLigne == 0){
+            QSqlQuery reqDeleteRayon ("delete from rayons where id = "+idRayons+";");
+            qDebug()<<"delete from rayons where id = '+idRayons+';";
+            reqDeleteRayon.exec();
+            chargeLesRayonsCombo();
+            chargeLesRayons();
+        //Si le rayon possède des type de produits il faut les déplacer dans le "pas ranges" et supprimer son 'pas rangés' à lui
+        }else{
+            //On verifie que la catégorie pas rangés du rayons possède des produits
+            QSqlQuery reqPossedeProduits ("select produits.id from rayons inner join typeProduits on rayons.id = typeProduits.idRayons inner join produits on typeProduits.id = produits.idTypeProduits where rayons.id = "+idRayons+" AND typeProduits.libelle = 'Pas ranges';");
+            int nbLigne= reqPossedeProduits.numRowsAffected();
+            qDebug()<<nbLigne;
+            //Si oui il possède des produits, on les déplace dans la catégorie pas ranges du rayon pas ranges et on supprime la categorie "pas ranges" du rayon que l'on veut supprimer
+            if(nbLigne > 0){
+                qDebug()<<"Pas rangés du rayons possède des produits";
+
+
+                    qDebug()<<idTypeProduitPasRanges;
+                    //On met les produits en question dans la cétégorie "pas rangés" du rayon " pas rangés"
+                    while(reqPossedeProduits.next()){
+                        QString idProduitPasRanges = reqPossedeProduits.value(0).toString();
+                        qDebug()<<idProduitPasRanges;
+                        //On déplace les produits dans la categorie pas rangés du rayon pas rangés
+                        QSqlQuery reqUpdateProduitsDansPasRanges("update produits set idTypeProduits = "+idTypeProduitPasRanges+" where id = "+idProduitPasRanges+";");
+                        reqUpdateProduitsDansPasRanges.exec();
+                    }
+
+            //Elle ne possède pas de produits
+            }else{
+                //On supprime le type de produits Pas rangés du rayon
+                QSqlQuery reqDeleteTypeProduitPasRanges ("delete from typeProduits where libelle = 'Pas ranges', idRayons = "+idRayons+";");
+                qDebug()<<"delete from typeProduits where libelle = 'Pas ranges', idRayons = "+idRayons+";";
+                reqDeleteTypeProduitPasRanges.exec();
+            }
+
+            //On récupère l'id du rayon "Pas rangés"
+
             qDebug()<<idRayonPasRanges;
+            //On déplace le type de produits dans le rayon Pas rangés
             QSqlQuery reqUpdateRayon("update typeProduits set idRayons = "+idRayonPasRanges+" where idRayons = "+idRayons+";");
             reqUpdateRayon.exec();
-        }
 
-        //Si un type de rayons existe, on déplace les types de rayons vers le rayon "Pas rangés"
-        QSqlQuery reqDeleteRayon ("delete from rayons where id = "+idRayons+";");
-        qDebug()<<"delete from rayons where id = "+idRayons+";";
-        reqDeleteRayon.exec();
-        chargeLesRayonsCombo();
+            //On supprime le rayon.
+            QSqlQuery reqDeleteRayon ("delete from rayons where id = "+idRayons+";");
+            qDebug()<<"delete from rayons where id = '+idRayons+';";
+            reqDeleteRayon.exec();
+            chargeLesRayonsCombo();
+            chargeLesRayons();
+         }
+     //Si le rayon est bien le rayon "Pas Rangés" impossible de le supprimer
+     }else{
+        QMessageBox::critical(this, "Error", "Impossible de supprimer ce rayon");
+         return;
     }
+
+}
+
+void MainWindow::on_pushButtonModifierTypeProduits_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonModifierTypeProduits_clicked()";
+    //Récuperer l'id du type de produit sélectionnait
+    QString nomTypeProduit = ui->comboBoxTypeProduits->currentText();
+    QString idTypeProduit = ui->comboBoxTypeProduits->currentData().toString();
+    QString idRayon = ui->comboBoxRayons->currentText();
+
+    qDebug()<<idTypeProduit;
+    qDebug()<<idRayon;
+    //Afficher la boite de dialog permettant de modifier et de deplacer le type de produit dans un autre rayon
+    DialogModifierTypeProduits diagModifTypeProduit(nomTypeProduit, idRayon, this);
+    //si le dialogue à été exécuter
+    if(diagModifTypeProduit.exec()==QDialog::Accepted)
+    {
+        qDebug()<<"Entrer dans la boite de dialog";
+        //On récupère les informations saisies de la boite de dialog
+        QString nomTypeProduit = diagModifTypeProduit.getTypeProduits();
+        QString idRayonApres = diagModifTypeProduit.getRayons();
+        //Si le rayon n'a pas été changé, on fait juste un update du text rayon
+        if(idRayonApres == idRayon){
+            QString texteReq = "update typeProduits set libelle = '"+nomTypeProduit+"' WHERE id = "+idTypeProduit+";";
+            qDebug()<<texteReq;
+            QSqlQuery reqModifierTypeProduit(texteReq);
+            reqModifierTypeProduit.exec();
+        //Si le rayon à été changer on modifie l'emplacement du type de Produit et on déplace ces produits avec
+        }else{
+            QString texteReq = "update typeProduits set idRayons =";
+            texteReq = texteReq +idRayonApres+", libelle = '"+nomTypeProduit+"' WHERE id = ";
+            texteReq =texteReq + idTypeProduit+";";
+            qDebug()<<texteReq;
+            QSqlQuery reqDeplacerTypeProduit(texteReq);
+            reqDeplacerTypeProduit.exec();
+        }
+        //recharge les contacts
+        ui->comboBoxTypeProduits->clear();
+        chargeLesRayonsCombo();
+        chargeLesRayons();
+    }
+
+}
+
+void MainWindow::on_comboBoxTypeProduits_currentIndexChanged(const QString &arg1)
+{
+    ui->pushButtonModifierTypeProduits->setEnabled(true);
+    ui->pushButtonSupprimerTypeProduits->setEnabled(true);
+}
+
+void MainWindow::on_pushButtonAjoutTypeProduits_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonAjoutTypeProduits_clicked()";
+    QString idRayon = ui->comboBoxRayons->currentData().toString();
+    qDebug()<<idRayon;
+    //déclaration variable ok booléen
+    bool ok;
+    //ouvre une boite de dialogue, pour saisie le nom d'un rayon
+    //nomRayons recoit le nom du rayon saisie
+    QString nomTypeProduits = QInputDialog::getText(this, tr("Gestion catalogue"),
+                                               tr ("Nom type de produits ="), QLineEdit::Normal, "...", &ok);
+    //si ok=1 et nomRayons n'est pas vide
+    if(ok && !nomTypeProduits.isEmpty())
+    {
+        QSqlQuery reqTypeProduitsVerif;
+        QString texteVerif ("select * from typeProduits where libelle = '"+nomTypeProduits+"';");
+        reqTypeProduitsVerif.exec(texteVerif);
+        qDebug()<<texteVerif;
+        //Si le nom du type de produit n'existe pas
+        if(reqTypeProduitsVerif.size()==0){
+            QSqlQuery reqTypeProduits;
+            QString texteRequete = "insert into typeProduits (libelle, idRayons) values ('"+nomTypeProduits+"', "+idRayon+");";
+            //test de la requete
+            qDebug()<<texteRequete;
+            //execution de la requête
+            reqTypeProduits.exec(texteRequete);
+            chargeLesRayonsCombo();
+            chargeLesRayons();
+        }
+        else
+        {
+            //message d'erreur
+            QMessageBox::critical(this, "Error", "This name is already exist !!");
+             return;
+        }//fin sinon
+    }//fin si
+}
+
+void MainWindow::on_pushButtonSupprimerTypeProduits_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonSupprimerTypeProduits_clicked()";
+    //Récuperer l'id du type de produits à supprimer
+    QString idTypeProduit = ui->comboBoxTypeProduits->currentData().toString();
+    qDebug()<<idTypeProduit;
+    qDebug()<<idTypeProduitPasRanges;
+
+    //Si le type de produit sélectionnait n'est pas le type 'Pas ranges' du rayons 'Pas ranges'
+    if(idTypeProduit != idTypeProduitPasRanges){
+
+        //On verifie que le type de produit ne possède pas déjà des produits
+        QSqlQuery reqExisteProduit ("select produits.id from typeProduits inner join produits on typeProduits.id = produits.idTypeProduits where typeProduits.id = "+idTypeProduit+";");
+        qDebug()<<"select * from typeProduits inner join produits on typeProduits.id = produits.idTypeProduits where typeProduits.id = "+idTypeProduit+";";
+        int nbLigne= reqExisteProduit.numRowsAffected();
+        qDebug()<<nbLigne;
+
+        //Si le type de produits ne possède aucuns produits on peut le supprimer direct
+        if(nbLigne == 0){
+            QSqlQuery reqDeleteTypeProduit ("delete from typeProduits where id = "+idTypeProduit+";");
+            qDebug()<<"delete from typeProduits where id = "+idTypeProduit+";";
+            reqDeleteTypeProduit.exec();
+            chargeLesRayonsCombo();
+            chargeLesRayons();
+        //Si le rayon possède des produits on les déplace dans le type de produits 'pas ranges' du rayon 'Pas ranges'
+        }else{
+            while(reqExisteProduit.next()){
+                QString idProduitARanger = reqExisteProduit.value(0).toString();
+                QSqlQuery reqUpdateProduits ("update produits set idTypeProduits = "+idTypeProduitPasRanges+" where id = "+idProduitARanger+";");
+                qDebug()<<"update produits set idTypeProduits = "+idTypeProduitPasRanges+" where id = "+idProduitARanger+";";
+                reqUpdateProduits.exec();
+            }
+            //Et on supprime le type de produit sélectionnait
+            QSqlQuery reqDeleteTypeProduit ("delete from typeProduits where id = "+idTypeProduit+";");
+            qDebug()<<"delete from typeProduits where id = "+idTypeProduit+";";
+            reqDeleteTypeProduit.exec();
+            chargeLesRayonsCombo();
+            chargeLesRayons();
+
+         }
+     //Si le type de produit est bien "Pas Rangés" du rayon 'Pas rangés' impossible de le supprimer
+     }else{
+        QMessageBox::critical(this, "Error", "Impossible de supprimer ce type de produit");
+         return;
+    }
+}
+
+void MainWindow::on_tableWidgetProduits_cellClicked(int row, int column)
+{
+    qDebug()<<"void MainWindow::on_tableWidgetProduits_cellClicked(int row, int column)";
+    //Récuperer l'id de la ligne sélectionnait
+    ui->pushButtonModifierProduits->setEnabled(true);
+    ui->pushButtonSupprimerProduits->setEnabled(true);
+    ui->lineEditLibelleProduit->setEnabled(true);
+    ui->doubleSpinBoxPoids->setEnabled(true);
+    ui->doubleSpinBoxPrix->setEnabled(true);
+    ui->dateTimeEditDebut->setEnabled(true);
+    ui->dateTimeEditFin->setEnabled(true);
+    idProduitCourant=ui->tableWidgetProduits->item(row,0)->data(32).toString();
+
+    QSqlQuery reqProduit ("Select libelle, prix, poids, dateDebut, dateFin from produits where id = "+idProduitCourant+";");
+    while(reqProduit.next()){
+        QString libelle = reqProduit.value(0).toString();
+        float prix = reqProduit.value(1).toFloat();
+        float poids = reqProduit.value(2).toFloat();
+        QDateTime dateDebut = reqProduit.value(3).toDateTime();
+        QDateTime dateFin = reqProduit.value(4).toDateTime();
+        ui->dateTimeEditDebut->setDateTime(dateDebut);
+        ui->dateTimeEditFin->setDateTime(dateFin);
+        ui->lineEditLibelleProduit->setText(libelle);
+        ui->doubleSpinBoxPoids->setValue(poids);
+        ui->doubleSpinBoxPrix->setValue(prix);
+    }
+    chargeLesRayonsCombo();
+    QSqlQuery reqFindRayon ("select libelle from rayons where id = "+idRayonCourant+";");
+    while(reqFindRayon.next()){
+        QString libelleRayon = reqFindRayon.value(0).toString();
+        ui->comboBoxRayons->setCurrentText(libelleRayon);
+    }
+    QSqlQuery reqFindTypeProduits ("select libelle from typeProduits where id = "+idTypeProduitCourant+";");
+    while(reqFindTypeProduits.next()){
+        QString libelleTypeProduits = reqFindTypeProduits.value(0).toString();
+        ui->comboBoxTypeProduits->setCurrentText(libelleTypeProduits);
+    }
+    //Dévérouiller les bouton suppr et modif
+
+}
+
+void MainWindow::on_pushButtonModifierProduits_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonModifierProduits_clicked()";
+    //On récupère toutes les informations rentrées
+    QString idTypeProduitUpdate = ui->comboBoxTypeProduits->currentData().toString();
+    QString libelleProduitUpdate = ui->lineEditLibelleProduit->text();
+    double poidsProduitValue = ui->doubleSpinBoxPoids->value();
+    double prixProduitValue= ui->doubleSpinBoxPrix->value();
+    QString poidsProduitUpdate = QString::number(poidsProduitValue, 'g', 6);
+    QString prixProduitUpdate = QString::number(prixProduitValue, 'g', 6);
+    qDebug()<<poidsProduitUpdate;
+    QString dateDebutUpdate = ui->dateTimeEditDebut->dateTime().toString("yyyy-dd-mm hh:mm");
+    QString dateFinUpdate = ui->dateTimeEditFin->dateTime().toString("yyyy-dd-mm hh:mm");
+    qDebug()<<idTypeProduitUpdate;
+    qDebug()<<dateDebutUpdate;
+    qDebug()<<dateFinUpdate;
+    qDebug()<<idProduitCourant;
+    //On l'update dans la base de données
+    QSqlQuery reqUpdateProduit ("update produits set libelle = '"+libelleProduitUpdate+"', poids = "+poidsProduitUpdate+", prix = "+prixProduitUpdate+", dateDebut = '"+dateDebutUpdate+"', dateFin = '"+dateFinUpdate+"', idTypeProduits = "+idTypeProduitUpdate+" where id = "+idProduitCourant+";");
+    qDebug()<<"update produits set libelle = '"+libelleProduitUpdate+"', poids = "+poidsProduitUpdate+", prix = "+prixProduitUpdate+", dateDebut = '"+dateDebutUpdate+"', dateFin = '"+dateFinUpdate+"', idTypeProduits = "+idTypeProduitUpdate+" where id = "+idProduitCourant+";";
+    reqUpdateProduit.exec();
+    chargeLesRayonsCombo();
+    chargeLesRayons();
+
+
+
+}
+
+void MainWindow::on_pushButtonSupprimerProduits_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonSupprimerProduits_clicked()";
+    //Récupération des informations du produits
+    qDebug()<<idProduitCourant;
+    QSqlQuery reqProduitVerif ("select libelle, prix, poids from produits where id = " +idProduitCourant+";");
+    while(reqProduitVerif.next()){
+        QString libelle = reqProduitVerif.value(0).toString();
+        QString prix = reqProduitVerif.value(1).toString();
+        QString poids = reqProduitVerif.value(2).toString();
+        //demander confirmation de la suppresion du produit
+        int rep = (QMessageBox::warning(this, tr("Gestion catalogue"),  "Voulez vous vraiment supprimer ce produit ? "+libelle+" "+prix+"€ "+poids+"kilos.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes));
+
+        //Si la réponse à la question est positive, sortir de l'application
+        if (rep == QMessageBox::Yes)
+        {
+            QSqlQuery reqSupprimerProduit ("delete from produits where id = "+idProduitCourant+";");
+            reqSupprimerProduit.exec();
+            QMessageBox::critical(this, "Error", "Ce produit a bien été supprimé.");
+            return;
+        }
+      }
+
+
 }

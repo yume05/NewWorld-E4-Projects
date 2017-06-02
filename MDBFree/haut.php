@@ -43,7 +43,7 @@ include("translation_en.php");
                             <h4><a href = 'acheter.php' class="nav-link"><?php echo $aBuy;?></a></h4>
                         </li>
                         <li class="nav-item">
-                            <h4><a class="nav-link"><?php echo $aProduce; ?></a></h4>
+                            <h4><a href='produire.php' class="nav-link"><?php echo $aProduce; ?></a></h4>
                         </li>
                         <li class="nav-item">
                             <h4><a class="nav-link"><?php echo $aDistribute; ?></a></h4>

@@ -109,7 +109,7 @@
        <attribute name="title">
         <string>Gestion catalogue</string>
        </attribute>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>12</x>
@@ -157,6 +157,9 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tableWidgetProduits">
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
              <column>
               <property name="text">
                <string>produits</string>
@@ -195,6 +198,27 @@
          </item>
          <item>
           <layout class="QGridLayout" name="gridLayout_5">
+           <item row="7" column="3">
+            <widget class="QPushButton" name="pushButtonSupprimerProduits">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/images/docs/edit-delete.png</normaloff>:/images/docs/edit-delete.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" colspan="3">
+            <widget class="QDateTimeEdit" name="dateTimeEditDebut">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_7">
              <property name="text">
@@ -273,6 +297,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonModifierTypeProduits">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -292,59 +319,95 @@
             </widget>
            </item>
            <item row="2" column="2" colspan="2">
-            <widget class="QLineEdit" name="lineEditLibelleProduit"/>
+            <widget class="QLineEdit" name="lineEditLibelleProduit">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_10">
              <property name="text">
-              <string>Prix :</string>
+              <string>Prix : (au kilo)</string>
              </property>
             </widget>
-           </item>
-           <item row="3" column="1" colspan="3">
-            <widget class="QLineEdit" name="lineEditPrix"/>
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>Poids :</string>
+              <string>Poids : </string>
              </property>
             </widget>
-           </item>
-           <item row="4" column="1" colspan="3">
-            <widget class="QLineEdit" name="lineEditPoids"/>
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="label_12">
              <property name="text">
-              <string>Date Debut :</string>
+              <string>Date Fabrication:</string>
              </property>
             </widget>
-           </item>
-           <item row="5" column="1" colspan="3">
-            <widget class="QDateTimeEdit" name="dateTimeEdit"/>
            </item>
            <item row="6" column="0">
             <widget class="QLabel" name="label_13">
              <property name="text">
-              <string>Date Fin :</string>
+              <string>Date Peremption :</string>
              </property>
             </widget>
            </item>
            <item row="6" column="1" colspan="3">
-            <widget class="QDateTimeEdit" name="dateTimeEdit_2"/>
-           </item>
-           <item row="7" column="0">
-            <widget class="QPushButton" name="pushButtonGestionPersonnelAjouter_2">
+            <widget class="QDateTimeEdit" name="dateTimeEditFin">
              <property name="enabled">
-              <bool>true</bool>
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QPushButton" name="pushButtonModifierProduits">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
              <property name="text">
               <string/>
              </property>
              <property name="icon">
               <iconset resource="ressources.qrc">
-               <normaloff>:/images/docs/add.png</normaloff>:/images/docs/add.png</iconset>
+               <normaloff>:/images/docs/edit-undo.png</normaloff>:/images/docs/edit-undo.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxPrix">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="singleStep">
+              <double>0.250000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxPoids">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="singleStep">
+              <double>0.250000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="3">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;kilo(s)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;€/kilo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
