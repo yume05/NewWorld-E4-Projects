@@ -107,10 +107,6 @@ function ouvrirFermerSpoiler(valeur) {
 				<input type="text" name="villeProd" id="form3" class="form-control">
 				<label for="villeProd">*Ville du siège:</label>
 			</div>
-			<div class="md-form">
-				<input type="text" name="facturationProd" id="form3" class="form-control">
-				<label for="facturationProd">*Informations de facturation:</label>
-			</div>
 		</div>
 		<div class="col-6 col-md-4" id='cacherProducer2'>
 			<legend><?php echo $title3; ?></legend>
@@ -127,15 +123,7 @@ function ouvrirFermerSpoiler(valeur) {
 				<input type="text" name="emailContactProd" id="form3" class="form-control">
 				<label for="emailContact">*Email du contact :</label>
 			</div>
-			<div class="md-form">
-				
-				<input type="text" name="ibanProd" id="form3" class="form-control">
-				<label for="iban">*IBAN:</label>
-			</div>
-			<div class="md-form">
-				<input type="text" name="siretProd" id="form3" class="form-control">
-				<label for="siret">*SIRET:</label>
-			</div>
+
 			<div class="md-form">
 				<textarea id="textarea1" name="descriptionProd" class="md-textarea" length="120"></textarea>
 				<label for="description">*Description entreprise:</label>
@@ -159,10 +147,7 @@ function ouvrirFermerSpoiler(valeur) {
 				<input type="text" name="villePoint" id="form3" class="form-control">
 				<label for="ville">*Ville du siège:</label>
 			</div>
-			<div class="md-form">
-				<input type="text" name="facturationPoint" id="form3" class="form-control">
-				<label for="facturation">*Informations de facturation:</label>
-			</div>
+
 		</div>
 	
 		<div id='cacherPointSale2' class="col-6 col-md-4">
@@ -179,14 +164,7 @@ function ouvrirFermerSpoiler(valeur) {
 				<input type="text" name="emailContactPoint" id="form3" class="form-control">
 				<label for="emailContact">*Email du contact :</label>
 			</div>
-			<div class="md-form">
-				<input type="text" name="ibanPoint" id="form3" class="form-control">
-				<label for="iban">*IBAN:</label>
-			</div>
-			<div class="md-form">
-				<input type="text" name="siretPoint" id="form3" class="form-control">
-				<label for="siret">*SIRET:</label>
-			</div>
+
 		</div>
 	
 	</div>

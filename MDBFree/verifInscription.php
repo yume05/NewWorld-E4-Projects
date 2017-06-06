@@ -44,7 +44,7 @@ $type = $_POST['type'];
 		$test = mysqli_query($connexion, "SELECT user_id FROM user WHERE user_login = '".$login."' AND user_mail = '".$email."' AND user_type = ".$type.";"); 
 		$result = mysqli_num_rows($test);
 		//Si il retourne un résultat autre que 0
-			if($result > 0) 
+			if(mysqli_num_rows($test) !== 0){
 			{ 
 				echo '<font color="red"><i>Un utilisateur porte déjà ce nom, cette email et ce type, réessayez !</i></font>';
 				header("refresh:2;url=inscription.php");
@@ -124,14 +124,11 @@ $type = $_POST['type'];
 		$cp=$_POST['cpProd'];
 		$rue=$_POST['rueProd'];
 		$ville=$_POST['villeProd'];
-		$facturation=$_POST['facturationProd'];
 		$statutJuridique = $_POST['statutJuridiqueProd'];
 		$denomination=$_POST['denominationProd'];
 		$emailContact=$_POST['emailContactProd'];
-		$iban=$_POST['ibanProd'];
-		$siret=$_POST['siretProd'];
 		$description=$_POST['descriptionProd'];
-		if(empty($login) || empty($nom) || empty($prenom) || empty($email) || empty($cp) || empty($rue) || empty($ville) || empty($facturation) || empty($statutJuridique) || empty($denomination) || empty($emailContact) || empty($iban) || empty($siret) || empty($description))
+		if(empty($login) || empty($nom) || empty($prenom) || empty($email) || empty($cp) || empty($rue) || empty($ville) || empty($statutJuridique) || empty($denomination) || empty($emailContact) || empty($description))
 		{ 
 			echo '<font color="red"><i>Remplir tous les champs !</i></font>';
 			header("refresh:2;url=inscription.php");
@@ -140,7 +137,7 @@ $type = $_POST['type'];
 			$test = mysqli_query($connexion, "SELECT user_id FROM user WHERE user_login = '".$login."' AND user_mail = '".$email."' AND user_type = ".$type.";"); 
 			$result = mysqli_num_rows($test);
 			//Si il retourne un résultat autre que 0
-			if($result > 0) 
+			if(mysqli_num_rows($test) !== 0){
 			{ 
 				echo '<font color="red"><i>Un utilisateur porte déjà ce nom, cette email et ce type, réessayez !</i></font>';
 				header("refresh:2;url=inscription.php");
@@ -152,7 +149,7 @@ $type = $_POST['type'];
 				$mdp = generer_mot_de_passe(12);
 				// on écrit la requête sql 
 				//on insère dans la bdd
-				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_facturation, user_statutJuridique, user_denominationSociale, user_mailContact, user_siret, user_iban , user_descriptionEntreprise, etat) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$facturation."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$siret."', '".$iban."', '".$description."', 'ATT');"; 
+				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_statutJuridique, user_denominationSociale, user_mailContact, user_descriptionEntreprise, etat) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$description."', 'ATT');"; 
 				// on insère les informations du formulaire dans la table 
 				mysqli_query($connexion, $sql); 
 				echo "<font color='green'><i>Inscription réussie, retour sur l'accueil dans 2 secondes.</i></font>";
@@ -221,13 +218,11 @@ $type = $_POST['type'];
 		$cp=$_POST['cpPoint'];
 		$rue=$_POST['ruePoint'];
 		$ville=$_POST['villePoint'];
-		$facturation=$_POST['facturationPoint'];
 		$statutJuridique = $_POST['statutJuridiquePoint'];
 		$denomination=$_POST['denominationPoint'];
 		$emailContact=$_POST['emailContactPoint'];
-		$iban=$_POST['ibanPoint'];
-		$siret=$_POST['siretPoint'];
-		if(empty($login) || empty($nom) || empty($prenom) || empty($email) || empty($cp) || empty($rue) || empty($ville) || empty($facturation) || empty($statutJuridique) || empty($denomination) || empty($emailContact) || empty($iban) || empty($siret))
+
+		if(empty($login) || empty($nom) || empty($prenom) || empty($email) || empty($cp) || empty($rue) || empty($ville) || empty($statutJuridique) || empty($denomination) || empty($emailContact))
 		{ 
 			echo '<font color="red"><i>Remplir tous les champs !</i></font>';
 			header("refresh:2;url=inscription.php");
@@ -236,7 +231,7 @@ $type = $_POST['type'];
 			$test = mysqli_query($connexion, "SELECT user_id FROM user WHERE user_login = '".$login."' AND user_mail = '".$email."' AND user_type = ".$type.";"); 
 			$result = mysqli_num_rows($test);
 			//Si il retourne un résultat autre que 0
-			if($result > 0) 
+			if(mysqli_num_rows($test) !== 0){) 
 			{ 
 				echo '<font color="red"><i>Un utilisateur porte déjà ce nom, cette email et ce type, réessayez !</i></font>';
 				header("refresh:2;url=inscription.php");
@@ -248,7 +243,7 @@ $type = $_POST['type'];
 				$mdp = generer_mot_de_passe(12);
 				// on écrit la requête sql 
 				//on insère dans la bdd
-				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_facturation, user_statutJuridique, user_denominationSociale, user_mailContact, user_siret, user_iban, etat) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$facturation."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', '".$siret."', '".$iban."', 'ATT');"; 
+				$sql = "INSERT INTO user(user_login, user_nom, user_prenom , user_mdp, user_mail, user_tel, user_type, user_dateInscription, user_cp, user_rue, user_ville, user_statutJuridique, user_denominationSociale, user_mailContact, etat) VALUES('".$login."', '".$nom."','".$prenom."', '".$mdp."', '".$email."', '".$tel."', ".$type.", now(), '".$cp."', '".$rue."', '".$ville."', '".$statutJuridique."', '".$denomination."', '".$emailContact."', 'ACC');"; 
 				// on insère les informations du formulaire dans la table 
 				mysqli_query($connexion, $sql); 
 				echo "<font color='green'><i>Inscription réussie, retour sur l'accueil dans 2 secondes.</i></font>";

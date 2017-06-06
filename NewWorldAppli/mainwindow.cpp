@@ -866,9 +866,14 @@ void MainWindow::on_pushButtonSupprimerProduits_clicked()
         if (rep == QMessageBox::Yes)
         {
             QSqlQuery reqSupprimerProduit ("delete from produits where id = "+idProduitCourant+";");
+            QSqlQuery reqSupprimerProduit2 ("delete from propose where producteurProduits = "+idProduitCourant+";");
+            qDebug()<<"delete from propose where producteurProduits = "+idProduitCourant+";";
+            reqSupprimerProduit2.exec();
+            qDebug()<<"delete from produits where id = "+idProduitCourant+";";
             reqSupprimerProduit.exec();
             QMessageBox::critical(this, "Error", "Ce produit a bien été supprimé.");
             return;
+            ui->tableWidgetProduits->setRowCount(0);
         }
       }
 

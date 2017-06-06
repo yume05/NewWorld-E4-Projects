@@ -48,3 +48,37 @@ background {
 #cacherPointSale, #cacherPointSale2{
 	display: none;
 }
+
+table {
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    border: medium solid #6495ed;
+    border-collapse: collapse;
+
+}
+th {
+font-family: monospace;
+text-align:center;
+border: thin solid #6495ed;
+padding: 5px;
+background-color: #D0E3FA;
+background-image: url(sky.jpg);
+}
+td {
+text-align:center;
+font-family: sans-serif;
+border: thin solid #6495ed;
+padding: 5px;
+text-align: center;
+background-color: #ffffff;
+}
+td img{
+    height: 70px;
+    width: 100px;
+    
+}
+
+caption {
+font-family: sans-serif;
+}

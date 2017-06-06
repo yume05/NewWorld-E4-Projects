@@ -11,46 +11,43 @@ if(isset($_SESSION['login']))
                 //Si formulaire activer
             if(isset($_POST['btEnregistrer'])) {
 
-                if(!empty($_POST['nom']) && !empty($_POST['prix']) && !empty($_POST['poids']) && !empty($_POST['datedebut']) && !empty($_POST['datefin'])) {
+                if(!empty($_POST['nom']) && !empty($_POST['prix']) && !empty($_POST['poids'])) {
                     $nom = $_POST['nom'];
                     $prix = $_POST['prix'];
                     $poids = $_POST['poids'];
-                    $datedebut = $_POST['datedebut'];
-                    $datefin = $_POST['datefin'];
+
+                    $datedebut = $_POST['anneeDebut'].'-'.$_POST['moisDebut'].'-'.$_POST['joursDebut'];
+                    $datefin = $_POST['anneeFin'].'-'.$_POST['moisFin'].'-'.$_POST['joursFin'];;
                     
                     
-                        /*if(!empty($_FILES['fichier']['name'])) {
-                            echo "rentrer dans le debut de l'upload";
+                    //if(!empty($_FILES['fichier']['name'])) {
+                            /*echo "rentrer dans le debut de l'upload";
                             $extensions = array('png', '.jpg', '.jpeg');
                             $extension = strrchr($_FILES['fichier']['name'], '.');
                           
-                            if(!in_array($extension, $extensions)) {
+                             if(!in_array($extension, $extensions)) {
                                 $msg = "<center><i><font color=red>Vous devez insérer uniquement un <b>png</b>, <b>jpeg</b> ou <b>jpg</b>.</font></i></center>"; 
                             
-                            } else {*/
-                                //$file = md5(date("Y-m-d - H-i-s").basename($_FILES['fichier']['name'])).".".pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);
-                                //$file = 'No_image.png';
-                                //$upload_dir='/img/produits/';
-                                //$tmpname = $_FILES['fichier']['tmp_name'];
-                                //if(move_uploaded_file($tmpname, $upload_dir.$file)) {
+                            } else {
+                                $file = md5(date("Y-m-d - H-i-s").basename($_FILES['fichier']['name'])).".".pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);*/
+                                //if(move_uploaded_file($_FILES['fichier']['tmp_name'], './img/produits/'.$file)) {
                                     //var_dump($file);
                                    
                                     if(isset($_POST['type'])){
-                                        $reqVerif = "SELECT libelle, poids, prix, image, idTypeProduits FROM produits WHERE libelle = ".$nom." AND image = 'No_image.png' AND poids = ".$poids." AND prix = ".$prix." AND idTypeProduits = ".$_POST['type'].";";
+                                        $reqVerif = "SELECT libelle, poids, prix, image, idTypeProduits FROM produits WHERE libelle = ".$nom." AND image = 'noimage.jpeg' AND poids = ".$poids." AND prix = ".$prix." AND idTypeProduits = ".$_POST['type'].";";
                                         if(mysqli_query($connexion, $reqVerif)){
                                             $msg = "<center><i><font color=red>Ce produit existe déjà ! Recommencez </font></i></center>"; 
                                         } else {
-                                            $sql = "INSERT INTO produits (libelle, poids, prix, image, datedebut, datefin, idTypeProduits) VALUES ('".$nom."', ".$poids.", ".$prix.", 'No_image.png', '".$datedebut."', '".$datefin."', ".$_POST['type'].");";
+                                            $sql = "INSERT INTO produits (libelle, poids, prix, image, datedebut, datefin, idTypeProduits) VALUES ('".$nom."', ".$poids.", ".$prix.", 'noimage.jpeg', '".$datedebut."', '".$datefin."', ".$_POST['type'].");";
                                         //Test connexion à la bdd
                                             if(mysqli_query($connexion, $sql)) {
-                                                $reqRecup = "SELECT id FROM produits WHERE libelle = '".$nom."' AND prix like ".$prix." AND poids like ".$poids." AND image = 'No_image.png' AND datedebut = '".$datedebut."' AND datefin = '".$datefin."' AND idTypeProduits like ".$_POST['type'].";";
+                                                $reqRecup = "SELECT id FROM produits WHERE libelle = '".$nom."' AND prix like ".$prix." AND poids like ".$poids." AND image = 'noimage.jpeg' AND datedebut = '".$datedebut."' AND datefin = '".$datefin."' AND idTypeProduits like ".$_POST['type'].";";
                                                 $result = mysqli_query($connexion, $reqRecup);
                                                 $data = mysqli_fetch_assoc($result);
-                                                var_dump($reqRecup);
+
                                                 $idNewProduit = $data['id'];
                                                 $sql2 = "INSERT INTO propose (etat, producteurProduits, producteurUser) VALUES ('ATT', ".$idNewProduit.", ".$_SESSION['id'].");";
-                                                var_dump($sql2);
-                                                var_dump($idNewProduit);
+
                                                 if(mysqli_query($connexion, $sql2)){
                                                     $msg = "<center><i><font color=green>Le produit à bien été proposé ! Une réponse vous sera donnez dans les plus brefs délais</font></i></center>";
                                                 }
@@ -66,13 +63,13 @@ if(isset($_SESSION['login']))
                                    
                                     //Upload impossible
                                 //} else {
-                                   // $msg = "<center><i><font color=red>L'upload ne s'est pas effectué. Le répertoire n'existe pas.</font></i></center>";
+                                    //$msg = "<center><i><font color=red>L'upload ne s'est pas effectué. Le répertoire n'existe pas.</font></i></center>";
                                 //}
                             //}
                        
-                    //} else {
-                      //  $msg = "<center><i><font color=red>Il faut impérativement remplir tout les champs</font></i></center>";
-                    //}
+                   /* } else {
+                        $msg = "<center><i><font color=red>Il faut impérativement remplir tout les champs</font></i></center>";
+                    }*/
             } else {
                         $msg = "<center><i><font color=red>Il faut impérativement remplir tout les champs</font></i></center>";
                     }
@@ -90,7 +87,7 @@ if(isset($_SESSION['login']))
                                 <select class="mdb-select" name="type">
                                     <option value="" class='rounded-circle' disabled selected>Catégories</option>
                                     <?php 
-                                        $sql = "SELECT DISTINCT libelle, id from typeProduits ORDER BY idRayons;";
+                                        $sql = "SELECT DISTINCT libelle, id from typeProduits;";
                                         $result = mysqli_query($connexion, $sql);
                                         $date = date("Y-m-d H:i:s");
                                         while($data = mysqli_fetch_assoc($result)) {
@@ -105,17 +102,84 @@ if(isset($_SESSION['login']))
                             </div>
                             <div class="col-6 col-md-4">
                                 Poids du produit :<input type="number" name="poids" placeholder="0.750" step="0.15" min="0" max="99.99" ><br />
-                                Date Début (Fabrication/Récolte) :
-                                <input type="datetime" placeholder = "<?php echo $date; ?>" name="datedebut"><br />
-                                Date Fin (Peremption/Fin de récolte) :
-                                <input type="datetime" placeholder = "<?php echo $date; ?>" name="datefin" ><br />
-                                <!--Image :
+                                Date Début (Fabrication/Récolte) :<br>
+                                <?php
+                                echo "<SELECT name='joursDebut' Size='1'>";
+                                     for($i=1; $i<=31;$i++){           //Lister les jours
+
+                                               if ($i < 10){               //Lister les jours pour pouvoir leur ajouter un 0 devant
+                                              echo "<OPTION>0$i<br></OPTION>";
+                                                   }
+                                               else {
+                                              echo "<OPTION>$i<br></OPTION>";
+                                                    }
+                                                          }
+                                echo "</SELECT>";
+
+                                echo '<SELECT name="moisDebut" Size="1">';
+
+                                     for($d=1; $d<=12;$d++){           //Lister les mois
+
+                                               if ($d < 10){               //Lister les jours pour pouvoir leur ajouter un 0 devant
+                                              echo "<OPTION>0$d<br></OPTION>";
+                                                   }
+                                               else {
+                                              echo "<OPTION>$d<br></OPTION>";
+                                                    }
+                                                          }
+                                echo "</SELECT>";
+
+                                $date = date('Y');       //On prend l'année en cours
+                                    
+                                echo '<SELECT name="anneeDebut" Size="1">';
+
+                                     for ($y=$date; $y<=2100; $y++) {          //De l'année 2000 à l'année actuelle
+                                         echo "<OPTION><br>$y<br></OPTION>"; }
+                                echo "</SELECT>";
+                                ?><br />
+                                Date Fin (Peremption/Fin de récolte) :<br>
+                                <?php
+                                    echo "<SELECT name='joursFin' Size='1'>";
+                                         for($i=1; $i<=31;$i++){           //Lister les jours
+                                                   if ($i < 10){//Lister les jours pour pouvoir leur ajouter un 0 devant
+                                                  echo "<OPTION>0$i<br></OPTION>";
+                                                       }
+                                                   else {
+                                                  echo "<OPTION>$i<br></OPTION>";
+                                                        }
+                                                              }
+                                    echo "</SELECT>";
+
+                                    echo '<SELECT name="moisFin" Size="1">';
+
+                                         for($d=1; $d<=12;$d++){           //Lister les mois
+
+                                                   if ($d < 10){               //Lister les jours pour pouvoir leur ajouter un 0 devant
+                                                  echo "<OPTION>0$d<br></OPTION>";
+                                                       }
+                                                   else {
+                                                  echo "<OPTION>$d<br></OPTION>";
+                                                        }
+                                                              }
+                                    echo "</SELECT>";
+
+                                    $date = date('Y');       //On prend l'année en cours
+                                        
+                                    echo '<SELECT name="anneeFin" Size="1">';
+
+                                         for ($y=$date; $y<=2100; $y++) {          //De l'année 2000 à l'année actuelle
+                                             echo "<OPTION><br>$y<br></OPTION>"; }
+                                    echo "</SELECT>";
+                                    ?>
+                                    <br>
+                               <!-- Image :
                                 <input type="file" id="fichier" multiple="multiple" name="fichier" /><br />-->
                             </div>
                        </div> 
                             <?php if(isset($msg)) { echo $msg; } ?>
                             <input type="submit" value="Ajouter" name="btEnregistrer"/>
 
+                            
                     </form>
                     <br />
                     <hr />
@@ -141,7 +205,7 @@ if(isset($_SESSION['login']))
                                             echo '<button class="btn btn-success">Accepter</button>';
                                         }
                                         if($data['etat'] == 'REF'){
-                                            echo '<button class="btn btn-danger">Accepter</button>';
+                                            echo '<button class="btn btn-danger">Refuser</button>';
                                         }
                                         echo '</div></div>';
                                     }

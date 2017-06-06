@@ -16,7 +16,7 @@ if(isset($_SESSION['login']))
 		$requete = "SELECT user.user_id, type.type_libelle, user.user_nom,  user.user_prenom,  user.user_mail,  user.user_tel,  user.user_rue,  user.user_cp,  user.user_ville, user.user_dateInscription, user.user_facturation, user.user_statutJuridique, user.user_denominationSociale, user.user_mailContact, user.user_siret, user.user_iban, user.user_descriptionEntreprise, user.etat FROM user inner join type on  user.user_type=type.type_id WHERE  user.user_login = '$login' AND  user.user_mail = '$mail' AND  user.user_mdp = '$password';"; 
 		$result = mysqli_query($connexion, $requete);
 		$data = mysqli_fetch_assoc($result);
-	    if(!$result){
+	    if(mysqli_num_rows($result) == 0){
 			$message2 =  '<font color="red"><i>Mauvais identifiants, réessayez !</i></font>';
 			echo $requete;
 		}else{
@@ -24,9 +24,9 @@ if(isset($_SESSION['login']))
 			$_SESSION['prenom'] = $data['user_prenom'];
 			$_SESSION['nom'] = $data['user_nom'];
 			$_SESSION['tel']= $data['user_tel'];
-			$_SESSION['adresse'] = $date['user_rue'].' '.$data['user_ville'].' '.$data['user_cp'];
+			$_SESSION['adresse'] = $data['user_rue'].' '.$data['user_ville'].' '.$data['user_cp'];
 			$_SESSION['type'] = $data['type_libelle'];
-			$_SESSION['dateInscription'] = $data['user_dateInscritpion'];
+			$_SESSION['dateInscription'] = $data['user_dateInscription'];
 			$_SESSION['facturation'] = $data['user_facturation'];
 			$_SESSION['statutJuridique'] = $data['user_statutJuridique'];
 			$_SESSION['denomination'] = $data['user_denominationSociale'];
@@ -40,8 +40,18 @@ if(isset($_SESSION['login']))
 			$_SESSION['mail'] = $mail;
 			$_SESSION['connectOK']=1;
 			$_SESSION['login']=$login;
+			if($data['type_libelle'] == 'Consommateur'){
+				 if (!isset($_SESSION['panier'])){
+				 	$_SESSION['panier'] = array();
+					$_SESSION['panier']['id_produit'] = array();
+					$_SESSION['panier']['libelle_produit'] = array();
+					$_SESSION['panier']['prix_produit'] = array();
+					$_SESSION['panier']['poids_produit'] = array();
+					$_SESSION['panier']['image_produit'] = array();
+					$_SESSION['panier']['qte_produit'] = array();
+			   }
+			}
 	 		header('Location: index.php');
-	 		echo 'ok';
 
 		}
 	}

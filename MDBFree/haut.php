@@ -53,23 +53,44 @@ include("translation_en.php");
 					<?php 
 					//Si je suis connecter :
 					if(isset($_SESSION['login'])) 
-					{
-						$login = $_SESSION['login'];
-					?>
-					<ul class="navbar-nav ml-auto nav-flex-icons">
-						<li class="item">
-							<h6><?php echo ' '.$login.' '.$aConnected; ?></h6>
-						</li>
-						<li class="item">
-							<h5><a class="nav-link" href="account.php"><?php echo $labelYourProfil; ?></a></h5>
-						</li>
-						<li class="item">
-							<h5><a class="nav-link" href="logout.php"><?php echo $aLogOut; ?></a></h5>
-						</li>
-					</ul>
-					<?php 
-					//Si je ne suis pas connecter :
-					}
+                    {
+                        $login = $_SESSION['login'];
+                        if($_SESSION['type'] == 'Consommateur') {
+                            
+                    ?>
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="item">
+                            <h6 class="nav-link"><?php echo ' '.$login.' '.$aConnected; ?></h6>
+                        </li>
+                        <li class="item">
+                            <a class="nav-link" href ="panier.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="item">
+                            <a class="nav-link" href ="account.php"><i class="fa fa-user" aria-hidden="true"></i></a>
+                        </li>    
+                        <li class="item">
+                            <h5><a class="nav-link" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></h5>
+                        </li>
+                    </ul>
+                    <?php 
+                    //Si je ne suis pas un conssomateur :
+                        }else{
+                        ?>
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="item">
+                            <h6 class="nav-link"><?php echo ' '.$login.' '.$aConnected; ?></h6>
+                        </li>
+                        <li class="item">
+                            <a class="nav-link" href="account.php"><i class="fa fa-user" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="item">
+                            <h5><a class="nav-link" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></h5>
+                        </li>
+                    </ul>
+                    <?php
+                        }
+                    }
+                    
 					else
 					{
 					?>
