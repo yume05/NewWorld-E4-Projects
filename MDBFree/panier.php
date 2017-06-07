@@ -5,13 +5,13 @@ echo '<div class="text-center">';
 if(isset($_SESSION['login'])) 
 { 
     if($_SESSION['type'] == 'Consommateur'){
-//Montant Global
-$total=0;
-for($i = 0; $i < count($_SESSION['panier']['id_produit']); $i++)
-{
-  $total += $_SESSION['panier']['qte_produit'][$i] * $_SESSION['panier']['prix_produit'][$i];
+	//Montant Global
+	$total=0;
+	for($i = 0; $i < count($_SESSION['panier']['id_produit']); $i++)
+	{
+	  $total += $_SESSION['panier']['qte_produit'][$i] * $_SESSION['panier']['prix_produit'][$i];
 
-}
+	}
 
 //Supprimer Article
 if(isset($_GET['del'])){
@@ -96,10 +96,39 @@ if(isset($_GET['viderPanier'])){
 	  //On efface notre panier temporaire
 	  unset($tmp);
 		header("location: ".$_SERVER["PHP_SELF"]);
+		if(isset($_GET['commandeFait'])){
+			$msg = "<center><i><font color=green>La commande à bien été enregistrer, vous pouvez voir le récapitulatif de vos commandes dans votre partie 'Profil'</font></i></center>";
+		}
+}
+//Vider panier
+if(isset($_GET['validerPanier'])){
+	$nbArticles=count($_SESSION['panier']['id_produit']);
+	if ($nbArticles > 0){
+		if(isset($_POST['pdv']) && $_POST['pdv'] != ""){
+			$qteEnTout = 0;
+			
+			for ($i=0; $i<count($_SESSION['panier']['libelle_produit']); $i++) {
+					mysqli_query($connexion, "INSERT INTO commande (ordreNbre, idUser, libelleProduit, qteProduit, prixProduit, total, nom, prenom, rue, ville, cp, tel, dateCommande, pdv) VALUES (".$i.",'".$_SESSION['id']."','".$_SESSION['panier']["libelle_produit"][$i]."','".$_SESSION['panier']["qte_produit"][$i]."','".$_SESSION['panier']["prix_produit"][$i]."','".$total."','".$_SESSION['nom']."', '".$_SESSION['prenom']."', '".$_SESSION['rue']."', '".$_SESSION['ville']."', '".$_SESSION['cp']."', '".$_SESSION['tel']."', now(), ".$_POST['pdv']." );") or die(mysql_error());  
+					$qteEnTout += $_SESSION['panier']['qte_produit'][$i];
+					
+			}
+			$text = "INSERT INTO chiffreAffaire (dateCommande, prixTotal, idUser, qteProduit, pdv) VALUES (now(), '".$total."', ".$_SESSION['id'].", '".$qteEnTout."', ".$_POST['pdv'].");";
+			mysqli_query($connexion, $text);
+			var_dump($text);	
+			header("location: ".$_SERVER["PHP_SELF"]."?viderPanier=1&commandeFait=1");
+			
+		}else{
+			$msg = "<center><i><font color=red>Veuillez choisir un point de vente avant de valider votre commande</font></i></center>";
+		}
+	}else{
+		$msg = "<center><i><font color=red>Votre panier est vide</font></i></center>";
+	}
 }
 
 
+
 ?>
+<form method="post" action="panier.php?validerPanier=1" enctype="multipart/form-data">
 <h1>Votre panier</h1>
 <div class="panier">
 <table>
@@ -147,7 +176,7 @@ Vous avez <strong><?php echo $nbArticles; ?></strong> article(s) dans votre pani
 </div>
 
 Choississez votre point de relais : 
-<select>
+<select name="pdv">
 <option value="" class='rounded-circle' disabled selected>Pdv</option>
 	<?php 
 		$sql = "SELECT user_id, user_nom, user_prenom, user_rue, user_cp, user_ville from user where user_type like 5;";
@@ -160,9 +189,10 @@ Choississez votre point de relais :
 </select>
 
 <br></br>
-<a href="#"><button name="valider">Valider Commande</button></a>
+<input type="submit" name="valider"></input>
 <a href="panier.php?viderPanier=1"><button name="vider">Vider Panier</button></a>
-
+</form>
+<?php if(isset($msg)) { echo $msg; } ?>
 
 </div>
 <?php

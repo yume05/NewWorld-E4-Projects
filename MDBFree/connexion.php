@@ -25,6 +25,9 @@ if(isset($_SESSION['login']))
 			$_SESSION['nom'] = $data['user_nom'];
 			$_SESSION['tel']= $data['user_tel'];
 			$_SESSION['adresse'] = $data['user_rue'].' '.$data['user_ville'].' '.$data['user_cp'];
+			$_SESSION['rue'] = $data['user_rue'];
+			$_SESSION['ville'] = $data['user_ville'];
+			$_SESSION['cp'] =$data['user_cp'];
 			$_SESSION['type'] = $data['type_libelle'];
 			$_SESSION['dateInscription'] = $data['user_dateInscription'];
 			$_SESSION['facturation'] = $data['user_facturation'];
