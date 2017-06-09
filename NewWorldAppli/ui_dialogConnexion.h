@@ -173,12 +173,12 @@ public:
 
     void retranslateUi(QDialog *DialogConnexion)
     {
-        DialogConnexion->setWindowTitle(QApplication::translate("DialogConnexion", "New Wprld", 0));
+        DialogConnexion->setWindowTitle(QApplication::translate("DialogConnexion", "New World", 0));
         label->setText(QApplication::translate("DialogConnexion", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">NEW WORLD</span></p></body></html>", 0));
-        label_4->setText(QApplication::translate("DialogConnexion", "Serveur :", 0));
+        label_4->setText(QApplication::translate("DialogConnexion", "Server :", 0));
         label_2->setText(QApplication::translate("DialogConnexion", "Login :", 0));
-        lineEditLogin->setText(QApplication::translate("DialogConnexion", "Gestionnaire", 0));
-        label_3->setText(QApplication::translate("DialogConnexion", "Mot de passe :", 0));
+        lineEditLogin->setText(QApplication::translate("DialogConnexion", "Controleur", 0));
+        label_3->setText(QApplication::translate("DialogConnexion", "Password :", 0));
         lineEditMdp->setText(QApplication::translate("DialogConnexion", "ini01", 0));
     } // retranslateUi
 

@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>New Wprld</string>
+   <string>New World</string>
   </property>
   <property name="windowIcon">
    <iconset resource="ressources.qrc">
@@ -97,7 +97,7 @@
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Serveur :</string>
+          <string>Server :</string>
          </property>
         </widget>
        </item>
@@ -144,7 +144,7 @@
        <item>
         <widget class="QLineEdit" name="lineEditLogin">
          <property name="text">
-          <string>Gestionnaire</string>
+          <string>Controleur</string>
          </property>
         </widget>
        </item>
@@ -181,7 +181,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Mot de passe :</string>
+          <string>Password :</string>
          </property>
         </widget>
        </item>

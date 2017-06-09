@@ -33,6 +33,7 @@ public:
     void chargeLesProducteursTous();
     void chargeLesControleurs();
     void chargeLesVisites();
+    void statistiques();
 
 
 private slots:

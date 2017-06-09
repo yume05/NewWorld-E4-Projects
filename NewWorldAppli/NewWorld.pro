@@ -43,5 +43,7 @@ FORMS    += mainwindow.ui \
     dialogmodifiertypeproduits.ui \
     dialogafficheimageproduit.ui
 
+TRANSLATIONS += newWorld_fr_FR.ts
+
 RESOURCES += \
     ressources.qrc

@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Gestionnaire</string>
+   <string>Administrator</string>
   </property>
   <property name="windowIcon">
    <iconset resource="ressources.qrc">
@@ -28,17 +28,17 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>Gestion du personnel</string>
+        <string>Staff management</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Liste du personnel :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Personnel List :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -105,7 +105,7 @@
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Gestion catalogue</string>
+        <string>Catalog management</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
@@ -127,7 +127,7 @@
                 </property>
                 <column>
                  <property name="text">
-                  <string>Rayons</string>
+                  <string>Rays</string>
                  </property>
                 </column>
                </widget>
@@ -145,7 +145,7 @@
                 </property>
                 <column>
                  <property name="text">
-                  <string>Type Produits</string>
+                  <string>Product Type</string>
                  </property>
                 </column>
                </widget>
@@ -162,27 +162,27 @@
               </property>
               <column>
                <property name="text">
-                <string>produits</string>
+                <string>product</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>prix</string>
+                <string>price</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>kilos</string>
+                <string>weight</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>date début</string>
+                <string>start date</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>date fin</string>
+                <string>end date</string>
                </property>
               </column>
              </widget>
@@ -212,17 +212,10 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="1" colspan="3">
-             <widget class="QDateTimeEdit" name="dateTimeEditDebut">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_7">
               <property name="text">
-               <string>Rayons :</string>
+               <string>Rays :</string>
               </property>
              </widget>
             </item>
@@ -261,7 +254,7 @@
             <item row="1" column="0" colspan="2">
              <widget class="QLabel" name="label_8">
               <property name="text">
-               <string>Type produits :</string>
+               <string>Product type :</string>
               </property>
              </widget>
             </item>
@@ -314,7 +307,7 @@
             <item row="2" column="0" colspan="2">
              <widget class="QLabel" name="label_9">
               <property name="text">
-               <string>Libelle produit :</string>
+               <string>Product name :</string>
               </property>
              </widget>
             </item>
@@ -328,35 +321,28 @@
             <item row="3" column="0">
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>Prix : (au kilo)</string>
+               <string>Price : (per kilo)</string>
               </property>
              </widget>
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_11">
               <property name="text">
-               <string>Poids : </string>
+               <string>Weight : </string>
               </property>
              </widget>
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="label_12">
               <property name="text">
-               <string>Date Fabrication:</string>
+               <string>Date start:</string>
               </property>
              </widget>
             </item>
             <item row="6" column="0">
              <widget class="QLabel" name="label_13">
               <property name="text">
-               <string>Date Peremption :</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1" colspan="3">
-             <widget class="QDateTimeEdit" name="dateTimeEditFin">
-              <property name="enabled">
-               <bool>false</bool>
+               <string>End date :</string>
               </property>
              </widget>
             </item>
@@ -411,6 +397,20 @@
               </property>
              </widget>
             </item>
+            <item row="5" column="1" colspan="3">
+             <widget class="QDateEdit" name="dateEditDebut">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1" colspan="3">
+             <widget class="QDateEdit" name="dateEditFin">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -419,7 +419,7 @@
       </widget>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
-        <string>Producteurs</string>
+        <string>Producers</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_20">
         <item>
@@ -431,7 +431,7 @@
               <item>
                <widget class="QLabel" name="label_2">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Producteurs :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Producers :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -450,12 +450,12 @@
                 </column>
                 <column>
                  <property name="text">
-                  <string>nom</string>
+                  <string>last name</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>prenom</string>
+                  <string>first name</string>
                  </property>
                 </column>
                </widget>
@@ -470,7 +470,7 @@
               <item>
                <widget class="QLabel" name="label_3">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Produits en attente :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Product pending :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -484,37 +484,37 @@
                 </property>
                 <column>
                  <property name="text">
-                  <string>libelle</string>
+                  <string>name</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>prix</string>
+                  <string>price</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>poids</string>
+                  <string>weight</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>rayon</string>
+                  <string>ray</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>catégorie</string>
+                  <string>product type</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>dateDebut</string>
+                  <string>date start</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>dateFin</string>
+                  <string>end date</string>
                  </property>
                 </column>
                </widget>
@@ -535,7 +535,7 @@
             <item>
              <widget class="QLabel" name="label_59">
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Accepter ou Refuser produit :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Accept or reject product :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -544,7 +544,7 @@
               <item>
                <widget class="QLabel" name="label_4">
                 <property name="text">
-                 <string>Produit :</string>
+                 <string>Name :</string>
                 </property>
                </widget>
               </item>
@@ -565,7 +565,7 @@
               <item>
                <widget class="QLabel" name="label_5">
                 <property name="text">
-                 <string>Prix :</string>
+                 <string>Price :</string>
                 </property>
                </widget>
               </item>
@@ -586,7 +586,7 @@
               <item>
                <widget class="QLabel" name="label_6">
                 <property name="text">
-                 <string>Poids :</string>
+                 <string>Weight :</string>
                 </property>
                </widget>
               </item>
@@ -607,7 +607,7 @@
               <item>
                <widget class="QLabel" name="label_16">
                 <property name="text">
-                 <string>Rayon :</string>
+                 <string>Ray :</string>
                 </property>
                </widget>
               </item>
@@ -628,7 +628,7 @@
               <item>
                <widget class="QLabel" name="label_17">
                 <property name="text">
-                 <string>Catégorie :</string>
+                 <string>Product type :</string>
                 </property>
                </widget>
               </item>
@@ -649,7 +649,7 @@
               <item>
                <widget class="QLabel" name="label_18">
                 <property name="text">
-                 <string>Date fabrication/récolte :</string>
+                 <string>Date production / harvest :</string>
                 </property>
                </widget>
               </item>
@@ -670,7 +670,7 @@
               <item>
                <widget class="QLabel" name="label_19">
                 <property name="text">
-                 <string>Date péremption/fin de récolte  :</string>
+                 <string>Date of expiry / end of harvest :</string>
                 </property>
                </widget>
               </item>
@@ -691,7 +691,7 @@
               <item>
                <widget class="QLabel" name="label_29">
                 <property name="text">
-                 <string>Image :</string>
+                 <string>File :</string>
                 </property>
                </widget>
               </item>
@@ -716,7 +716,7 @@
               <item>
                <widget class="QLabel" name="label_27">
                 <property name="text">
-                 <string>Etat :</string>
+                 <string>Condition :</string>
                 </property>
                </widget>
               </item>
@@ -745,7 +745,7 @@
               <item>
                <widget class="QLabel" name="label_28">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-style:italic;&quot;&gt;Accepter/Attente/Refuser&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-style:italic;&quot;&gt;Accept/StandBy/Refuse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -790,7 +790,7 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Planifications visites</string>
+        <string>Planning visits</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_11">
         <item>
@@ -800,7 +800,7 @@
             <item>
              <widget class="QLabel" name="label_20">
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tous les producteurs :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All producers :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -819,17 +819,17 @@
               </column>
               <column>
                <property name="text">
-                <string>nom prénom</string>
+                <string>name</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>adresse</string>
+                <string>address</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>etat</string>
+                <string>condition</string>
                </property>
               </column>
              </widget>
@@ -841,7 +841,7 @@
             <item>
              <widget class="QLabel" name="label_21">
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Controleurs :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Controllers :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -860,12 +860,12 @@
               </column>
               <column>
                <property name="text">
-                <string>nom prénom</string>
+                <string>name</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>adresse</string>
+                <string>address</string>
                </property>
               </column>
              </widget>
@@ -890,7 +890,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_22">
           <item>
-           <widget class="QFrame" name="">
+           <widget class="QFrame" name="frame">
             <layout class="QGridLayout" name="gridLayout_3">
              <item row="2" column="1" colspan="3">
               <widget class="QLabel" name="etatProducteur">
@@ -905,7 +905,7 @@
              <item row="0" column="0" colspan="3">
               <widget class="QLabel" name="label_22">
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Proposer visite :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Propose visit :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
@@ -922,7 +922,7 @@
              <item row="5" column="0" colspan="3">
               <widget class="QLabel" name="label_62">
                <property name="text">
-                <string>Thème de la visite :</string>
+                <string>Type visit :</string>
                </property>
               </widget>
              </item>
@@ -949,7 +949,7 @@
              <item row="4" column="0">
               <widget class="QLabel" name="label_60">
                <property name="text">
-                <string>Controleur :</string>
+                <string>Controller :</string>
                </property>
               </widget>
              </item>
@@ -973,21 +973,21 @@
              <item row="2" column="0">
               <widget class="QLabel" name="label_25">
                <property name="text">
-                <string>Etat  :</string>
+                <string>Condition  :</string>
                </property>
               </widget>
              </item>
              <item row="6" column="0" colspan="2">
               <widget class="QLabel" name="label_63">
                <property name="text">
-                <string>Date proposé :</string>
+                <string>Propose date :</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_23">
                <property name="text">
-                <string>Producteur :</string>
+                <string>Producer :</string>
                </property>
               </widget>
              </item>
@@ -1023,7 +1023,7 @@
             <item>
              <widget class="QLabel" name="label_24">
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Visites :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Visits :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -1036,27 +1036,27 @@
               </column>
               <column>
                <property name="text">
-                <string>etat</string>
+                <string>condition</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>gestionnaire</string>
+                <string>administrator</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>controleur</string>
+                <string>controller</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>producteur</string>
+                <string>producer</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>typeVisite</string>
+                <string>typeVisit</string>
                </property>
               </column>
              </widget>
@@ -1067,15 +1067,169 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_4">
-       <attribute name="title">
-        <string>Gestion paie</string>
-       </attribute>
-      </widget>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
         <string>Statistiques</string>
        </attribute>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Statistics&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_30">
+            <property name="text">
+             <string>Number of products accepted :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisNbreProduitA">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_31">
+            <property name="text">
+             <string>Number of products refused :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisNbreProduitC">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <item>
+           <widget class="QLabel" name="label_32">
+            <property name="text">
+             <string>Number of products stand by :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisNbreProduitB">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_24">
+          <item>
+           <widget class="QLabel" name="label_33">
+            <property name="text">
+             <string>User registered :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisNbreUser">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="5" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_25">
+          <item>
+           <widget class="QLabel" name="label_34">
+            <property name="text">
+             <string>Orders made :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisNbreCommandes">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="6" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_35">
+            <property name="text">
+             <string>Turnover :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisCA">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_37">
+            <property name="text">
+             <string>€</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="7" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_27">
+          <item>
+           <widget class="QLabel" name="label_36">
+            <property name="text">
+             <string>Producers accepted :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStatisProdA">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

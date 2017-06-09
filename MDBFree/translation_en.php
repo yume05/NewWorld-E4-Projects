@@ -29,10 +29,18 @@ $title5 = "Address";
 $info1 = "A random password will be sent to you by email ";
 $info2 = "Fields preceded by a * are mandatory";
 $labelType = "User type";
+$labelZipSiege = 'Postal code of headquarters';
+$labelAddressSiege = 'Address of headquarters';
+$labelCitySiege = 'City of headquarters';
+$labelStatut = 'Legal status';
+$labelDenomination = 'Company name';
+$labelMailContact = 'Contact mail';
+$labelDescriptionEntreprise = 'Company description';
+
 /////////////////////////////////////////////
 
 /**
-  *Translation for hautNW.php
+  *Translation for haut.php
   */
 $aHome="Home";
 $aBuy="Buy";
@@ -45,9 +53,44 @@ $aLogOut="Sign out";
 $aAccount="My account";
 $aConnected= "is connected";
 ////////////////////////////////////////////
+//acheter.php
+$msgError3 = 'You must be logged in as a consumer to access this page';
 
+//panier.php
+$msgOk = 'The product has been added succesfully.';
+$msgOk1 = 'Back to the shopping page';
+$msgOk2 = 'Shopping cart';
+$msgValidError = 'Please choose a point of sale before validating your order.';
+$msgValidError1 = 'Your basket is empty';
+$panier = '<th>Number</th>
+<th>Image</th>
+<th>Product</th>
+<th>Weight</th>
+<th>Unit price</th>
+<th>Qty</th>
+<th>Action</th>
+<th>Delete</th>';
+
+$pdv = 'Choose your relay point :';
+$clearCart = 'Clear cart';
+$titlePanier = 'Your cart';
+$labelTotal = 'You have ';
+$labelTotal1 = ' article(s) in your basket.';
+
+//produire.php
+$titleProduire = 'ADDING A PRODUCT';
+$titleProduire1 = 'PRODUCTS YOU HAVE PROPOSED.';
+$etat1 = 'Accepted';
+$etat2 = 'Stand By';
+$etat3 = 'Refused';
+$labelNameProduit = 'Product name';
+$labelPriceProduit = 'Price';
+$labelWeightProduit = 'Weight';
+$labelDateStartProduit = 'Date Start (harvest/manufacturing)';
+$labelDateEndProduit = 'Date End (Peremption/End of harvest)';
+$msgError4 = 'You must be logged in as a producer and have been accepted by the administrator to access this page';
 /**
-  *Translation for basNW.php
+  *Translation for bas.php
   */
 $aParticipate="Participate";
 $aOfferProducts="Offer products";
@@ -66,30 +109,12 @@ $aReceptesGrandmother="The grandmother's recipes";
 $aFoodPreservation="Food preservation";
 
 /**
-  *Translation for register.php
+  *Translation for connexion.php
   */
 
-$subjectMessage = "Action Required: Confirm Your Account";
-$errorFirstName = "Enter your first name";
-$errorLastName = "Enter your last name";
-$errorLogin = "Enter your login";
-$errorLogin1 = "Login supports only english characters";
-$errorLogin2 = "Login can't be less than 3 and more than 30 characters";
-$errorLogin3 = "This login is already used";
-$errorAddress = "Enter your address";
-$errorCity1 = "Enter your city";
-$errorCity2 = "The city can have only english characters";
-$errorZipCode1 = "Enter you zip code ";
-$errorZipCode2 = "Zip code can't have the characters ";
-$errorMail1 = "Enter your email";
-$errorMail3 = "The user with the same email is already exists ";
-$errorMail2 = "Wrong format of email";
-$errorNumber1 = "Enter your phone number ";
-$errorNumber2 = "Phone number can't have the characters";
-$errorTypeUser = "Choose your type of user";
-/////////////////////
-$succesRegistration = "You have successfully registered";
-$confirmMessage = "Your password must be changed at the first connection <br> Sincerely Administration";
+$msgError = 'You are already connected';
+$msgError1 = 'Fill all fields';
+$msgError2 = 'Bad identifiers, try again';
 $yourLogin= "Your login: "; 
 $yourPassword = "Your password: ";
 $textMail1 = '<html><head></head><body><b>Dear User, </b><br><br>

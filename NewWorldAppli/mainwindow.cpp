@@ -26,6 +26,7 @@ MainWindow::MainWindow(QString leUserConnected, QWidget *parent) :
     chargeLesProducteursTous();
     chargeLesControleurs();
     chargeLesVisites();
+    statistiques();
     QSqlQuery reqTypeProduitPasRanges("select typeProduits.id from rayons inner join typeProduits on rayons.id = typeProduits.idRayons where rayons.libelle = 'Pas ranges' ;");
     while(reqTypeProduitPasRanges.next()){
         idTypeProduitPasRanges = reqTypeProduitPasRanges.value(0).toString();
@@ -42,6 +43,48 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::statistiques()
+{
+    qDebug()<<"void MainWindow::statistiques()";
+    QString text = "SELECT COUNT(produits.id) AS 'nbrePA' FROM produits INNER JOIN propose ON produits.id = propose.producteurProduits WHERE propose.etat like 'ACC';";
+    QSqlQuery reqNbreProduitAccepter(text);
+    reqNbreProduitAccepter.next();
+    QString nbrePA = reqNbreProduitAccepter.value(0).toString();
+    ui->labelStatisNbreProduitA->setText(nbrePA);
+    QString text1 = "SELECT COUNT(produits.id) AS 'nbrePC' FROM produits INNER JOIN propose ON produits.id = propose.producteurProduits WHERE propose.etat like 'REF';";
+    QSqlQuery reqNbreProduitRefuser(text1);
+    reqNbreProduitRefuser.next();
+    QString nbrePC = reqNbreProduitRefuser.value(0).toString();
+    ui->labelStatisNbreProduitC->setText(nbrePC);
+    QString text2 = "SELECT COUNT(produits.id) AS 'nbrePB' FROM produits INNER JOIN propose ON produits.id = propose.producteurProduits WHERE propose.etat like 'ATT';";
+    QSqlQuery reqNbreProduitAtt(text2);
+    reqNbreProduitAtt.next();
+    QString nbrePB = reqNbreProduitAtt.value(0).toString();
+    ui->labelStatisNbreProduitB->setText(nbrePB);
+    QString text3 = "SELECT COUNT(user.user_id) AS 'nbreU' FROM user;";
+    QSqlQuery reqNbreUser(text3);
+    reqNbreUser.next();
+    QString nbreU = reqNbreUser.value(0).toString();
+    ui->labelStatisNbreUser->setText(nbreU);
+    QString text4= "SELECT COUNT(user.user_id) AS 'nbreProdA' FROM user WHERE etat like 'ACC';";
+    QSqlQuery reqNbreProd(text4);
+    reqNbreProd.next();
+    QString nbreProdA = reqNbreProd.value(0).toString();
+    ui->labelStatisProdA->setText(nbreProdA);
+    QString text5= "SELECT SUM(prixTotal) AS 'ca' FROM chiffreAffaire;";
+    QSqlQuery reqCa(text5);
+    reqCa.next();
+    QString CA = reqCa.value(0).toString();
+    ui->labelStatisCA->setText(CA);
+    QString text6= "SELECT COUNT(id) AS 'commande' FROM chiffreAffaire;";
+    QSqlQuery reqCommande(text6);
+    reqCommande.next();
+    QString Commande = reqCommande.value(0).toString();
+    ui->labelStatisNbreCommandes->setText(Commande);
+
+    //select month(user_dateInscription) as mois, day(user_dateInscription) as jour, (select count(user_login) from user where day(user_dateInscription) = jour and month(user_dateInscription) = mois) as nbreUtilisateur from user;
+
+}
 
 void MainWindow::chargeLePersonnel()
 {
@@ -247,8 +290,8 @@ void MainWindow::on_tableWidgetRayons_cellClicked(int row, int column)
         ui->lineEditLibelleProduit->setEnabled(false);
         ui->doubleSpinBoxPoids->setEnabled(false);
         ui->doubleSpinBoxPrix->setEnabled(false);
-        ui->dateTimeEditDebut->setEnabled(false);
-        ui->dateTimeEditFin->setEnabled(false);
+        ui->dateEditDebut->setEnabled(false);
+        ui->dateEditFin->setEnabled(false);
         ui->lineEditLibelleProduit->clear();
         ui->doubleSpinBoxPoids->clear();
         ui->doubleSpinBoxPrix->clear();
@@ -302,8 +345,8 @@ void MainWindow::on_tableWidgetTypeProduits_cellClicked(int row, int column)
         ui->lineEditLibelleProduit->setEnabled(false);
         ui->doubleSpinBoxPoids->setEnabled(false);
         ui->doubleSpinBoxPrix->setEnabled(false);
-        ui->dateTimeEditDebut->setEnabled(false);
-        ui->dateTimeEditFin->setEnabled(false);
+        ui->dateEditDebut->setEnabled(false);
+        ui->dateEditFin->setEnabled(false);
         ui->lineEditLibelleProduit->clear();
         ui->doubleSpinBoxPoids->clear();
         ui->doubleSpinBoxPrix->clear();
@@ -789,8 +832,8 @@ void MainWindow::on_tableWidgetProduits_cellClicked(int row, int column)
     ui->lineEditLibelleProduit->setEnabled(true);
     ui->doubleSpinBoxPoids->setEnabled(true);
     ui->doubleSpinBoxPrix->setEnabled(true);
-    ui->dateTimeEditDebut->setEnabled(true);
-    ui->dateTimeEditFin->setEnabled(true);
+    ui->dateEditDebut->setEnabled(true);
+    ui->dateEditFin->setEnabled(true);
     idProduitCourant=ui->tableWidgetProduits->item(row,0)->data(32).toString();
 
     QSqlQuery reqProduit ("Select libelle, prix, poids, dateDebut, dateFin from produits where id = "+idProduitCourant+";");
@@ -798,10 +841,10 @@ void MainWindow::on_tableWidgetProduits_cellClicked(int row, int column)
         QString libelle = reqProduit.value(0).toString();
         float prix = reqProduit.value(1).toFloat();
         float poids = reqProduit.value(2).toFloat();
-        QDateTime dateDebut = reqProduit.value(3).toDateTime();
-        QDateTime dateFin = reqProduit.value(4).toDateTime();
-        ui->dateTimeEditDebut->setDateTime(dateDebut);
-        ui->dateTimeEditFin->setDateTime(dateFin);
+        QDate dateDebut = reqProduit.value(3).toDate();
+        QDate dateFin = reqProduit.value(4).toDate();
+        ui->dateEditDebut->setDate(dateDebut);
+        ui->dateEditFin->setDate(dateFin);
         ui->lineEditLibelleProduit->setText(libelle);
         ui->doubleSpinBoxPoids->setValue(poids);
         ui->doubleSpinBoxPrix->setValue(prix);
@@ -832,8 +875,8 @@ void MainWindow::on_pushButtonModifierProduits_clicked()
     QString poidsProduitUpdate = QString::number(poidsProduitValue, 'g', 6);
     QString prixProduitUpdate = QString::number(prixProduitValue, 'g', 6);
     qDebug()<<poidsProduitUpdate;
-    QString dateDebutUpdate = ui->dateTimeEditDebut->dateTime().toString("yyyy-dd-mm hh:mm");
-    QString dateFinUpdate = ui->dateTimeEditFin->dateTime().toString("yyyy-dd-mm hh:mm");
+    QString dateDebutUpdate = ui->dateEditDebut->date().toString("yyyy-dd-mm");
+    QString dateFinUpdate = ui->dateEditFin->date().toString("yyyy-dd-mm");
     qDebug()<<idTypeProduitUpdate;
     qDebug()<<dateDebutUpdate;
     qDebug()<<dateFinUpdate;
@@ -994,3 +1037,4 @@ void MainWindow::on_pushButtonProposerVisite_clicked()
     //reqProposerVisite.exec();
     chargeLesVisites();
 }
+

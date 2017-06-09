@@ -21,7 +21,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ajout d'un personnel :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Adding staff :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -44,7 +44,7 @@
      <item>
       <widget class="QLabel" name="label_10">
        <property name="text">
-        <string>Rue :</string>
+        <string>Address :</string>
        </property>
       </widget>
      </item>
@@ -58,7 +58,7 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Nom :</string>
+        <string>Last name :</string>
        </property>
       </widget>
      </item>
@@ -72,7 +72,7 @@
      <item>
       <widget class="QLabel" name="label_9">
        <property name="text">
-        <string>Ville :</string>
+        <string>City</string>
        </property>
       </widget>
      </item>
@@ -86,7 +86,7 @@
      <item>
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>Prenom :</string>
+        <string>First name :</string>
        </property>
       </widget>
      </item>
@@ -100,7 +100,7 @@
      <item>
       <widget class="QLabel" name="label_11">
        <property name="text">
-        <string>Cp :</string>
+        <string>Zip Code</string>
        </property>
       </widget>
      </item>
@@ -142,7 +142,7 @@
      <item>
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>Tel :</string>
+        <string>Phone :</string>
        </property>
       </widget>
      </item>

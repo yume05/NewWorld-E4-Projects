@@ -26,7 +26,7 @@ if(isset($_SESSION['panier'])){
 				array_push($_SESSION['panier']['image_produit'], $_GET['image_produit']);
 				array_push($_SESSION['panier']['qte_produit'], $_GET['qte_produit']);
 				$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
-				die("Le produit à été rajouter avec succés. <br><a href='".$referer."'>Retour sur la page d'achat</a> <br><a href='panier.php'>Votre panier</a>");
+				die($msgOk."<br><a href='".$referer."'>".$msgOk1."</a> <br><a href='panier.php'>".$msgOk2."</a>");
 			
 			}
 		}	

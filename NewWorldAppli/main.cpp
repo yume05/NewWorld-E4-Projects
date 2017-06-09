@@ -5,12 +5,33 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include "dialogConnexion.h"
+#include <QTranslator>
+#include <QLibraryInfo>
 
 
 int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+            QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    a.installTranslator(&qtTranslator);
+    QTranslator myappTranslator;
+    QString nomFichier="newWorld_" + QLocale::system().name()+".qm";
+    QString baseName;
+    #ifdef Q_OS_LINUX
+            baseName="/usr/share/applications/newWorld/translations/";
+    #endif
+    #ifdef Q_OS_DARWIN
+            baseName=QApplication::applicationDirPath()+QLatin1String("/translations/"); // path defaults to app dir.
+    #endif
+    #ifdef Q_OS_WIN
+            baseName=QApplication::applicationDirPath();
+    #endif
+    //myappTranslator.load(baseName+nomFichier);
+    //myappTranslator.load("/usr/share/applications/gapmea/translations/gapMea_" + QLocale::system().name()+".qm");
+    //a.installTranslator(&myappTranslator);
 
     DialogConnexion dialogConnexion;
 
@@ -46,7 +67,7 @@ int main(int argc, char *argv[])
             if(type=="Controleur")
             //Controleur
             {
-                MainWindow2 w2;
+                MainWindow2 w2(idUser);
                 w2.show();
                 return a.exec();
 

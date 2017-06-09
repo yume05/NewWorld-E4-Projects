@@ -93,10 +93,10 @@ public:
     void retranslateUi(QDialog *DialogModifierTypeProduits)
     {
         DialogModifierTypeProduits->setWindowTitle(QApplication::translate("DialogModifierTypeProduits", "Modifier Type Produit", 0));
-        label->setText(QApplication::translate("DialogModifierTypeProduits", "<html><head/><body><p><span style=\" font-weight:600;\">Modifier le type de produit</span></p></body></html>", 0));
-        label_2->setText(QApplication::translate("DialogModifierTypeProduits", "Rayons", 0));
-        label_3->setText(QApplication::translate("DialogModifierTypeProduits", "Type produit", 0));
-        label_4->setText(QApplication::translate("DialogModifierTypeProduits", "<html><head/><body><p><span style=\" font-style:italic; color:#d00606;\">Les produits seront d\303\251placer avec si vous d\303\251cidez de </span></p><p><span style=\" font-style:italic; color:#d00606;\">d\303\251placer le type de produit ailleurs.</span></p></body></html>", 0));
+        label->setText(QApplication::translate("DialogModifierTypeProduits", "<html><head/><body><p><span style=\" font-weight:600;\">Change Product Type :</span></p></body></html>", 0));
+        label_2->setText(QApplication::translate("DialogModifierTypeProduits", "Rays :", 0));
+        label_3->setText(QApplication::translate("DialogModifierTypeProduits", "Product Type", 0));
+        label_4->setText(QApplication::translate("DialogModifierTypeProduits", "<html><head/><body><p><span style=\" font-style:italic; color:#d00606;\">The products will move with if you decide to </span></p><p><span style=\" font-style:italic; color:#d00606;\">move the product type elsewhere.</span></p></body></html>", 0));
     } // retranslateUi
 
 };

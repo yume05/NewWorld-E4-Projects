@@ -163,13 +163,13 @@ public:
     void retranslateUi(QDialog *DialogModifierPersonnel)
     {
         DialogModifierPersonnel->setWindowTitle(QApplication::translate("DialogModifierPersonnel", "Modifier Personnel", 0));
-        label_4->setText(QApplication::translate("DialogModifierPersonnel", "Nom :", 0));
-        label_6->setText(QApplication::translate("DialogModifierPersonnel", "Prenom :", 0));
+        label_4->setText(QApplication::translate("DialogModifierPersonnel", "Last name :", 0));
+        label_6->setText(QApplication::translate("DialogModifierPersonnel", "First name :", 0));
         label_8->setText(QApplication::translate("DialogModifierPersonnel", "Mail :", 0));
-        label_7->setText(QApplication::translate("DialogModifierPersonnel", "Tel :", 0));
-        label_10->setText(QApplication::translate("DialogModifierPersonnel", "Rue :", 0));
-        label_9->setText(QApplication::translate("DialogModifierPersonnel", "Ville :", 0));
-        label_11->setText(QApplication::translate("DialogModifierPersonnel", "Cp :", 0));
+        label_7->setText(QApplication::translate("DialogModifierPersonnel", "Phone :", 0));
+        label_10->setText(QApplication::translate("DialogModifierPersonnel", "Address :", 0));
+        label_9->setText(QApplication::translate("DialogModifierPersonnel", "City :", 0));
+        label_11->setText(QApplication::translate("DialogModifierPersonnel", "Zip code :", 0));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
          << QApplication::translate("DialogModifierPersonnel", "Gestionnaire", 0)

@@ -79,7 +79,7 @@ if(isset($_SESSION['login']))
         
             <!--Section: Products v.3-->
             <section class="section"> 
-                    <b>AJOUT D'UN PRODUIT</b>
+                    <b><?php echo $titleProduire; ?></b>
                     </section>
                      <form method="post" action="produire.php?act=add" enctype="multipart/form-data">
                         <div class="row justify-content-center">
@@ -97,12 +97,12 @@ if(isset($_SESSION['login']))
                                     ?>
                                 </select>
                                 <br />
-                                Nom du produit :<input type="text" placeholder="Salade de montagne.." name="nom" ><br>
-                                Prix du produit à l'unité :<input type="number" placeholder = "1.35" name="prix" step="0.01"  min="0" max="99.99">
+                                <?php echo $labelNameProduit; ?> :<input type="text" placeholder="Salade de montagne.." name="nom" ><br>
+                                <?php echo $labelPriceProduit; ?> :<input type="number" placeholder = "1.35" name="prix" step="0.01"  min="0" max="99.99">
                             </div>
                             <div class="col-6 col-md-4">
-                                Poids du produit :<input type="number" name="poids" placeholder="0.750" step="0.15" min="0" max="99.99" ><br />
-                                Date Début (Fabrication/Récolte) :<br>
+                                <?php echo $labelWeightProduit; ?> :<input type="number" name="poids" placeholder="0.750" step="0.15" min="0" max="99.99" ><br />
+                                <?php echo $labelDateStartProduit; ?> :<br>
                                 <?php
                                 echo "<SELECT name='joursDebut' Size='1'>";
                                      for($i=1; $i<=31;$i++){           //Lister les jours
@@ -137,7 +137,7 @@ if(isset($_SESSION['login']))
                                          echo "<OPTION><br>$y<br></OPTION>"; }
                                 echo "</SELECT>";
                                 ?><br />
-                                Date Fin (Peremption/Fin de récolte) :<br>
+                                <?php echo $labelDateEndProduit; ?> :<br>
                                 <?php
                                     echo "<SELECT name='joursFin' Size='1'>";
                                          for($i=1; $i<=31;$i++){           //Lister les jours
@@ -183,7 +183,7 @@ if(isset($_SESSION['login']))
                     </form>
                     <br />
                     <hr />
-                    <b>LES PRODUITS QUE VOUS AVEZ PROPOSE.</b>
+                    <b><?php echo $titleProduire1; ?>.</b>
                     
 
                     <div class="row">
@@ -199,13 +199,13 @@ if(isset($_SESSION['login']))
                                         echo '<p class="card-text">('.$data['poids'].'kg)</p>';
                                         echo '<span class="left">'.$data["prix"].'€/kilos </span><br />';
                                         if($data['etat'] == 'ATT'){
-                                            echo '<button class="btn btn-warning">En attente</button>';
+                                            echo '<button class="btn btn-warning">'.$etat1.'</button>';
                                         }
                                         if($data['etat'] == 'ACC'){
-                                            echo '<button class="btn btn-success">Accepter</button>';
+                                            echo '<button class="btn btn-success">'.$etat2.'</button>';
                                         }
                                         if($data['etat'] == 'REF'){
-                                            echo '<button class="btn btn-danger">Refuser</button>';
+                                            echo '<button class="btn btn-danger">'.$etat3.'</button>';
                                         }
                                         echo '</div></div>';
                                     }
@@ -216,11 +216,11 @@ if(isset($_SESSION['login']))
 
 <?php
     }else{
-        echo "Il faut etre connecté en tant que producteur et avoir été accepter par l'administrateur pour acceder à cette page";
+        echo $msgError4;
         header( "refresh:1;url=index.php" );
     }
 }else{
-    echo "Il faut etre connecté en tant que producteur pour acceder à cette page";
+    echo $msgError4;
     header( "refresh:1;url=index.php" );
 }
 

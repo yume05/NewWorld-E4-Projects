@@ -96,37 +96,37 @@ function ouvrirFermerSpoiler(valeur) {
 			<legend><?php echo $title5;?></legend>
 			<div class="md-form">
 				<input type="text" name="cpProd" id="form3" class="form-control">
-				<label for="cpProd">*Code postal du siège:</label>
+				<label for="cpProd">*<?php echo $labelZipSiege; ?>:</label>
 			</div>
 			<div class="md-form">
 
 				<input type="text" name="rueProd" id="form3" class="form-control">
-				<label for="rueProd">*Adresse du siège:</label>
+				<label for="rueProd">*<?php echo $labelAddressSiege; ?>:</label>
 			</div>
 			<div class="md-form">
 				<input type="text" name="villeProd" id="form3" class="form-control">
-				<label for="villeProd">*Ville du siège:</label>
+				<label for="villeProd">*<?php echo $labelCitySiege; ?>:</label>
 			</div>
 		</div>
 		<div class="col-6 col-md-4" id='cacherProducer2'>
 			<legend><?php echo $title3; ?></legend>
 			<div class="md-form">
 				<input type="text" name="statutJuridiqueProd" id="form3" class="form-control">
-				<label for="statut">*Statut juridique:</label>
+				<label for="statut">*<?php echo $labelStatut; ?>:</label>
 			</div>
 			<div class="md-form">
 				
 				<input type="text" name="denominationProd" id="form3" class="form-control">
-				<label for="denomination">*Dénomination sociale:</label>
+				<label for="denomination">*<?php echo $labelDenomination; ?>:</label>
 			</div>
 			<div class="md-form">
 				<input type="text" name="emailContactProd" id="form3" class="form-control">
-				<label for="emailContact">*Email du contact :</label>
+				<label for="emailContact">*<?php echo $labelMailContact; ?>:</label>
 			</div>
 
 			<div class="md-form">
 				<textarea id="textarea1" name="descriptionProd" class="md-textarea" length="120"></textarea>
-				<label for="description">*Description entreprise:</label>
+				<label for="description">*<?php echo $labelDescriptionEntreprise; ?>:</label>
 			</div>
 		
 		</div>
@@ -137,15 +137,15 @@ function ouvrirFermerSpoiler(valeur) {
 			<legend><?php echo $title5;?></legend>
 			<div class="md-form">
 				<input type="text" name="cpPoint" id="form3" class="form-control">
-				<label for="cp">*Code postal du siège:</label>
+				<label for="cp">*<?php echo $labelZipSiege; ?>:</label>
 			</div>
 			<div class="md-form">
 				<input type="text" name="ruePoint" id="form3" class="form-control">
-				<label for="rue">*Adresse du siège:</label>
+				<label for="rue">*<?php echo $labelAddressSiege; ?>:</label>
 			</div>
 			<div class="md-form">
 				<input type="text" name="villePoint" id="form3" class="form-control">
-				<label for="ville">*Ville du siège:</label>
+				<label for="ville">*<?php echo $labelCitySiege; ?>:</label>
 			</div>
 
 		</div>
@@ -154,15 +154,15 @@ function ouvrirFermerSpoiler(valeur) {
 			<legend><?php echo $title3; ?></legend>
 			<div class="md-form">
 				<input type="text" name="statutJuridiquePoint" id="form3" class="form-control">
-				<label for="statutJuridique">*Statut juridique:</label>
+				<label for="statutJuridique">*<?php echo $labelStatut; ?>:</label>
 			</div>
 			<div class="md-form">
 				<input type="text" name="denominationPoint" id="form3" class="form-control">
-				<label for="domination">*Dénomination sociale:</label>
+				<label for="domination">*<?php echo $labelDenomination; ?>:</label>
 			</div>
 			<div class="md-form">
 				<input type="text" name="emailContactPoint" id="form3" class="form-control">
-				<label for="emailContact">*Email du contact :</label>
+				<label for="emailContact">*<?php echo $labelMailContact; ?>:</label>
 			</div>
 
 		</div>

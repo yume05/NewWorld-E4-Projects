@@ -118,10 +118,10 @@ if(isset($_GET['validerPanier'])){
 			header("location: ".$_SERVER["PHP_SELF"]."?viderPanier=1&commandeFait=1");
 			
 		}else{
-			$msg = "<center><i><font color=red>Veuillez choisir un point de vente avant de valider votre commande</font></i></center>";
+			$msg = "<center><i><font color=red>".$msgValidError."</font></i></center>";
 		}
 	}else{
-		$msg = "<center><i><font color=red>Votre panier est vide</font></i></center>";
+		$msg = "<center><i><font color=red>".$msgValidError1."</font></i></center>";
 	}
 }
 
@@ -129,18 +129,11 @@ if(isset($_GET['validerPanier'])){
 
 ?>
 <form method="post" action="panier.php?validerPanier=1" enctype="multipart/form-data">
-<h1>Votre panier</h1>
+<h1><?php echo $titlePanier; ?></h1>
 <div class="panier">
 <table>
 	<tr>
-		<th>Numéro</th>
-		<th>Image</th>
-		<th>Produit</th>
-		<th>Poids</th>
-		<th>Prix unité</th>	
-		<th>Qte</th>
-		<th>Action</th>
-		<th>Supprimer</th>
+		<?php echo $panier; ?>
 
 	</tr>
 	<?php
@@ -148,7 +141,7 @@ if(isset($_GET['validerPanier'])){
 		$nbArticles=count($_SESSION['panier']['id_produit']);
 	   if ($nbArticles <= 0){
 		   echo "<tr><td></td></tr>";
-	   echo "Panier est vide.";
+	   echo $msgValidError1;
 	   }
 	   else
 	   {
@@ -171,11 +164,11 @@ if(isset($_GET['validerPanier'])){
 </div>
 </div>
 <div style="text-align:right;">
-Vous avez <strong><?php echo $nbArticles; ?></strong> article(s) dans votre panier
+<?php echo $labelTotal; ?><strong><?php echo $nbArticles; ?></strong><?php echo $labelTotal1; ?>
 <p>Total : <strong><?php echo number_format($total, 2,","," "); ?> €</strong></p>
 </div>
 
-Choississez votre point de relais : 
+<?php echo $pdv; ?>
 <select name="pdv">
 <option value="" class='rounded-circle' disabled selected>Pdv</option>
 	<?php 
@@ -190,18 +183,19 @@ Choississez votre point de relais :
 
 <br></br>
 <input type="submit" name="valider"></input>
-<a href="panier.php?viderPanier=1"><button name="vider">Vider Panier</button></a>
 </form>
+<a href="panier.php?viderPanier=1"><button><?php echo $clearCart; ?></button></a>
+
 <?php if(isset($msg)) { echo $msg; } ?>
 
 </div>
 <?php
     }else{
-        echo "Il faut etre connecté en tant que consommateur pour acceder à cette page";
+        echo $msgError3;
         header( "refresh:1;url=index.php" );
     }
 }else{
-    echo "Il faut etre connecté en tant que consommateur pour acceder à cette page";
+    echo $msgError3;
     header( "refresh:1;url=index.php" );
 }
 ?>

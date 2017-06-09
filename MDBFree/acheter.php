@@ -81,11 +81,11 @@ if(isset($_SESSION['login']))
     </section>
 <?php
     }else{
-        echo "Il faut etre connecté en tant que consommateur pour acceder à cette page";
+        echo $msgError3;
         header( "refresh:1;url=index.php" );
     }
 }else{
-    echo "Il faut etre connecté en tant que consommateur pour acceder à cette page";
+    echo $msgError3;
     header( "refresh:1;url=index.php" );
 }
 ?>

@@ -214,20 +214,20 @@ public:
     void retranslateUi(QDialog *DialogAjoutPersonnel)
     {
         DialogAjoutPersonnel->setWindowTitle(QApplication::translate("DialogAjoutPersonnel", "Ajout Personnel", 0));
-        label_2->setText(QApplication::translate("DialogAjoutPersonnel", "<html><head/><body><p><span style=\" font-weight:600;\">Ajout d'un personnel :</span></p></body></html>", 0));
+        label_2->setText(QApplication::translate("DialogAjoutPersonnel", "<html><head/><body><p><span style=\" font-weight:600;\">Adding staff :</span></p></body></html>", 0));
         label->setText(QApplication::translate("DialogAjoutPersonnel", "Login :", 0));
-        label_10->setText(QApplication::translate("DialogAjoutPersonnel", "Rue :", 0));
-        label_4->setText(QApplication::translate("DialogAjoutPersonnel", "Nom :", 0));
-        label_9->setText(QApplication::translate("DialogAjoutPersonnel", "Ville :", 0));
-        label_6->setText(QApplication::translate("DialogAjoutPersonnel", "Prenom :", 0));
-        label_11->setText(QApplication::translate("DialogAjoutPersonnel", "Cp :", 0));
+        label_10->setText(QApplication::translate("DialogAjoutPersonnel", "Address :", 0));
+        label_4->setText(QApplication::translate("DialogAjoutPersonnel", "Last name :", 0));
+        label_9->setText(QApplication::translate("DialogAjoutPersonnel", "City", 0));
+        label_6->setText(QApplication::translate("DialogAjoutPersonnel", "First name :", 0));
+        label_11->setText(QApplication::translate("DialogAjoutPersonnel", "Zip Code", 0));
         label_8->setText(QApplication::translate("DialogAjoutPersonnel", "Mail :", 0));
         comboBoxType->clear();
         comboBoxType->insertItems(0, QStringList()
          << QApplication::translate("DialogAjoutPersonnel", "Gestionnaire", 0)
          << QApplication::translate("DialogAjoutPersonnel", "Controleur", 0)
         );
-        label_7->setText(QApplication::translate("DialogAjoutPersonnel", "Tel :", 0));
+        label_7->setText(QApplication::translate("DialogAjoutPersonnel", "Phone :", 0));
     } // retranslateUi
 
 };

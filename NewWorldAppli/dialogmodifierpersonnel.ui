@@ -21,7 +21,7 @@
    <item>
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Nom :</string>
+      <string>Last name :</string>
      </property>
     </widget>
    </item>
@@ -31,7 +31,7 @@
    <item>
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>Prenom :</string>
+      <string>First name :</string>
      </property>
     </widget>
    </item>
@@ -51,7 +51,7 @@
    <item>
     <widget class="QLabel" name="label_7">
      <property name="text">
-      <string>Tel :</string>
+      <string>Phone :</string>
      </property>
     </widget>
    </item>
@@ -61,7 +61,7 @@
    <item>
     <widget class="QLabel" name="label_10">
      <property name="text">
-      <string>Rue :</string>
+      <string>Address :</string>
      </property>
     </widget>
    </item>
@@ -71,7 +71,7 @@
    <item>
     <widget class="QLabel" name="label_9">
      <property name="text">
-      <string>Ville :</string>
+      <string>City :</string>
      </property>
     </widget>
    </item>
@@ -81,7 +81,7 @@
    <item>
     <widget class="QLabel" name="label_11">
      <property name="text">
-      <string>Cp :</string>
+      <string>Zip code :</string>
      </property>
     </widget>
    </item>

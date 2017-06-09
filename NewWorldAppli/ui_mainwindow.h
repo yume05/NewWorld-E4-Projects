@@ -15,8 +15,8 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
-#include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -60,7 +60,6 @@ public:
     QFrame *line;
     QGridLayout *gridLayout_5;
     QPushButton *pushButtonSupprimerProduits;
-    QDateTimeEdit *dateTimeEditDebut;
     QLabel *label_7;
     QComboBox *comboBoxRayons;
     QHBoxLayout *horizontalLayout_3;
@@ -78,12 +77,13 @@ public:
     QLabel *label_11;
     QLabel *label_12;
     QLabel *label_13;
-    QDateTimeEdit *dateTimeEditFin;
     QPushButton *pushButtonModifierProduits;
     QDoubleSpinBox *doubleSpinBoxPrix;
     QDoubleSpinBox *doubleSpinBoxPoids;
     QLabel *label_14;
     QLabel *label_15;
+    QDateEdit *dateEditDebut;
+    QDateEdit *dateEditFin;
     QWidget *tab_6;
     QHBoxLayout *horizontalLayout_20;
     QHBoxLayout *horizontalLayout_19;
@@ -157,8 +157,33 @@ public:
     QVBoxLayout *verticalLayout_10;
     QLabel *label_24;
     QTableWidget *tableWidgetVisites;
-    QWidget *tab_4;
     QWidget *tab_5;
+    QFormLayout *formLayout;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_26;
+    QSpacerItem *horizontalSpacer_3;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_30;
+    QLabel *labelStatisNbreProduitA;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_31;
+    QLabel *labelStatisNbreProduitC;
+    QHBoxLayout *horizontalLayout_23;
+    QLabel *label_32;
+    QLabel *labelStatisNbreProduitB;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *label_33;
+    QLabel *labelStatisNbreUser;
+    QHBoxLayout *horizontalLayout_25;
+    QLabel *label_34;
+    QLabel *labelStatisNbreCommandes;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_35;
+    QLabel *labelStatisCA;
+    QLabel *label_37;
+    QHBoxLayout *horizontalLayout_27;
+    QLabel *label_36;
+    QLabel *labelStatisProdA;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -313,12 +338,6 @@ public:
 
         gridLayout_5->addWidget(pushButtonSupprimerProduits, 7, 3, 1, 1);
 
-        dateTimeEditDebut = new QDateTimeEdit(tab_3);
-        dateTimeEditDebut->setObjectName(QStringLiteral("dateTimeEditDebut"));
-        dateTimeEditDebut->setEnabled(false);
-
-        gridLayout_5->addWidget(dateTimeEditDebut, 5, 1, 1, 3);
-
         label_7 = new QLabel(tab_3);
         label_7->setObjectName(QStringLiteral("label_7"));
 
@@ -417,12 +436,6 @@ public:
 
         gridLayout_5->addWidget(label_13, 6, 0, 1, 1);
 
-        dateTimeEditFin = new QDateTimeEdit(tab_3);
-        dateTimeEditFin->setObjectName(QStringLiteral("dateTimeEditFin"));
-        dateTimeEditFin->setEnabled(false);
-
-        gridLayout_5->addWidget(dateTimeEditFin, 6, 1, 1, 3);
-
         pushButtonModifierProduits = new QPushButton(tab_3);
         pushButtonModifierProduits->setObjectName(QStringLiteral("pushButtonModifierProduits"));
         pushButtonModifierProduits->setEnabled(false);
@@ -454,6 +467,18 @@ public:
         label_15->setObjectName(QStringLiteral("label_15"));
 
         gridLayout_5->addWidget(label_15, 3, 3, 1, 1);
+
+        dateEditDebut = new QDateEdit(tab_3);
+        dateEditDebut->setObjectName(QStringLiteral("dateEditDebut"));
+        dateEditDebut->setEnabled(false);
+
+        gridLayout_5->addWidget(dateEditDebut, 5, 1, 1, 3);
+
+        dateEditFin = new QDateEdit(tab_3);
+        dateEditFin->setObjectName(QStringLiteral("dateEditFin"));
+        dateEditFin->setEnabled(false);
+
+        gridLayout_5->addWidget(dateEditFin, 6, 1, 1, 3);
 
 
         horizontalLayout_4->addLayout(gridLayout_5);
@@ -927,11 +952,144 @@ public:
         verticalLayout_11->addLayout(horizontalLayout_22);
 
         tabWidget->addTab(tab_2, QString());
-        tab_4 = new QWidget();
-        tab_4->setObjectName(QStringLiteral("tab_4"));
-        tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
+        formLayout = new QFormLayout(tab_5);
+        formLayout->setSpacing(6);
+        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label_26 = new QLabel(tab_5);
+        label_26->setObjectName(QStringLiteral("label_26"));
+
+        horizontalLayout_5->addWidget(label_26);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_3);
+
+
+        formLayout->setLayout(0, QFormLayout::LabelRole, horizontalLayout_5);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        label_30 = new QLabel(tab_5);
+        label_30->setObjectName(QStringLiteral("label_30"));
+
+        horizontalLayout_7->addWidget(label_30);
+
+        labelStatisNbreProduitA = new QLabel(tab_5);
+        labelStatisNbreProduitA->setObjectName(QStringLiteral("labelStatisNbreProduitA"));
+
+        horizontalLayout_7->addWidget(labelStatisNbreProduitA);
+
+
+        formLayout->setLayout(1, QFormLayout::LabelRole, horizontalLayout_7);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        label_31 = new QLabel(tab_5);
+        label_31->setObjectName(QStringLiteral("label_31"));
+
+        horizontalLayout_8->addWidget(label_31);
+
+        labelStatisNbreProduitC = new QLabel(tab_5);
+        labelStatisNbreProduitC->setObjectName(QStringLiteral("labelStatisNbreProduitC"));
+
+        horizontalLayout_8->addWidget(labelStatisNbreProduitC);
+
+
+        formLayout->setLayout(2, QFormLayout::LabelRole, horizontalLayout_8);
+
+        horizontalLayout_23 = new QHBoxLayout();
+        horizontalLayout_23->setSpacing(6);
+        horizontalLayout_23->setObjectName(QStringLiteral("horizontalLayout_23"));
+        label_32 = new QLabel(tab_5);
+        label_32->setObjectName(QStringLiteral("label_32"));
+
+        horizontalLayout_23->addWidget(label_32);
+
+        labelStatisNbreProduitB = new QLabel(tab_5);
+        labelStatisNbreProduitB->setObjectName(QStringLiteral("labelStatisNbreProduitB"));
+
+        horizontalLayout_23->addWidget(labelStatisNbreProduitB);
+
+
+        formLayout->setLayout(3, QFormLayout::LabelRole, horizontalLayout_23);
+
+        horizontalLayout_24 = new QHBoxLayout();
+        horizontalLayout_24->setSpacing(6);
+        horizontalLayout_24->setObjectName(QStringLiteral("horizontalLayout_24"));
+        label_33 = new QLabel(tab_5);
+        label_33->setObjectName(QStringLiteral("label_33"));
+
+        horizontalLayout_24->addWidget(label_33);
+
+        labelStatisNbreUser = new QLabel(tab_5);
+        labelStatisNbreUser->setObjectName(QStringLiteral("labelStatisNbreUser"));
+
+        horizontalLayout_24->addWidget(labelStatisNbreUser);
+
+
+        formLayout->setLayout(4, QFormLayout::LabelRole, horizontalLayout_24);
+
+        horizontalLayout_25 = new QHBoxLayout();
+        horizontalLayout_25->setSpacing(6);
+        horizontalLayout_25->setObjectName(QStringLiteral("horizontalLayout_25"));
+        label_34 = new QLabel(tab_5);
+        label_34->setObjectName(QStringLiteral("label_34"));
+
+        horizontalLayout_25->addWidget(label_34);
+
+        labelStatisNbreCommandes = new QLabel(tab_5);
+        labelStatisNbreCommandes->setObjectName(QStringLiteral("labelStatisNbreCommandes"));
+
+        horizontalLayout_25->addWidget(labelStatisNbreCommandes);
+
+
+        formLayout->setLayout(5, QFormLayout::LabelRole, horizontalLayout_25);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        label_35 = new QLabel(tab_5);
+        label_35->setObjectName(QStringLiteral("label_35"));
+
+        horizontalLayout_6->addWidget(label_35);
+
+        labelStatisCA = new QLabel(tab_5);
+        labelStatisCA->setObjectName(QStringLiteral("labelStatisCA"));
+
+        horizontalLayout_6->addWidget(labelStatisCA);
+
+        label_37 = new QLabel(tab_5);
+        label_37->setObjectName(QStringLiteral("label_37"));
+
+        horizontalLayout_6->addWidget(label_37);
+
+
+        formLayout->setLayout(6, QFormLayout::LabelRole, horizontalLayout_6);
+
+        horizontalLayout_27 = new QHBoxLayout();
+        horizontalLayout_27->setSpacing(6);
+        horizontalLayout_27->setObjectName(QStringLiteral("horizontalLayout_27"));
+        label_36 = new QLabel(tab_5);
+        label_36->setObjectName(QStringLiteral("label_36"));
+
+        horizontalLayout_27->addWidget(label_36);
+
+        labelStatisProdA = new QLabel(tab_5);
+        labelStatisProdA->setObjectName(QStringLiteral("labelStatisProdA"));
+
+        horizontalLayout_27->addWidget(labelStatisProdA);
+
+
+        formLayout->setLayout(7, QFormLayout::LabelRole, horizontalLayout_27);
+
         tabWidget->addTab(tab_5, QString());
 
         gridLayout_6->addWidget(tabWidget, 0, 0, 1, 1);
@@ -946,7 +1104,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -954,138 +1112,153 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Gestionnaire", 0));
-        label->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Liste du personnel :</span></p></body></html>", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Administrator", 0));
+        label->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Personnel List :</span></p></body></html>", 0));
         pushButtonGestionPersonnelAjouter->setText(QString());
         pushButtonGestionPersonnelModifier->setText(QString());
         pushButtonGestionPersonnelSupprimer->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Gestion du personnel", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Staff management", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidgetRayons->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Rayons", 0));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Rays", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidgetTypeProduits->horizontalHeaderItem(0);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Type Produits", 0));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Product Type", 0));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidgetProduits->horizontalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "produits", 0));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "product", 0));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidgetProduits->horizontalHeaderItem(1);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "prix", 0));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "price", 0));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidgetProduits->horizontalHeaderItem(2);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "kilos", 0));
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "weight", 0));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidgetProduits->horizontalHeaderItem(3);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "date d\303\251but", 0));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "start date", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidgetProduits->horizontalHeaderItem(4);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "date fin", 0));
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "end date", 0));
         pushButtonSupprimerProduits->setText(QString());
-        label_7->setText(QApplication::translate("MainWindow", "Rayons :", 0));
+        label_7->setText(QApplication::translate("MainWindow", "Rays :", 0));
         pushButtonAjoutRayons->setText(QString());
         pushButtonSupprimerRayons->setText(QString());
-        label_8->setText(QApplication::translate("MainWindow", "Type produits :", 0));
+        label_8->setText(QApplication::translate("MainWindow", "Product type :", 0));
         pushButtonAjoutTypeProduits->setText(QString());
         pushButtonSupprimerTypeProduits->setText(QString());
         pushButtonModifierTypeProduits->setText(QString());
-        label_9->setText(QApplication::translate("MainWindow", "Libelle produit :", 0));
-        label_10->setText(QApplication::translate("MainWindow", "Prix : (au kilo)", 0));
-        label_11->setText(QApplication::translate("MainWindow", "Poids : ", 0));
-        label_12->setText(QApplication::translate("MainWindow", "Date Fabrication:", 0));
-        label_13->setText(QApplication::translate("MainWindow", "Date Peremption :", 0));
+        label_9->setText(QApplication::translate("MainWindow", "Product name :", 0));
+        label_10->setText(QApplication::translate("MainWindow", "Price : (per kilo)", 0));
+        label_11->setText(QApplication::translate("MainWindow", "Weight : ", 0));
+        label_12->setText(QApplication::translate("MainWindow", "Date start:", 0));
+        label_13->setText(QApplication::translate("MainWindow", "End date :", 0));
         pushButtonModifierProduits->setText(QString());
         label_14->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">kilo(s)</span></p></body></html>", 0));
         label_15->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">\342\202\254/kilo</span></p></body></html>", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Gestion catalogue", 0));
-        label_2->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Producteurs :</span></p></body></html>", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Catalog management", 0));
+        label_2->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Producers :</span></p></body></html>", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidgetProducteurs->horizontalHeaderItem(0);
         ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "login", 0));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidgetProducteurs->horizontalHeaderItem(1);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "nom", 0));
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "last name", 0));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidgetProducteurs->horizontalHeaderItem(2);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "prenom", 0));
-        label_3->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Produits en attente :</span></p></body></html>", 0));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "first name", 0));
+        label_3->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Product pending :</span></p></body></html>", 0));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidgetProduitsAttente->horizontalHeaderItem(0);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "libelle", 0));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "name", 0));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidgetProduitsAttente->horizontalHeaderItem(1);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "prix", 0));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "price", 0));
         QTableWidgetItem *___qtablewidgetitem12 = tableWidgetProduitsAttente->horizontalHeaderItem(2);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "poids", 0));
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "weight", 0));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidgetProduitsAttente->horizontalHeaderItem(3);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "rayon", 0));
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "ray", 0));
         QTableWidgetItem *___qtablewidgetitem14 = tableWidgetProduitsAttente->horizontalHeaderItem(4);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "cat\303\251gorie", 0));
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "product type", 0));
         QTableWidgetItem *___qtablewidgetitem15 = tableWidgetProduitsAttente->horizontalHeaderItem(5);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "dateDebut", 0));
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "date start", 0));
         QTableWidgetItem *___qtablewidgetitem16 = tableWidgetProduitsAttente->horizontalHeaderItem(6);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "dateFin", 0));
-        label_59->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Accepter ou Refuser produit :</span></p></body></html>", 0));
-        label_4->setText(QApplication::translate("MainWindow", "Produit :", 0));
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "end date", 0));
+        label_59->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Accept or reject product :</span></p></body></html>", 0));
+        label_4->setText(QApplication::translate("MainWindow", "Name :", 0));
         libelleProduit->setText(QApplication::translate("MainWindow", "...", 0));
-        label_5->setText(QApplication::translate("MainWindow", "Prix :", 0));
+        label_5->setText(QApplication::translate("MainWindow", "Price :", 0));
         prixProduit->setText(QApplication::translate("MainWindow", "...", 0));
-        label_6->setText(QApplication::translate("MainWindow", "Poids :", 0));
+        label_6->setText(QApplication::translate("MainWindow", "Weight :", 0));
         poidsProduit->setText(QApplication::translate("MainWindow", "...", 0));
-        label_16->setText(QApplication::translate("MainWindow", "Rayon :", 0));
+        label_16->setText(QApplication::translate("MainWindow", "Ray :", 0));
         rayonProduit->setText(QApplication::translate("MainWindow", "...", 0));
-        label_17->setText(QApplication::translate("MainWindow", "Cat\303\251gorie :", 0));
+        label_17->setText(QApplication::translate("MainWindow", "Product type :", 0));
         categorieProduit->setText(QApplication::translate("MainWindow", "...", 0));
-        label_18->setText(QApplication::translate("MainWindow", "Date fabrication/r\303\251colte :", 0));
+        label_18->setText(QApplication::translate("MainWindow", "Date production / harvest :", 0));
         datedebutProduit->setText(QApplication::translate("MainWindow", "..", 0));
-        label_19->setText(QApplication::translate("MainWindow", "Date p\303\251remption/fin de r\303\251colte  :", 0));
+        label_19->setText(QApplication::translate("MainWindow", "Date of expiry / end of harvest :", 0));
         datefinProduit->setText(QApplication::translate("MainWindow", "...", 0));
-        label_29->setText(QApplication::translate("MainWindow", "Image :", 0));
+        label_29->setText(QApplication::translate("MainWindow", "File :", 0));
         imageProduit->setText(QString());
-        label_27->setText(QApplication::translate("MainWindow", "Etat :", 0));
+        label_27->setText(QApplication::translate("MainWindow", "Condition :", 0));
         etatProduit->clear();
         etatProduit->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "ATT", 0)
          << QApplication::translate("MainWindow", "ACC", 0)
          << QApplication::translate("MainWindow", "REF", 0)
         );
-        label_28->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-style:italic;\">Accepter/Attente/Refuser</span></p></body></html>", 0));
+        label_28->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-style:italic;\">Accept/StandBy/Refuse</span></p></body></html>", 0));
         pushButtonValiderProduit->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Producteurs", 0));
-        label_20->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Tous les producteurs :</span></p></body></html>", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Producers", 0));
+        label_20->setText(QApplication::translate("MainWindow", "<html><head/><body><p>All producers :</p></body></html>", 0));
         QTableWidgetItem *___qtablewidgetitem17 = tableWidgetProducteursTous->horizontalHeaderItem(0);
         ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "login", 0));
         QTableWidgetItem *___qtablewidgetitem18 = tableWidgetProducteursTous->horizontalHeaderItem(1);
-        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "nom pr\303\251nom", 0));
+        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "name", 0));
         QTableWidgetItem *___qtablewidgetitem19 = tableWidgetProducteursTous->horizontalHeaderItem(2);
-        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "adresse", 0));
+        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "address", 0));
         QTableWidgetItem *___qtablewidgetitem20 = tableWidgetProducteursTous->horizontalHeaderItem(3);
-        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "etat", 0));
-        label_21->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Controleurs :</span></p></body></html>", 0));
+        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "condition", 0));
+        label_21->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Controllers :</span></p></body></html>", 0));
         QTableWidgetItem *___qtablewidgetitem21 = tableWidgetControleurs->horizontalHeaderItem(0);
         ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "login", 0));
         QTableWidgetItem *___qtablewidgetitem22 = tableWidgetControleurs->horizontalHeaderItem(1);
-        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "nom pr\303\251nom", 0));
+        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "name", 0));
         QTableWidgetItem *___qtablewidgetitem23 = tableWidgetControleurs->horizontalHeaderItem(2);
-        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "adresse", 0));
+        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "address", 0));
         etatProducteur->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">...</span></p></body></html>", 0));
-        label_22->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Proposer visite :</span></p></body></html>", 0));
+        label_22->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Propose visit :</span></p></body></html>", 0));
         controleur->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">...</span></p></body></html>", 0));
-        label_62->setText(QApplication::translate("MainWindow", "Th\303\250me de la visite :", 0));
-        label_60->setText(QApplication::translate("MainWindow", "Controleur :", 0));
+        label_62->setText(QApplication::translate("MainWindow", "Type visit :", 0));
+        label_60->setText(QApplication::translate("MainWindow", "Controller :", 0));
         typeVisite->clear();
         typeVisite->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "1\303\250re Visite", 0)
          << QApplication::translate("MainWindow", "P\303\251riodique", 0)
         );
-        label_25->setText(QApplication::translate("MainWindow", "Etat  :", 0));
-        label_63->setText(QApplication::translate("MainWindow", "Date propos\303\251 :", 0));
-        label_23->setText(QApplication::translate("MainWindow", "Producteur :", 0));
+        label_25->setText(QApplication::translate("MainWindow", "Condition  :", 0));
+        label_63->setText(QApplication::translate("MainWindow", "Propose date :", 0));
+        label_23->setText(QApplication::translate("MainWindow", "Producer :", 0));
         producteur->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-style:italic;\">...</span></p></body></html>", 0));
         pushButtonProposerVisite->setText(QString());
-        label_24->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Visites :</span></p></body></html>", 0));
+        label_24->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Visits :</span></p></body></html>", 0));
         QTableWidgetItem *___qtablewidgetitem24 = tableWidgetVisites->horizontalHeaderItem(0);
         ___qtablewidgetitem24->setText(QApplication::translate("MainWindow", "date", 0));
         QTableWidgetItem *___qtablewidgetitem25 = tableWidgetVisites->horizontalHeaderItem(1);
-        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "etat", 0));
+        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "condition", 0));
         QTableWidgetItem *___qtablewidgetitem26 = tableWidgetVisites->horizontalHeaderItem(2);
-        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "gestionnaire", 0));
+        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "administrator", 0));
         QTableWidgetItem *___qtablewidgetitem27 = tableWidgetVisites->horizontalHeaderItem(3);
-        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "controleur", 0));
+        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "controller", 0));
         QTableWidgetItem *___qtablewidgetitem28 = tableWidgetVisites->horizontalHeaderItem(4);
-        ___qtablewidgetitem28->setText(QApplication::translate("MainWindow", "producteur", 0));
+        ___qtablewidgetitem28->setText(QApplication::translate("MainWindow", "producer", 0));
         QTableWidgetItem *___qtablewidgetitem29 = tableWidgetVisites->horizontalHeaderItem(5);
-        ___qtablewidgetitem29->setText(QApplication::translate("MainWindow", "typeVisite", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Planifications visites", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Gestion paie", 0));
+        ___qtablewidgetitem29->setText(QApplication::translate("MainWindow", "typeVisit", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Planning visits", 0));
+        label_26->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Statistics</span></p></body></html>", 0));
+        label_30->setText(QApplication::translate("MainWindow", "Number of products accepted :", 0));
+        labelStatisNbreProduitA->setText(QApplication::translate("MainWindow", "...", 0));
+        label_31->setText(QApplication::translate("MainWindow", "Number of products refused :", 0));
+        labelStatisNbreProduitC->setText(QApplication::translate("MainWindow", "...", 0));
+        label_32->setText(QApplication::translate("MainWindow", "Number of products stand by :", 0));
+        labelStatisNbreProduitB->setText(QApplication::translate("MainWindow", "...", 0));
+        label_33->setText(QApplication::translate("MainWindow", "User registered :", 0));
+        labelStatisNbreUser->setText(QApplication::translate("MainWindow", "...", 0));
+        label_34->setText(QApplication::translate("MainWindow", "Orders made :", 0));
+        labelStatisNbreCommandes->setText(QApplication::translate("MainWindow", "...", 0));
+        label_35->setText(QApplication::translate("MainWindow", "Turnover :", 0));
+        labelStatisCA->setText(QApplication::translate("MainWindow", "...", 0));
+        label_37->setText(QApplication::translate("MainWindow", "\342\202\254", 0));
+        label_36->setText(QApplication::translate("MainWindow", "Producers accepted :", 0));
+        labelStatisProdA->setText(QApplication::translate("MainWindow", "...", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Statistiques", 0));
     } // retranslateUi
 

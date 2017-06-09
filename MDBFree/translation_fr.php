@@ -2,6 +2,7 @@
 $lang_fr = "Français";
 $lang_en = "Anglais";
 /** Accueil */
+// Inscription.php
 $labelFirstName="Prenom";
 $labelLastName="Nom";
 $labelLogin="Identifiant";
@@ -25,6 +26,13 @@ $title5 = "Adresse";
 $info1 = "Un mot de passe aléatoire vous sera envoyé par mail";
 $info2 = "Les champs précédés d un * sont obligatoires";
 $labelType = "Type d'utilisateur";
+$labelZipSiege = 'Code postal du siège';
+$labelAddressSiege = 'Adresse du siège';
+$labelCitySiege = 'Ville du siège';
+$labelStatut = 'Statut juridique';
+$labelDenomination = 'Dénomination sociale';
+$labelMailContact = 'Email du contact';
+$labelDescriptionEntreprise = 'Description entreprise';
 
 /////////////////////////////////////////////
 
@@ -44,6 +52,41 @@ $aConnected= "est connecté";
 
 ////////////////////////////////////////////
 
+//acheter.php
+$msgError3 = 'Il faut être connecté en tant que consommateur pour accéder à cette page';
+
+//panier.php
+$msgOk = 'Le produit à été rajouter avec succés.';
+$msgOk1 = 'Retour sur la page d\'achat';
+$msgOk2 = 'Votre panier';
+$msgValidError = 'Veuillez choisir un point de vente avant de valider votre commande.';
+$msgValidError1 = 'Votre panier est vide';
+$panier = '<th>Numéro</th>
+		<th>Image</th>
+		<th>Produit</th>
+		<th>Poids</th>
+		<th>Prix unité</th>	
+		<th>Qte</th>
+		<th>Action</th>
+		<th>Supprimer</th>';
+$pdv = 'Choississez votre point de relais :';
+$clearCart = 'Vider panier';
+$titlePanier = 'Votre panier';
+$labelTotal = 'Vous avez ';
+$labelTotal1 = ' article(s) dans votre panier.';
+
+//produire.php
+$titleProduire = 'AJOUT D\'UN PRODUIT';
+$titleProduire1 = 'LES PRODUITS QUE VOUS AVEZ PROPOSE.';
+$etat1 = 'Accepted';
+$etat2 = 'Stand By';
+$etat3 = 'Refused';
+$labelNameProduit = 'Nom du produit';
+$labelPriceProduit = 'Prix';
+$labelWeightProduit = 'Poids';
+$labelDateStartProduit = 'Date début (récolte/fabrication)';
+$labelDateEndProduit = 'Date fin (Peremption/fin de récolte)';
+$msgError4 = 'Il faut etre connecté en tant que producteur et avoir été accepter par l\'administrateur pour acceder à cette page';
 /**
   *Translation for basNW.php
   */
@@ -64,30 +107,12 @@ $aReceptesGrandmother="Les recettes de grand-mère";
 $aFoodPreservation="Conservation des aliments";
 
 /**
-  *Translation for register.php
+  *Translation for connexion.php
   */
 
-$subjectMessage = "Action Required: Confirm Your Account";
-$errorFirstName = "Enter your first name";
-$errorLastName = "Enter your last name";
-$errorLogin = "Enter your login";
-$errorLogin1 = "Login supports only english characters";
-$errorLogin2 = "Login can't be less than 3 and more than 30 characters";
-$errorLogin3 = "This login is already used";
-$errorAddress = "Enter your address";
-$errorCity1 = "Enter your city";
-$errorCity2 = "The city can have only english characters";
-$errorZipCode1 = "Enter you zip code ";
-$errorZipCode2 = "Zip code can't have the characters ";
-$errorMail1 = "Enter your email";
-$errorMail3 = "The user with the same email is already exists ";
-$errorMail2 = "Wrong format of email";
-$errorNumber1 = "Enter your phone number ";
-$errorNumber2 = "Phone number can't have the characters";
-$errorTypeUser = "Choose your type of user";
-/////////////////////
-$succesRegistration = "You have successfully registered";
-$confirmMessage = "Your password must be changed at the first connection <br> Sincerely Administration";
+$msgError = 'Vous êtes déjà connecté';
+$msgError1 = 'Remplir tous les champs';
+$msgError2 = 'Mauvais identifiants, réessayez';
 $yourLogin= "Your login: "; 
 $yourPassword = "Your password: ";
 $textMail1 = '<html><head></head><body><b>Cher utilisateur,</b><br><br>
